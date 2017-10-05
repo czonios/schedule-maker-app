@@ -19,7 +19,7 @@ export const Footer = (props) => {
                     <Grid.Column>
                         <h3 className="inline">
                             <a href="https://czonios.github.io" target="_blank">
-                                Christos Zonios
+                                Christos <br className="text-wrap"/> Zonios
                             </a>
                         </h3>
                         <a href="https://github.com/czonios" target="_blank">
@@ -29,7 +29,7 @@ export const Footer = (props) => {
                     <Grid.Column>
                         <h3 className="inline">
                             <a href="#" target="_blank">
-                                Paul Spheeris
+                                Paul <br className="text-wrap"/> Spheeris
                             </a>
                         </h3>
                         <a href="https://github.com/paspheeris" target="_blank">

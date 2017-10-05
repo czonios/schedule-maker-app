@@ -11,8 +11,12 @@ footer {
 }
 
 footer hr {
-    border-color: black;
+    border: 1px solid rgba(0, 0, 0, 0.2);
     width: 50%;
+}
+
+.text-wrap {
+    display: none;
 }
 
 .inline {
@@ -22,6 +26,7 @@ footer hr {
 
 footer h3 {
     padding-right: 5%;
+    text-decoration: underline;
 }
 
 @media (max-width: 768px) {
@@ -36,3 +41,10 @@ footer h3 {
         margin: 0px 5px; 
     }
 }
+
+@media (max-width: 340px) {
+    
+        .text-wrap {
+            display: block;
+        }
+    }
