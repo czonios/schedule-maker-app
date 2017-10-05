@@ -94,7 +94,7 @@ This project is still in very early stages and we are not accepting contribution
 * **Paul Spheeris** - *Initial work* - [Paul's Github](https://github.com/paspheeris)
 
 
-See also the list of [contributors](https://github.com/your/project/contributors) who participated in this project.
+See also the list of [contributors](https://github.com/czonios/schedule-maker-app/graphs/contributors) who participated in this project.
 
 ## License
 
