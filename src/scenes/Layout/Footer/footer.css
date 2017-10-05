@@ -1,0 +1,38 @@
+footer {
+    display: table;
+    width: 100%;
+    padding: 10px;
+    padding-top: 20px;
+    position: absolute;
+    bottom: 0;
+    text-align: center;
+    background-color: #B0BEC5;
+    color: black;
+}
+
+footer hr {
+    border-color: black;
+    width: 50%;
+}
+
+.inline {
+    display: inline-block;
+    margin: 0px 5px; 
+}
+
+footer h3 {
+    padding-right: 5%;
+}
+
+@media (max-width: 768px) {
+
+    footer {
+        position: relative;
+        max-width: 100%;
+    }
+
+    .inline {
+        display: block;
+        margin: 0px 5px; 
+    }
+}

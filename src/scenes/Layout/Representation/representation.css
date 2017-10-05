@@ -1,0 +1,19 @@
+.representation {
+    display: block;
+    margin: auto;
+    width: 800px;
+    height: 600px;
+    background-color: white; 
+    box-shadow: 1px 1px 6px 3px rgba(0, 0, 0, 0.5);
+}
+
+@media (max-width: 768px) {
+    
+    .representation {
+        box-shadow: none;
+        max-width: 100%;
+        max-height: 60%;
+        width: 100%;
+    }
+
+}
