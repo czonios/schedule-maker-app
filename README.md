@@ -67,7 +67,10 @@ npm install
 
 ## Running Tests
 
-TODO
+Run the following code in your terminal
+```
+npm run test
+```
 
 ## Deployment
 
