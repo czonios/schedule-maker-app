@@ -30,9 +30,13 @@ function chooseView({ displayMonth, displayYear, incrementDisplayMonth, decremen
     }
 }
 function mapStateToProps(state, ownProps) {
+    console.log(ownProps);
+    const { params } = ownProps.url.match;
     return {
-        displayMonth: state.layout.representation.data.displayMonth,
-        displayYear: state.layout.representation.data.displayYear
+        // displayMonth: state.layout.representation.data.displayMonth,
+        // displayYear: state.layout.representation.data.displayYear
+        displayMonth: parseInt(params.month, 10),
+        displayYear: parseInt(params.year, 10)
     }
 }
 
