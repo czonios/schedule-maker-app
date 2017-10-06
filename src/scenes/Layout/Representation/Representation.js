@@ -18,19 +18,19 @@ const Representation = (props) => {
 }
 function chooseView({ displayMonth, displayYear, incrementDisplayMonth, decrementDisplayMonth, url }) {
     //Decide which view to render, based on the URL
-    //Renders the month view by default (when the url is '/')
-    if (!url.params
-        || url.params.view === 'month') {
+    const view = url.match.params.view;
+    //don't need the null check for route '/' i think?
+    // if (!url.match) return null;
+    if (view === 'month') {
         return <Month displayMonth={displayMonth} displayYear={displayYear}
             incrementDisplayMonth={incrementDisplayMonth} decrementDisplayMonth={decrementDisplayMonth} />
-    } else if (url.params.view === 'week') {
+    } else if (view === 'week') {
         return <Week />
-    } else if (url.params.view === 'day') {
+    } else if (view === 'day') {
         return <Day />
     }
 }
 function mapStateToProps(state, ownProps) {
-    console.log(ownProps);
     const { params } = ownProps.url.match;
     return {
         // displayMonth: state.layout.representation.data.displayMonth,
