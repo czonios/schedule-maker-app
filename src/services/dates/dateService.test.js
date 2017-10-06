@@ -54,4 +54,4 @@ test('getNamedDaysInMonth returns an array with the short names of each day for 
     })
       .map(dayNum => strReps[dayNum])
   )
-})
+});

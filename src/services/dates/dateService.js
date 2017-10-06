@@ -15,6 +15,16 @@ class DateService {
   getNamedDaysInMonth(year = this.today.getFullYear(), month = this.today.getMonth()) {
     return this.getDaysInMonth(year, month).map(dayNumber => this.dayStrRepArr[dayNumber]);
   }
+  //Return a 5 x 7 array of the days of the month, with nulls as padding. For use
+  //on the Month view representation
+  //TODO: unit testing for this method
+  // getFormatedWeekChunks(year = this.today.getFullYear(), month = this.today.getMonth()) {
+  //   const dayArr = this.getDaysInMonth(year, month);
+  //   const initialPadding = Array.from({ length: dayArr[0] - 1 }, (_) => {
+  //     return null;
+  // });
+  // console.log(initialPadding);
+  // }
 }
 
 const dateService = new DateService();
