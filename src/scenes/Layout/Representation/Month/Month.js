@@ -6,32 +6,35 @@ import dateService from '../../../../services/dates/dateService';
 
 const propTypes = {
   displayYear: PropTypes.number.isRequired,
-  displayMonth: PropTypes.number.isRequired
+  displayMonth: PropTypes.number.isRequired,
+  incrementDisplayMonth: PropTypes.func.isRequired,
+  decrementDisplayMonth: PropTypes.func.isRequired,
 };
 
 const defaultProps = {
-  displayYear: 2017,
-  displayMonth: 9
+  // displayYear: 2017,
+  // displayMonth: 9
 };
 
-const Month = ({ displayMonth, displayYear }) => (
+const Month = ({ displayMonth, displayYear, incrementDisplayMonth, decrementDisplayMonth }) => (
   <div className="month-view-wrapper">
     <Grid.Row>
-      <MonthHeader displayMonth={displayMonth} />
+      <MonthHeader displayMonth={displayMonth} incrementDisplayMonth={incrementDisplayMonth} decrementDisplayMonth={decrementDisplayMonth} displayYear={displayYear} />
     </Grid.Row>
     <Grid columns={7} divided>
       <Grid.Row>
         {generateWeekdayColumns()}
       </Grid.Row>
-      {generateRows(splitDaysIntoWeeks(padDaysInMonthArr(2017, 9)))}
+      {generateRows(splitDaysIntoWeeks(padDaysInMonthArr(displayYear, displayMonth)))}
     </Grid>
   </div>
 );
-const MonthHeader = ({ displayMonth }) => (
+const MonthHeader = ({ displayMonth, incrementDisplayMonth, decrementDisplayMonth, displayYear }) => (
   <div>
-    <button>prev</button>
+    <button onClick={decrementDisplayMonth}>prev</button>
     {dateService.monthNamesLong[displayMonth]}
-    <button>next</button>
+    {displayYear}
+    <button onClick={incrementDisplayMonth}>next</button>
   </div>
 )
 
@@ -59,10 +62,10 @@ function splitDaysIntoWeeks(paddedArr) {
   return chuckArr;
 }
 function generateRows(chunkedArr) {
-  return chunkedArr.map(subArr => {
-    return <Grid.Row>
-      {subArr.map(day => {
-        return (<Grid.Column>
+  return chunkedArr.map((subArr, i) => {
+    return <Grid.Row key={i}>
+      {subArr.map((day, j) => {
+        return (<Grid.Column key={j}>
           <div>{day}</div>
         </Grid.Column>
         )
