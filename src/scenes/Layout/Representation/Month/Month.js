@@ -4,18 +4,37 @@ import './month.css';
 import { Grid } from 'semantic-ui-react';
 import dateService from '../../../../services/dates/dateService';
 
-const propTypes = {};
+const propTypes = {
+  displayYear: PropTypes.number.isRequired,
+  displayMonth: PropTypes.number.isRequired
+};
 
-const defaultProps = {};
+const defaultProps = {
+  displayYear: 2017,
+  displayMonth: 9
+};
 
-const Month = props => (
-  <Grid columns={7} >
+const Month = ({ displayMonth, displayYear }) => (
+  <div className="month-view-wrapper">
     <Grid.Row>
-      {generateWeekdayColumns()}
+      <MonthHeader displayMonth={displayMonth} />
     </Grid.Row>
-    {generateRows(generateChunkedArr(padArr()))}
-  </Grid>
+    <Grid columns={7} divided>
+      <Grid.Row>
+        {generateWeekdayColumns()}
+      </Grid.Row>
+      {generateRows(splitDaysIntoWeeks(padDaysInMonthArr(2017, 9)))}
+    </Grid>
+  </div>
 );
+const MonthHeader = ({ displayMonth }) => (
+  <div>
+    <button>prev</button>
+    {dateService.monthNamesLong[displayMonth]}
+    <button>next</button>
+  </div>
+)
+
 function generateWeekdayColumns() {
   return dateService.dayStrRepArr.map((dayName, i) => {
     return (
@@ -25,14 +44,14 @@ function generateWeekdayColumns() {
     )
   })
 }
-function padArr() {
-  const daysArr = dateService.getDaysInMonth(2016, 9);
-  const dayCount = dateService.getDaysCountInMonth(2016, 9);
+function padDaysInMonthArr(year, month) {
+  const daysArr = dateService.getDaysInMonth(year, month);
+  const dayCount = dateService.getDaysCountInMonth(year, month);
   const initialPaddingNeeded = daysArr[0];
   return Array.from({ length: initialPaddingNeeded }, () => null)
     .concat(Array.from({ length: dayCount }, (_, i) => i + 1));
 }
-function generateChunkedArr(paddedArr) {
+function splitDaysIntoWeeks(paddedArr) {
   const chuckArr = [];
   for (let i = 0; i < 36; i += 7) {
     chuckArr.push(paddedArr.slice(i, i + 7));

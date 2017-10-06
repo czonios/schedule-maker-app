@@ -2,6 +2,9 @@ class DateService {
   constructor() {
     this.today = new Date();
     this.dayStrRepArr = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+    this.monthNamesShort = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+    this.monthNamesLong = ['January', 'Febuary', 'March', 'April', 'May', 'June', 'July',
+      'August', 'September', 'Oct', 'Nov', 'Dec'];
   }
   getDaysCountInMonth(year = this.today.getFullYear(), month = this.today.getMonth()) {
     //CF https://stackoverflow.com/a/1184359
