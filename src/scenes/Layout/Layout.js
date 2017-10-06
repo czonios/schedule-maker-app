@@ -16,10 +16,11 @@ import Representation from './Representation/Representation';
 class Layout extends Component {
 
     render() {
+        const url = this.props
         return (
             <div className="layout">
                 <Title />
-                <Representation />
+                <Representation url={url} />
                 <Footer />
             </div>
         );
