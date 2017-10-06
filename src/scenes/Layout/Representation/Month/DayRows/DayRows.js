@@ -23,7 +23,7 @@ const acceptedDays = [
  * This is then used to gray out cells that appear in one month
  * but actually belong to the previous and next months.
  */
-function padDaysInMonthArr(year, month, dateService) {
+export function padDaysInMonthArr(year, month, dateService) {
 
   const daysArr = dateService.getDaysInMonth(year, month);
   const dayCount = dateService.getDaysCountInMonth(year, month);
@@ -51,13 +51,12 @@ function padDaysInMonthArr(year, month, dateService) {
     const endPaddingNeeded = Array.from({ length: cellsToPad }, () => null);
     paddedArr = paddedArr.concat(endPaddingNeeded);
   }
-
   return paddedArr;
 
 }
 
 //Transform the 1d padded array into a 2d array (5 x 7) representing the weeks of the month
-function splitDaysIntoWeeks(paddedArr) {
+export function splitDaysIntoWeeks(paddedArr) {
 
   const chunckArr = [];
   for (let i = 0; i < 36; i += 7) {
@@ -86,7 +85,7 @@ export function cellClasses(day) {
 }
 
 //Consume the 2d array representing the weeks, and generate  5-6 Grid.Rows with the days as columns 
-function generateRows(chunkedArr) {
+export function generateRows(chunkedArr) {
 
   return chunkedArr.map((subArr, i) => {
     return (
