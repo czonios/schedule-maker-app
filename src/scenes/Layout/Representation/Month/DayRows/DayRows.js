@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types'
 import { Grid } from 'semantic-ui-react';
+import './dayRows.css';
 
 const DayRows = ({ displayMonth, displayYear, dateService }) => (
 
@@ -33,19 +34,43 @@ function splitDaysIntoWeeks(paddedArr) {
   return chunckArr;
 }
 
+// decide if a cell should be greyed out
+export function cellColor (day) {
+  let acceptedDays = [0, 1, 2, 3, 4, 5, 6];
+  
+  if (acceptedDays.includes(day))
+    return;
+  else
+    return "grey";
+}
+
+// gives custom classes to greyed out cells
+// such as background color and a more defined shadow
+export function cellClasses(day) {
+  let acceptedDays = [0, 1, 2, 3, 4, 5, 6];
+
+  if (acceptedDays.includes(day))
+    return;
+  else
+    return "no-day shadow";
+}
+
 //Consume the 2d array representing the weeks, and generate  5-6 Grid.Rows with the days as columns 
 function generateRows(chunkedArr) {
-  
+
   return chunkedArr.map((subArr, i) => {
-    return <Grid.Row key={i}>
-      {subArr.map((day, j) => {
-        return (<Grid.Column key={j}>
-          <div>{day}</div>
-        </Grid.Column>
-        )
-      })}
-    </Grid.Row>
-  })
+    return (
+      <Grid.Row key={i}>
+        {subArr.map((day, j) => {
+          return (
+            <Grid.Column className={cellClasses(day)} key={j} color={cellColor(day)} >
+            <div>{day}</div>
+            </Grid.Column>
+          );
+        })}
+      </Grid.Row>
+    );
+  });
 }
 
 const propTypes = {
