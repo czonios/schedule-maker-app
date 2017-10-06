@@ -5,7 +5,7 @@ class DateService {
     this.dayStrRepArr = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat','Sun'];
     this.monthNamesShort = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
     this.monthNamesLong = ['January', 'Febuary', 'March', 'April', 'May', 'June', 'July',
-      'August', 'September', 'Oct', 'Nov', 'Dec'];
+      'August', 'September', 'October', 'November', 'December'];
   }
 
   // getDaysCountInMonth :: (Num, Num) -> Num

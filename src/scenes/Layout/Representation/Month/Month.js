@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import './month.css';
-import { Grid } from 'semantic-ui-react';
+import { Grid, Header } from 'semantic-ui-react';
 import dateService from '../../../../services/dates/dateService';
 import MonthHeader from './MonthHeader/MonthHeader.js';
 import DayRows from './DayRows/DayRows.js';
@@ -32,7 +32,7 @@ function generateWeekdayColumns() {
   return dateService.dayStrRepArr.map((dayName, i) => {
     return (
       <Grid.Column key={i}>
-        <h2 className="day-name">{dayName}</h2>
+        <Header size="medium" className="day-name">{dayName}</Header>
       </Grid.Column>
     )
   })
