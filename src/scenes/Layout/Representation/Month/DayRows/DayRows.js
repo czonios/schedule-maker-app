@@ -24,16 +24,18 @@ const acceptedDays = [
  * but actually belong to the previous and next months.
  */
 function padDaysInMonthArr(year, month, dateService) {
-  
+
   const daysArr = dateService.getDaysInMonth(year, month);
   const dayCount = dateService.getDaysCountInMonth(year, month);
   const initialPaddingNeeded = daysArr[0];
   let paddedArr = Array.from({
-      length: initialPaddingNeeded },
-      () => null
-    ).concat(Array.from({ 
-      length: dayCount },
-      (_, i) => i + 1)
+    length: initialPaddingNeeded
+  },
+    () => null
+  ).concat(Array.from({
+    length: dayCount
+  },
+    (_, i) => i + 1)
     );
 
   let len = paddedArr.length;
@@ -43,10 +45,10 @@ function padDaysInMonthArr(year, month, dateService) {
     cellsToPad = 42 - len;
   else
     cellsToPad = 35 - len;
-  
+
 
   if (cellsToPad > 0) {
-    const endPaddingNeeded = Array.from({length: cellsToPad }, () => null);
+    const endPaddingNeeded = Array.from({ length: cellsToPad }, () => null);
     paddedArr = paddedArr.concat(endPaddingNeeded);
   }
 
@@ -56,7 +58,7 @@ function padDaysInMonthArr(year, month, dateService) {
 
 //Transform the 1d padded array into a 2d array (5 x 7) representing the weeks of the month
 function splitDaysIntoWeeks(paddedArr) {
-  
+
   const chunckArr = [];
   for (let i = 0; i < 36; i += 7) {
     chunckArr.push(paddedArr.slice(i, i + 7));
@@ -65,8 +67,8 @@ function splitDaysIntoWeeks(paddedArr) {
 }
 
 // decide if a cell should be greyed out
-export function cellColor (day) {
-  
+export function cellColor(day) {
+
   if (acceptedDays.includes(day))
     return;
   else
@@ -92,7 +94,7 @@ function generateRows(chunkedArr) {
         {subArr.map((day, j) => {
           return (
             <Grid.Column className={cellClasses(day)} key={j} color={cellColor(day)} >
-            <div>{day}</div>
+              <div>{day}</div>
             </Grid.Column>
           );
         })}
