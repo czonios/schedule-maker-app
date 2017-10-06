@@ -9,19 +9,49 @@ const DayRows = ({ displayMonth, displayYear, dateService }) => (
 
 );
 
+const acceptedDays = [
+  1, 2, 3, 4, 5, 6, 7,
+  8, 9, 10, 11, 12, 13,
+  14, 15, 16, 17, 18, 19,
+  20, 21, 22, 23, 24, 25,
+  26, 27, 28, 29, 30, 31
+];
+
 /**
- * For display on the month grid, if the first day of the month isn't sunday, null's need to be added
- * onto the beggining of the array in order to adjust the display to the right
- * EG if a month starts on wednesday, we want 3 null's padded onto the front of the days array 
- * in order to adjust for sun through tue
+ * padDaysInMonthArr concatenates null to the beginning and end of the
+ * array, if the month doesn't start on Monday and end on Sunday.
+ * This is then used to gray out cells that appear in one month
+ * but actually belong to the previous and next months.
  */
 function padDaysInMonthArr(year, month, dateService) {
   
   const daysArr = dateService.getDaysInMonth(year, month);
   const dayCount = dateService.getDaysCountInMonth(year, month);
   const initialPaddingNeeded = daysArr[0];
-  return Array.from({ length: initialPaddingNeeded }, () => null)
-    .concat(Array.from({ length: dayCount }, (_, i) => i + 1));
+  let paddedArr = Array.from({
+      length: initialPaddingNeeded },
+      () => null
+    ).concat(Array.from({ 
+      length: dayCount },
+      (_, i) => i + 1)
+    );
+
+  let len = paddedArr.length;
+  let cellsToPad;
+
+  if (len > 35)
+    cellsToPad = 42 - len;
+  else
+    cellsToPad = 35 - len;
+  
+
+  if (cellsToPad > 0) {
+    const endPaddingNeeded = Array.from({length: cellsToPad }, () => null);
+    paddedArr = paddedArr.concat(endPaddingNeeded);
+  }
+
+  return paddedArr;
+
 }
 
 //Transform the 1d padded array into a 2d array (5 x 7) representing the weeks of the month
@@ -36,7 +66,6 @@ function splitDaysIntoWeeks(paddedArr) {
 
 // decide if a cell should be greyed out
 export function cellColor (day) {
-  let acceptedDays = [0, 1, 2, 3, 4, 5, 6];
   
   if (acceptedDays.includes(day))
     return;
@@ -47,7 +76,6 @@ export function cellColor (day) {
 // gives custom classes to greyed out cells
 // such as background color and a more defined shadow
 export function cellClasses(day) {
-  let acceptedDays = [0, 1, 2, 3, 4, 5, 6];
 
   if (acceptedDays.includes(day))
     return;
