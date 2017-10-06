@@ -1,5 +1,5 @@
 import React from 'react';
-import { Grid, Image, Header } from 'semantic-ui-react';
+import { Grid, Image, Header, Divider } from 'semantic-ui-react';
 import './footer.css';
 
 export const Footer = (props) => {
@@ -12,7 +12,7 @@ export const Footer = (props) => {
                 </small>
             </p>
 
-            <hr />
+            <Divider horizontal>About us</Divider>
 
             <Grid columns={3} divided>
                 <Grid.Row>
