@@ -5,3 +5,21 @@
 .centered {
     text-align: center;
 }
+
+.ui.basic.button,
+.ui.basic.buttons .button,
+.ui.basic.button:active,
+.ui.basic.buttons .button:active,
+.ui.basic.button:focus,
+.ui.basic.button .button:focus,
+.ui.basic.button:hover,
+.ui.basic.button .button:hover {
+    border: none;
+    box-shadow: none;
+}
+
+.ui.mini.image.arrow {
+    width: 1.5rem;
+    height: 1rem;
+    font-size: .7em;
+}
