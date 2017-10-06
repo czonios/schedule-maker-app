@@ -5,3 +5,13 @@
 .month-view-wrapper {
     height: 100%;
 }
+
+.day-name {
+    text-decoration: underline;
+}
+
+@media (max-width: 768px) {
+    h2 {
+        font-size: 1.5em;
+    }
+}

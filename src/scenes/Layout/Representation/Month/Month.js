@@ -9,17 +9,22 @@ import DayRows from './DayRows/DayRows.js';
 
 const Month = ({ displayMonth, displayYear, incrementDisplayMonth, decrementDisplayMonth }) => (
   <div className="month-view-wrapper">
+
     <Grid columns={7} divided>
+
       <Grid.Row centered>
         <MonthHeader displayMonth={displayMonth} incrementDisplayMonth={incrementDisplayMonth}
           decrementDisplayMonth={decrementDisplayMonth} displayYear={displayYear}
           dateService={dateService} />
       </Grid.Row>
+
       <Grid.Row>
         {generateWeekdayColumns()}
       </Grid.Row>
       <DayRows displayMonth={displayMonth} displayYear={displayYear} dateService={dateService} />
+
     </Grid>
+
   </div>
 );
 
@@ -27,7 +32,7 @@ function generateWeekdayColumns() {
   return dateService.dayStrRepArr.map((dayName, i) => {
     return (
       <Grid.Column key={i}>
-        <p>{dayName}</p>
+        <h2 className="day-name">{dayName}</h2>
       </Grid.Column>
     )
   })
