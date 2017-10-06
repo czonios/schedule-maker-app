@@ -5,7 +5,7 @@ import './monthHeader.css';
 const MonthHeader = (
   { displayMonth, incrementDisplayMonth, decrementDisplayMonth, displayYear, dateService }
 ) => (
-    <div>
+    <div className="centered">
       <Button compact onClick={decrementDisplayMonth}>
         <img src={require('./img/arrow-left.svg')} alt="<" />
       </Button>

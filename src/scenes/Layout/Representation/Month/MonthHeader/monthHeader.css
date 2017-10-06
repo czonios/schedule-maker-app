@@ -1,3 +1,7 @@
 .month-year {
     display: inline;
 }
+
+.centered {
+    text-align: center;
+}
