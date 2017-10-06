@@ -1,5 +1,5 @@
 import React from 'react';
-import { Grid, Image } from 'semantic-ui-react';
+import { Grid, Image, Header } from 'semantic-ui-react';
 import './footer.css';
 
 export const Footer = (props) => {
@@ -14,26 +14,34 @@ export const Footer = (props) => {
 
             <hr />
 
-            <Grid columns={2} divided>
+            <Grid columns={3} divided>
                 <Grid.Row>
                     <Grid.Column>
-                        <h3 className="inline">
+                        <Header size="small" className="inline">
                             <a href="https://czonios.github.io" target="_blank" rel="noopener noreferrer">
                                 Christos <br className="text-wrap" /> Zonios
                             </a>
-                        </h3>
+                        </Header>
                         <a href="https://github.com/czonios" target="_blank" rel="noopener noreferrer">
-                            <Image className="inline" src='https://czonios.github.io/img/icons/social/github.png' size="mini" />
+                            <Image className="inline" src={require('./img/icons/github.png')} size="mini" />
                         </a>
                     </Grid.Column>
+
                     <Grid.Column>
-                        <h3 className="inline">
-                            <a href="https://github.com/paspheeris" target="_blank" rel="noopener noreferrer">
+                        <Header size="small" className="inline">Official Github repository</Header>
+                        <a href="https://github.com/czonios/schedule-maker-app" target="_blank" rel="noopener noreferrer">
+                            <Image className="inline" src={require('./img/icons/github.png')} size="mini" />
+                        </a>
+                    </Grid.Column>
+
+                    <Grid.Column>
+                        <Header size="small" className="inline">
+                            <a href="https://github.com/paspheeris/portfolio" target="_blank" rel="noopener noreferrer">
                                 Paul <br className="text-wrap" /> Spheeris
                             </a>
-                        </h3>
+                        </Header>
                         <a href="https://github.com/paspheeris" target="_blank" rel="noopener noreferrer">
-                            <Image className="inline" src='https://czonios.github.io/img/icons/social/github.png' size="mini" />
+                            <Image className="inline" src={require('./img/icons/github.png')} size="mini" />
                         </a>
                     </Grid.Column>
                 </Grid.Row>
