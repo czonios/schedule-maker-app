@@ -4,8 +4,17 @@
     max-width: 95%;
     background-color: white; 
     box-shadow: 1px 1px 6px 3px rgba(0, 0, 0, 0.5);
+    margin-bottom: 200px;
 }
 
+/* don't get too wide on wide viewports */
+@media (min-width: 1400px) {
+    .representation {
+        max-width: 1200px;
+    }
+}
+
+/* mobile */
 @media (max-width: 768px) {
     
     .representation {

@@ -1,0 +1,8 @@
+
+@media (max-width: 500px) {
+
+    .ui.celled.grid>.column:not(.row).time, 
+    .ui.celled.grid>.row>.column.time {
+        padding-left: 2vw;
+    }
+}

@@ -69,29 +69,73 @@ test('getNextMonth return an object representing the next month', () => {
     month: 10,
     monthNameShort: 'Nov',
     monthNameLong: 'November'
-  })
+  });
 });
+
 test('getNextMonth increments the year when called with december', () => {
   expect(dateService.getNextMonth(2017, 11)).toEqual({
     year: 2018,
     month: 0,
     monthNameShort: 'Jan',
     monthNameLong: 'January'
-  })
-})
+  });
+});
+
 test('getPrevMonth return an object representing the next month', () => {
   expect(dateService.getPrevMonth(2017, 9)).toEqual({
     year: 2017,
     month: 8,
     monthNameShort: 'Sep',
     monthNameLong: 'September'
-  })
+  });
 });
+
 test('getPrevMonth decrements the year when called with january', () => {
   expect(dateService.getPrevMonth(2017, 0)).toEqual({
     year: 2016,
     month: 11,
     monthNameShort: 'Dec',
     monthNameLong: 'December'
-  })
-})
+  });
+});
+
+test('getMonthStr returns the short name of the month when given its number', () => {
+  expect(dateService.getMonthStr(0)).toEqual("Jan");
+});
+
+test('getMonthStr returns undefined if it gets negative parameter', () => {
+  expect(dateService.getMonthStr(-1)).toEqual(undefined);
+});
+
+test('getMonthStr returns undefined if it gets undefined parameter', () => {
+  expect(dateService.getMonthStr(undefined)).toEqual(undefined);
+});
+
+test('getMonthStr returns undefined if it gets parameter > 11 (>December)', () => {
+  expect(dateService.getMonthStr(12)).toEqual(undefined);
+});
+
+test('getDayStr returns the short name of the day when given its number', () => {
+  expect(dateService.getDayStr(0)).toEqual("Mon");
+});
+
+test('getDayStr returns undefined if it gets negative parameter', () => {
+  expect(dateService.getDayStr(-1)).toEqual(undefined);
+});
+
+test('getDayStr returns undefined if it gets undefined parameter', () => {
+  expect(dateService.getDayStr(undefined)).toEqual(undefined);
+});
+
+test('getDayStr returns undefined if it gets parameter > 6 (0-6 days)', () => {
+  expect(dateService.getDayStr(7)).toEqual(undefined);
+});
+
+test('getDayStr returns the short name of the day when given its number', () => {
+  expect(dateService.getDayStr((new Date(2017, 9, 1).getDay()))).toEqual("Mon");
+});
+
+test('getDayStr returns undefined if it gets parameter > 6 (0-6 days)', () => {
+  expect(dateService.getDayStr(7)).toEqual(undefined);
+});
+

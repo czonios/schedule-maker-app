@@ -7,11 +7,25 @@ import * as actions from './data/actions';
 import Month from './Month/Month';
 import Week from './Week/Week';
 import Day from './Day/Day';
+import { Menu } from 'semantic-ui-react';
 
 
 const Representation = (props) => {
+
+    // state = { activeItem: 'bio' }
+    
+    // handleItemClick = (e, { name }) => this.setState({ 
+    //     activeItem: name 
+    // });
+
+    // const { activeItem } = this.state
+
     return (
         <div className="representation">
+            {/* <Menu tabular>
+                <Menu.Item name='bio' active={activeItem === 'bio'} onClick={this.handleItemClick} />
+                <Menu.Item name='photos' active={activeItem === 'photos'} onClick={this.handleItemClick} />
+            </Menu> */}
             {chooseView(props)}
         </div>
     );

@@ -17,7 +17,7 @@ export const Footer = (props) => {
             <Grid columns={3} divided>
                 <Grid.Row>
                     <Grid.Column>
-                        <Header size="small" className="inline">
+                        <Header size="small" className="inline name">
                             <a href="https://czonios.github.io" target="_blank" rel="noopener noreferrer">
                                 Christos <br className="text-wrap" /> Zonios
                             </a>
@@ -35,7 +35,7 @@ export const Footer = (props) => {
                     </Grid.Column>
 
                     <Grid.Column>
-                        <Header size="small" className="inline">
+                        <Header size="small" className="inline name">
                             <a href="https://github.com/paspheeris/portfolio" target="_blank" rel="noopener noreferrer">
                                 Paul <br className="text-wrap" /> Spheeris
                             </a>

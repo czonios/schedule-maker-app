@@ -51,7 +51,7 @@ class DateService {
     }
   }
 
-  //getPrevMonth :: (Num, Num) -> {String: Num, String: Num, String: String, String: String}
+  // getPrevMonth :: (Num, Num) -> {String: Num, String: Num, String: String, String: String}
   getPrevMonth(year, month) {
     if (month > 0) {
       return {
@@ -70,6 +70,15 @@ class DateService {
     }
   }
 
+  // getMonthStr :: Num -> String
+  getMonthStr(month) {
+    return this.monthNamesShort[month];
+  }
+
+  //getDayStr :: Num -> String mon=0 convention
+  getDayStr(day) {    
+    return this.dayStrRepArr[day];
+  }
 }
 
 const dateService = new DateService();

@@ -20,7 +20,7 @@ const MonthHeader = (
         </Button>
       </Link>
 
-      <Header size="small" color="white" className="month-year">
+      <Header size="small" className="month-year">
         {dateService.monthNamesLong[displayMonth]}
         <span>&#32;</span>
         {displayYear}
