@@ -14,7 +14,7 @@ const MonthHeader = (
 
   return (
     <div className="centered">
-      <Link to={`/month/${prevMonthsYear}/${prevMonth}`} >
+      <Link to={`/month/${prevMonthsYear}/${prevMonth}/1`} >
         <Button basic compact >
           <Image className="arrow" size="mini" src={require('./img/arrow-left.svg')} alt="<" />
         </Button>
@@ -26,7 +26,7 @@ const MonthHeader = (
         {displayYear}
       </Header>
 
-      <Link to={`/month/${nextMonthsYear}/${nextMonth}`} >
+      <Link to={`/month/${nextMonthsYear}/${nextMonth}/1`} >
         <Button basic compact >
           <Image className="arrow" size="mini" src={require('./img/arrow-right.svg')} alt=">" />
         </Button>

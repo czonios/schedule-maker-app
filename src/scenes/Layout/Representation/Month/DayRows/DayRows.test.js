@@ -1,5 +1,7 @@
 import { cellColor, cellClasses, padDaysInMonthArr, splitDaysIntoWeeks, generateRows } from './DayRows';
 import React from 'react';
+import { Link } from 'react-router-dom';
+import { StaticRouter } from 'react-router';
 import renderer from 'react-test-renderer';
 import dateService from '../../../../.././services/dates/dateService';
 import DayRows from './DayRows.js';
@@ -59,19 +61,27 @@ test('splitDaysIntoWeeks should return a 5x7 2D array', () => {
 //Snapshots
 it('DayRows renders Oct 2017 correctly', () => {
     const tree = renderer.create(
-        <DayRows displayMonth={9} displayYear={2017} dateService={dateService} />
+        <StaticRouter context={{}}>
+            <DayRows displayMonth={9} displayYear={2017} dateService={dateService} />
+        </StaticRouter>
     ).toJSON();
     expect(tree).toMatchSnapshot();
 });
 it('DayRows renders Feb 2016 correctly', () => {
     const tree = renderer.create(
-        <DayRows displayMonth={1} displayYear={2016} dateService={dateService} />
+        <StaticRouter context={{}}>
+            <DayRows displayMonth={1} displayYear={2016} dateService={dateService} />
+        </StaticRouter>
     ).toJSON();
     expect(tree).toMatchSnapshot();
 });
 it('generateRows renders the day rows from a chunked array', () => {
     const tree = renderer.create(
-        generateRows(chunkedArr)
+        <StaticRouter context={{}}>
+            <div>
+                {generateRows(2017, 9, chunkedArr)}
+            </div>
+        </StaticRouter>
     ).toJSON();
     expect(tree).toMatchSnapshot();
 })

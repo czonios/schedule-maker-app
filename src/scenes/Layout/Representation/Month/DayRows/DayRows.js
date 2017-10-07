@@ -1,11 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types'
 import { Grid } from 'semantic-ui-react';
+import { withRouter } from 'react-router';
+import { Link } from 'react-router-dom';
 import './dayRows.css';
 
 const DayRows = ({ displayMonth, displayYear, dateService }) => (
 
-  generateRows(splitDaysIntoWeeks(padDaysInMonthArr(displayYear, displayMonth, dateService)))
+  generateRows(displayYear, displayMonth, splitDaysIntoWeeks(padDaysInMonthArr(displayYear, displayMonth, dateService)))
 
 );
 
@@ -85,7 +87,7 @@ export function cellClasses(day) {
 }
 
 //Consume the 2d array representing the weeks, and generate  5-6 Grid.Rows with the days as columns 
-export function generateRows(chunkedArr) {
+export function generateRows(displayYear, displayMonth, chunkedArr) {
 
   return chunkedArr.map((subArr, i) => {
     return (
@@ -93,7 +95,11 @@ export function generateRows(chunkedArr) {
         {subArr.map((day, j) => {
           return (
             <Grid.Column className={cellClasses(day)} key={j} color={cellColor(day)} >
-              <div>{day}</div>
+
+              <Link to={`/day/${displayYear}/${displayMonth}/${day}`} >
+                <div>{day}</div>
+              </Link>
+
             </Grid.Column>
           );
         })}

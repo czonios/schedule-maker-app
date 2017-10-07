@@ -6,6 +6,11 @@ class DateService {
     this.monthNamesShort = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
     this.monthNamesLong = ['January', 'Febuary', 'March', 'April', 'May', 'June', 'July',
       'August', 'September', 'October', 'November', 'December'];
+    this.OClocks24 = Array.from({ length: 24 }, (_, i) => {
+      // i++;
+      const strRep = i / 10 < 1 ? `0${i}:00` : `${i}:00`;
+      return strRep;
+    })
   }
 
   // getDaysCountInMonth :: (Num, Num) -> Num
