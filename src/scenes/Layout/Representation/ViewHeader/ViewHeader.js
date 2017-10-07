@@ -47,8 +47,6 @@ function generateHeaderText(view, displayYear, displayMonth, displayDay, dateSer
   //JS indexes months started at 0, we're using 1 in the display of the URL, 0 elsewhere
   const monthStr = dateService.monthNamesLong[displayMonth];
   const dayStr = dateService.dayNamesLong[new Date(displayYear, displayMonth, displayDay).getDay() - 1] || 'Sunday';
-  console.log(displayYear, displayMonth, displayDay);
-  console.log(new Date(displayYear, displayMonth, displayDay));
   if (view === 'month') {
     return `${monthStr} ${displayYear}`
   } else if (view === 'week') {
@@ -70,7 +68,8 @@ function urlPrevStr(view, displayYear, displayMonth, displayDay, dateService) {
   } else if (view === 'week') {
 
   } else if (view === 'day') {
-
+    const prevDayObj = dateService.getPrevDay(displayYear, displayMonth, displayDay);
+    [yearStr, monthStr, dayStr] = [prevDayObj.year, prevDayObj.month, prevDayObj.day];
   }
   return `/${view}/${yearStr}/${monthStr + 1}/${dayStr}`;
 }
