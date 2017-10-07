@@ -4,16 +4,6 @@ import { Button, Image, Header } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
 import './viewHeader.css';
 
-const propTypes = {
-  view: PropTypes.string.isRequired,
-  dateService: PropTypes.object.isRequired,
-  displayYear: PropTypes.number.isRequired,
-  displayMonth: PropTypes.number.isRequired,
-  displayDay: PropTypes.number.isRequired,
-
-};
-
-const defaultProps = {};
 
 const ViewHeader = ({ view, dateService, displayYear, displayMonth, displayDay }) => {
 
@@ -27,9 +17,6 @@ const ViewHeader = ({ view, dateService, displayYear, displayMonth, displayDay }
 
       <Header size="small" className="month-year">
         {generateHeaderText(view, displayYear, displayMonth, displayDay, dateService)}
-        {/* {dateService.monthNamesLong[displayMonth]}
-        <span>&#32;</span>
-        {displayYear} */}
       </Header>
 
       <Link to={urlNextStr(view, displayYear, displayMonth, displayDay, dateService)} >
@@ -42,15 +29,15 @@ const ViewHeader = ({ view, dateService, displayYear, displayMonth, displayDay }
 };
 
 function generateHeaderText(view, displayYear, displayMonth, displayDay, dateService) {
-  //Our indexing is causing complexity here, with the +1 -1 stuff
-  //JS indexes Sunday to 0, we're using Monday as 0
-  //JS indexes months started at 0, we're using 1 in the display of the URL, 0 elsewhere
   const monthStr = dateService.monthNamesLong[displayMonth];
+  //TODO Move dayStr to dateService as a method? Would hide the implementation detail
+  //of starting our day indexing on monday instead of sunday
   const dayStr = dateService.dayNamesLong[new Date(displayYear, displayMonth, displayDay).getDay() - 1] || 'Sunday';
   if (view === 'month') {
     return `${monthStr} ${displayYear}`
   } else if (view === 'week') {
-    return `week`
+    const oneWeekFromDay = new Date(displayYear, displayMonth, displayDay + 6);
+    return `${displayDay} ${monthStr} to ${oneWeekFromDay.getDate()} ${dateService.monthNamesLong[oneWeekFromDay.getMonth()]}`;
   } else if (view === 'day') {
     return `${dayStr}, ${monthStr} ${displayDay} ${displayYear}`
   }
@@ -66,7 +53,8 @@ function urlPrevStr(view, displayYear, displayMonth, displayDay, dateService) {
     [yearStr, monthStr] = [prevMonthObj.year, prevMonthObj.month]
     dayStr = displayDay;
   } else if (view === 'week') {
-
+    const oneWeekBeforeDay = new Date(displayYear, displayMonth, displayDay - 6);
+    [yearStr, monthStr, dayStr] = [oneWeekBeforeDay.getFullYear(), oneWeekBeforeDay.getMonth(), oneWeekBeforeDay.getDate()];
   } else if (view === 'day') {
     const prevDayObj = dateService.getPrevDay(displayYear, displayMonth, displayDay);
     [yearStr, monthStr, dayStr] = [prevDayObj.year, prevDayObj.month, prevDayObj.day];
@@ -80,7 +68,8 @@ function urlNextStr(view, displayYear, displayMonth, displayDay, dateService) {
     [yearStr, monthStr] = [nextMonthObj.year, nextMonthObj.month]
     dayStr = displayDay;
   } else if (view === 'week') {
-
+    const oneWeekFromDay = new Date(displayYear, displayMonth, displayDay + 6);
+    [yearStr, monthStr, dayStr] = [oneWeekFromDay.getFullYear(), oneWeekFromDay.getMonth(), oneWeekFromDay.getDate()];
   } else if (view === 'day') {
     const nextDayObj = dateService.getNextDay(displayYear, displayMonth, displayDay);
     [yearStr, monthStr, dayStr] = [nextDayObj.year, nextDayObj.month, nextDayObj.day];
@@ -89,6 +78,15 @@ function urlNextStr(view, displayYear, displayMonth, displayDay, dateService) {
   return `/${view}/${yearStr}/${monthStr + 1}/${dayStr}`;
 }
 
+const propTypes = {
+  view: PropTypes.string.isRequired,
+  dateService: PropTypes.object.isRequired,
+  displayYear: PropTypes.number.isRequired,
+  displayMonth: PropTypes.number.isRequired,
+  displayDay: PropTypes.number.isRequired,
+};
+
+const defaultProps = {};
 ViewHeader.propTypes = propTypes;
 
 ViewHeader.defaultProps = defaultProps;

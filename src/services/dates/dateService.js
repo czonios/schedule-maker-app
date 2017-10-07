@@ -71,75 +71,26 @@ class DateService {
     }
   }
   getNextDay(year, month, day) {
-    // const date = new Date(year, month, day);
-    const lastDayInMonth = this.getDaysCountInMonth(year, month);
-    let nextDaysYear = year;
-    let nextDaysMonth = month;
-    let nextDay = day;
-    let nextDaysMonthNameShort = this.monthNamesShort[nextDaysMonth];
-    let nextDaysMonthNameLong = this.monthNamesLong[nextDaysMonth];
-    if (day === lastDayInMonth) {
-      if (month === 11) {
-        //December 31st
-        nextDaysYear = year + 1;
-        nextDaysMonth = 0;
-        nextDay = 1;
-        nextDaysMonthNameShort = this.monthNamesShort[nextDaysMonth];
-        nextDaysMonthNameLong = this.monthNamesLong[nextDaysMonth];
-      } else {
-        //Last day of any other month
-        nextDaysMonth = month + 1;
-        nextDay = 1;
-        nextDaysMonthNameShort = this.monthNamesShort[nextDaysMonth];
-        nextDaysMonthNameLong = this.monthNamesLong[nextDaysMonth];
-      }
-    } else {
-      //Any other day than the last day in the month
-      nextDay = day + 1
-    }
+    let nextDayObj = new Date(year, month, day + 1)
+    const nextDaysMonth = nextDayObj.getMonth();
     return {
-      year: nextDaysYear,
+      year: nextDayObj.getFullYear(),
       month: nextDaysMonth,
-      day: nextDay,
-      monthNameShort: nextDaysMonthNameShort,
-      monthNameLong: nextDaysMonthNameLong
+      day: nextDayObj.getDate(),
+      monthNameShort: this.monthNamesShort[nextDaysMonth],
+      monthNameLong: this.monthNamesLong[nextDaysMonth]
     }
   }
 
   getPrevDay(year, month, day) {
-    // const date = new Date(year, month, day);
-    //What happens with lastDayOfPrevMonth when month === 0 ?
-    const lastDayOfPrevMonth = this.getDaysCountInMonth(year, month - 1);
-    let prevDaysYear = year;
-    let prevDaysMonth = month;
-    let prevDay = day;
-    let prevDaysMonthNameShort = this.monthNamesShort[prevDaysMonth];
-    let prevDaysMonthNameLong = this.monthNamesLong[prevDaysMonth];
-    if (day === 1) {
-      if (month === 0) {
-        //January 1st
-        prevDaysYear = year - 1;
-        prevDaysMonth = 11;
-        prevDay = lastDayOfPrevMonth;
-        prevDaysMonthNameShort = this.monthNamesShort[prevDaysMonth];
-        prevDaysMonthNameLong = this.monthNamesLong[prevDaysMonth];
-      } else {
-        //First day of any other month
-        prevDaysMonth = month - 1;
-        prevDay = lastDayOfPrevMonth;
-        prevDaysMonthNameShort = this.monthNamesShort[prevDaysMonth];
-        prevDaysMonthNameLong = this.monthNamesLong[prevDaysMonth];
-      }
-    } else {
-      //Any other day than the first day in the month
-      prevDay = day - 1
-    }
+    let prevDayObj = new Date(year, month, day - 1)
+    const prevDaysMonth = prevDayObj.getMonth();
     return {
-      year: prevDaysYear,
+      year: prevDayObj.getFullYear(),
       month: prevDaysMonth,
-      day: prevDay,
-      monthNameShort: prevDaysMonthNameShort,
-      monthNameLong: prevDaysMonthNameLong
+      day: prevDayObj.getDate(),
+      monthNameShort: this.monthNamesShort[prevDaysMonth],
+      monthNameLong: this.monthNamesLong[prevDaysMonth]
     }
   }
 
