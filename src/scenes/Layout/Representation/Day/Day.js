@@ -11,6 +11,9 @@ import './day.css';
 const Day = props => (
   <div>
     <Grid columns={3} celled>
+      <Grid.Row>
+        {/* DayHeader here */}
+      </Grid.Row>
       {dateService.OClocks24.map(oclock => (
         <Grid.Row>
           <Grid.Column className="time" width={2}>
