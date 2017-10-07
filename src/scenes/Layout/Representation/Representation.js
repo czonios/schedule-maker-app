@@ -44,6 +44,7 @@ function chooseView({ displayMonth, displayYear, incrementDisplayMonth, decremen
         return <Day />
     }
 }
+
 function mapStateToProps(state, ownProps) {
     const { params } = ownProps.url.match;
     return {
