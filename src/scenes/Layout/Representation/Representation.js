@@ -5,21 +5,37 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import * as actions from './data/actions';
 import Month from './Month/Month';
+import Week from './Week/Week';
+import Day from './Day/Day';
 
 
-const Representation = ({ displayMonth, displayYear, incrementDisplayMonth, decrementDisplayMonth }) => {
+const Representation = (props) => {
     return (
         <div className="representation">
-            <Month displayMonth={displayMonth} displayYear={displayYear}
-                incrementDisplayMonth={incrementDisplayMonth} decrementDisplayMonth={decrementDisplayMonth} />
+            {chooseView(props)}
         </div>
     );
 }
-
+function chooseView({ displayMonth, displayYear, incrementDisplayMonth, decrementDisplayMonth, url }) {
+    //Decide which view to render, based on the URL
+    const view = url.match.params.view;
+    //don't need the null check for route '/' i think?
+    // if (!url.match) return null;
+    if (view === 'month') {
+        return <Month displayMonth={displayMonth} displayYear={displayYear}
+            incrementDisplayMonth={incrementDisplayMonth} decrementDisplayMonth={decrementDisplayMonth} />
+    } else if (view === 'week') {
+        return <Week />
+    } else if (view === 'day') {
+        return <Day />
+    }
+}
 function mapStateToProps(state, ownProps) {
+    const { params } = ownProps.url.match;
     return {
-        displayMonth: state.layout.representation.data.displayMonth,
-        displayYear: state.layout.representation.data.displayYear
+        events: state.layout.representation.data.events,
+        displayMonth: parseInt(params.month, 10),
+        displayYear: parseInt(params.year, 10)
     }
 }
 
@@ -36,7 +52,8 @@ const propTypes = {
     displayMonth: PropTypes.number.isRequired,
     displayYear: PropTypes.number.isRequired,
     incrementDisplayMonth: PropTypes.func.isRequired,
-    decrementDisplayMonth: PropTypes.func.isRequired
+    decrementDisplayMonth: PropTypes.func.isRequired,
+    url: PropTypes.object.isRequired
 }
 Representation.propTypes = propTypes;
 

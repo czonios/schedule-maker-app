@@ -18,7 +18,7 @@ test('the date service has the names of the days of the week', () => {
 
 test('getDaysCountInMonth returns the number of days for a given month and year', () => {
   expect(dateService.getDaysCountInMonth(2016, 11)).toBe(31),
-  expect(dateService.getDaysCountInMonth(2017, 10)).toBe(30)
+    expect(dateService.getDaysCountInMonth(2017, 10)).toBe(30)
 });
 
 test('getDaysCountInMonth gets the number of days in the current month when called with no arguments', () => {
@@ -62,3 +62,36 @@ test('getNamedDaysInMonth returns an array with the short names of each day for 
       .map(dayNum => strReps[dayNum])
   );
 });
+
+test('getNextMonth return an object representing the next month', () => {
+  expect(dateService.getNextMonth(2017, 9)).toEqual({
+    year: 2017,
+    month: 10,
+    monthNameShort: 'Nov',
+    monthNameLong: 'November'
+  })
+});
+test('getNextMonth increments the year when called with december', () => {
+  expect(dateService.getNextMonth(2017, 11)).toEqual({
+    year: 2018,
+    month: 0,
+    monthNameShort: 'Jan',
+    monthNameLong: 'January'
+  })
+})
+test('getPrevMonth return an object representing the next month', () => {
+  expect(dateService.getPrevMonth(2017, 9)).toEqual({
+    year: 2017,
+    month: 8,
+    monthNameShort: 'Sep',
+    monthNameLong: 'September'
+  })
+});
+test('getPrevMonth decrements the year when called with january', () => {
+  expect(dateService.getPrevMonth(2017, 0)).toEqual({
+    year: 2016,
+    month: 11,
+    monthNameShort: 'Dec',
+    monthNameLong: 'December'
+  })
+})
