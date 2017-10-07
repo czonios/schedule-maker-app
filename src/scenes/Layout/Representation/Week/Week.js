@@ -1,9 +1,9 @@
 import React from 'react';
-import PropTypes from 'prop-types'
+// import PropTypes from 'prop-types'
 
-const propTypes = {};
+// const propTypes = {};
 
-const defaultProps = {};
+// const defaultProps = {};
 
 const Week = props => (
   <div>
@@ -11,8 +11,8 @@ const Week = props => (
   </div>
 );
 
-Week.propTypes = propTypes;
+// Week.propTypes = propTypes;
 
-Week.defaultProps = defaultProps;
+// Week.defaultProps = defaultProps;
 
 export default Week;

@@ -1,4 +1,3 @@
-// import dateService from '../../../../services/dates/dateService';
 import * as m from '../../../../services/mock/events/mockEvents';
 
 const defaultState = {

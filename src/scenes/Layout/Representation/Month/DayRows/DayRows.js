@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types'
 import { Grid } from 'semantic-ui-react';
-import { withRouter } from 'react-router';
 import { Link } from 'react-router-dom';
 import './dayRows.css';
 
