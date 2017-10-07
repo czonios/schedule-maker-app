@@ -44,7 +44,7 @@ const ViewHeader = ({ view, dateService, displayYear, displayMonth, displayDay }
 function generateHeaderText(view, displayYear, displayMonth, displayDay, dateService) {
   //Our indexing is causing complexity here, with the +1 -1 stuff
   //JS indexes Sunday to 0, we're using Monday as 0
-  //JS indexes months started at 0, we're using 1
+  //JS indexes months started at 0, we're using 1 in the display of the URL, 0 elsewhere
   const monthStr = dateService.monthNamesLong[displayMonth];
   const dayStr = dateService.dayNamesLong[new Date(displayYear, displayMonth, displayDay).getDay() - 1] || 'Sunday';
   console.log(displayYear, displayMonth, displayDay);
@@ -67,6 +67,10 @@ function urlPrevStr(view, displayYear, displayMonth, displayDay, dateService) {
     const prevMonthObj = dateService.getPrevMonth(displayYear, displayMonth);
     [yearStr, monthStr] = [prevMonthObj.year, prevMonthObj.month]
     dayStr = displayDay;
+  } else if (view === 'week') {
+
+  } else if (view === 'day') {
+
   }
   return `/${view}/${yearStr}/${monthStr + 1}/${dayStr}`;
 }
@@ -76,7 +80,13 @@ function urlNextStr(view, displayYear, displayMonth, displayDay, dateService) {
     const nextMonthObj = dateService.getNextMonth(displayYear, displayMonth);
     [yearStr, monthStr] = [nextMonthObj.year, nextMonthObj.month]
     dayStr = displayDay;
+  } else if (view === 'week') {
+
+  } else if (view === 'day') {
+    const nextDayObj = dateService.getNextDay(displayYear, displayMonth, displayDay);
+    [yearStr, monthStr, dayStr] = [nextDayObj.year, nextDayObj.month, nextDayObj.day];
   }
+
   return `/${view}/${yearStr}/${monthStr + 1}/${dayStr}`;
 }
 

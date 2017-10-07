@@ -99,6 +99,61 @@ test('getPrevMonth decrements the year when called with january', () => {
   });
 });
 
+test('getNextDay returns an object representing the next day', () => {
+  expect(dateService.getNextDay(2017, 9, 7)).toEqual({
+    year: 2017,
+    month: 9,
+    day: 8,
+    monthNameShort: 'Oct',
+    monthNameLong: 'October'
+  })
+})
+test('getNextDay rolls over the month and day when given the last day in a month', () => {
+  expect(dateService.getNextDay(2017, 8, 30)).toEqual({
+    year: 2017,
+    month: 9,
+    day: 1,
+    monthNameShort: 'Oct',
+    monthNameLong: 'October'
+  })
+})
+test('getNextDay rolls over the year, month and day when given dec. 31st', () => {
+  expect(dateService.getNextDay(2017, 11, 31)).toEqual({
+    year: 2018,
+    month: 0,
+    day: 1,
+    monthNameShort: 'Jan',
+    monthNameLong: 'January'
+  })
+})
+test('getPrevDay returns an object representing the prev day', () => {
+  expect(dateService.getPrevDay(2017, 9, 7)).toEqual({
+    year: 2017,
+    month: 9,
+    day: 6,
+    monthNameShort: 'Oct',
+    monthNameLong: 'October'
+  })
+})
+test('getPrevDay rolls back the month and day when given the first day in a month', () => {
+  expect(dateService.getPrevDay(2017, 8, 1)).toEqual({
+    year: 2017,
+    month: 7,
+    day: 31,
+    monthNameShort: 'Aug',
+    monthNameLong: 'August'
+  })
+})
+test('getPrevDay rolls back the year, month and day when given Jan 1st', () => {
+  expect(dateService.getPrevDay(2017, 0, 1)).toEqual({
+    year: 2016,
+    month: 11,
+    day: 31,
+    monthNameShort: 'Dec',
+    monthNameLong: 'December'
+  })
+})
+
 test('getMonthStr returns the short name of the month when given its number', () => {
   expect(dateService.getMonthStr(0)).toEqual("Jan");
 });
