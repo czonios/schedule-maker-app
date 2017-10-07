@@ -16,15 +16,10 @@ const propTypes = {
 const defaultProps = {};
 
 const ViewHeader = ({ view, dateService, displayYear, displayMonth, displayDay }) => {
-  //Paths/links to the next/prev month need to be dynamically generated
-  const nextMonthObj = dateService.getNextMonth(displayYear, displayMonth);
-  const prevMonthObj = dateService.getPrevMonth(displayYear, displayMonth);
-  const [prevMonthsYear, prevMonth] = [prevMonthObj.year, prevMonthObj.month]
-  const [nextMonthsYear, nextMonth] = [nextMonthObj.year, nextMonthObj.month]
 
   return (
     <div className="centered">
-      <Link to={`/${view}/${prevMonthsYear}/${prevMonth + 1}/1`} >
+      <Link to={urlPrevStr(view, displayYear, displayMonth, displayDay, dateService)} >
         <Button basic compact >
           <Image className="arrow" size="mini" src={require('./img/arrow-left.svg')} alt="<" />
         </Button>
@@ -37,7 +32,7 @@ const ViewHeader = ({ view, dateService, displayYear, displayMonth, displayDay }
         {displayYear} */}
       </Header>
 
-      <Link to={`/${view}/${nextMonthsYear}/${nextMonth + 1}/1`} >
+      <Link to={urlNextStr(view, displayYear, displayMonth, displayDay, dateService)} >
         <Button basic compact >
           <Image className="arrow" size="mini" src={require('./img/arrow-right.svg')} alt=">" />
         </Button>
@@ -47,17 +42,42 @@ const ViewHeader = ({ view, dateService, displayYear, displayMonth, displayDay }
 };
 
 function generateHeaderText(view, displayYear, displayMonth, displayDay, dateService) {
+  //Our indexing is causing complexity here, with the +1 -1 stuff
+  //JS indexes Sunday to 0, we're using Monday as 0
+  //JS indexes months started at 0, we're using 1
   const monthStr = dateService.monthNamesLong[displayMonth];
-  const dayStr = dateService.dayNamesLong[new Date(displayYear, displayMonth + 1, displayDay).getDay()];
-  console.log(displayYear, displayMonth + 1, displayDay);
-  console.log(new Date(displayYear, displayMonth + 1, displayDay));
+  const dayStr = dateService.dayNamesLong[new Date(displayYear, displayMonth, displayDay).getDay() - 1] || 'Sunday';
+  console.log(displayYear, displayMonth, displayDay);
+  console.log(new Date(displayYear, displayMonth, displayDay));
   if (view === 'month') {
     return `${monthStr} ${displayYear}`
   } else if (view === 'week') {
     return `week`
   } else if (view === 'day') {
-    return `${dayStr}, ${monthStr} 1st ${displayYear}`
+    return `${dayStr}, ${monthStr} ${displayDay} ${displayYear}`
   }
+}
+
+//These two functin could be merged into one, and then passed in a flag for 'next' or 'prev'
+//Not doing that for now, I think it'll make testing them harder, and might result in a big messy function
+function urlPrevStr(view, displayYear, displayMonth, displayDay, dateService) {
+  let yearStr, monthStr, dayStr;
+  if (view === 'month') {
+    //Paths/links to the next/prev month need to be dynamically generated
+    const prevMonthObj = dateService.getPrevMonth(displayYear, displayMonth);
+    [yearStr, monthStr] = [prevMonthObj.year, prevMonthObj.month]
+    dayStr = displayDay;
+  }
+  return `/${view}/${yearStr}/${monthStr + 1}/${dayStr}`;
+}
+function urlNextStr(view, displayYear, displayMonth, displayDay, dateService) {
+  let yearStr, monthStr, dayStr;
+  if (view === 'month') {
+    const nextMonthObj = dateService.getNextMonth(displayYear, displayMonth);
+    [yearStr, monthStr] = [nextMonthObj.year, nextMonthObj.month]
+    dayStr = displayDay;
+  }
+  return `/${view}/${yearStr}/${monthStr + 1}/${dayStr}`;
 }
 
 ViewHeader.propTypes = propTypes;
