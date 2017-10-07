@@ -8,24 +8,33 @@ import Month from './Month/Month';
 import Week from './Week/Week';
 import Day from './Day/Day';
 import { Menu } from 'semantic-ui-react';
-
+import { Link } from 'react-router-dom';
+import ViewHeader from './ViewHeader/ViewHeader';
+import dateService from '../../../services/dates/dateService';
 
 const Representation = (props) => {
-
-    // state = { activeItem: 'bio' }
-    
-    // handleItemClick = (e, { name }) => this.setState({ 
-    //     activeItem: name 
-    // });
-
-    // const { activeItem } = this.state
-
+    const { displayYear, displayMonth, displayDay } = props;
+    const { view, year, month, day } = props.url.match.params;
     return (
         <div className="representation">
-            {/* <Menu tabular>
-                <Menu.Item name='bio' active={activeItem === 'bio'} onClick={this.handleItemClick} />
-                <Menu.Item name='photos' active={activeItem === 'photos'} onClick={this.handleItemClick} />
-            </Menu> */}
+            {/* Could be broken out into its own subcomponent */}
+            <Menu tabular>
+                <Menu.Item as={Link} to={`/month/${year}/${month}/${day}`} name='month' active={view === 'month'}>
+                    Month
+                </Menu.Item>
+                <Menu.Item as={Link} to={`/week/${year}/${month}/${day}`} name='week' active={view === 'week'}>
+                    Week
+                </Menu.Item>
+                <Menu.Item as={Link} to={`/day/${year}/${month}/${day}`} name='day' active={view === 'day'}>
+                    Day
+                </Menu.Item>
+                <Menu.Menu position="right">
+                    <Menu.Item name='bio' active={false} onClick={this.handleItemClick} />
+                    <Menu.Item name='photos' active={false} onClick={this.handleItemClick} />
+                </Menu.Menu>
+            </Menu>
+            <ViewHeader displayMonth={displayMonth} displayYear={displayYear} displayDay={displayDay} dateService={dateService}
+                view={view} />
             {chooseView(props)}
         </div>
     );
@@ -49,8 +58,9 @@ function mapStateToProps(state, ownProps) {
     const { params } = ownProps.url.match;
     return {
         events: state.layout.representation.data.events,
-        displayMonth: parseInt(params.month, 10),
-        displayYear: parseInt(params.year, 10)
+        displayYear: parseInt(params.year, 10),
+        displayMonth: parseInt(params.month, 10) - 1,
+        displayDay: parseInt(params.day, 10),
     }
 }
 

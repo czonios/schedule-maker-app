@@ -14,8 +14,8 @@ const Day = props => (
       <Grid.Row>
         {/* DayHeader here */}
       </Grid.Row>
-      {dateService.OClocks24.map(oclock => (
-        <Grid.Row>
+      {dateService.OClocks24.map((oclock, i) => (
+        <Grid.Row key={i}>
           <Grid.Column className="time" width={2}>
             {oclock}
           </Grid.Column>

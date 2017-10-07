@@ -3,6 +3,7 @@ class DateService {
   constructor() {
     this.today = new Date();
     this.dayStrRepArr = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
+    this.dayNamesLong = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
     this.monthNamesShort = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
     this.monthNamesLong = ['January', 'Febuary', 'March', 'April', 'May', 'June', 'July',
       'August', 'September', 'October', 'November', 'December'];
@@ -76,7 +77,7 @@ class DateService {
   }
 
   //getDayStr :: Num -> String mon=0 convention
-  getDayStr(day) {    
+  getDayStr(day) {
     return this.dayStrRepArr[day];
   }
 }

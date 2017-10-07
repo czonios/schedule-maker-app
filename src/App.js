@@ -28,7 +28,7 @@ class App extends Component {
 
 function urlPathForToday() {
   const year = dateService.today.getFullYear();
-  const month = dateService.today.getMonth();
+  const month = dateService.today.getMonth() + 1;
   const day = dateService.today.getDate();
   return `/${year}/${month}/${day}`
 }
