@@ -36,8 +36,8 @@ function generateHeaderText(view, displayYear, displayMonth, displayDay, dateSer
   if (view === 'month') {
     return `${monthStr} ${displayYear}`
   } else if (view === 'week') {
-    const oneWeekFromDay = new Date(displayYear, displayMonth, displayDay + 6);
-    return `${displayDay} ${monthStr} to ${oneWeekFromDay.getDate()} ${dateService.monthNamesLong[oneWeekFromDay.getMonth()]}`;
+    const oneWeekFromDay = dateService.getDateOneWeekFromDay(displayYear, displayMonth, displayDay);
+    return `${displayDay} ${monthStr} to ${oneWeekFromDay.day} ${oneWeekFromDay.monthNameLong}`;
   } else if (view === 'day') {
     return `${dayStr}, ${monthStr} ${displayDay} ${displayYear}`
   }
@@ -53,8 +53,8 @@ function urlPrevStr(view, displayYear, displayMonth, displayDay, dateService) {
     [yearStr, monthStr] = [prevMonthObj.year, prevMonthObj.month]
     dayStr = displayDay;
   } else if (view === 'week') {
-    const oneWeekBeforeDay = new Date(displayYear, displayMonth, displayDay - 6);
-    [yearStr, monthStr, dayStr] = [oneWeekBeforeDay.getFullYear(), oneWeekBeforeDay.getMonth(), oneWeekBeforeDay.getDate()];
+    const oneWeekBeforeDay = dateService.getDateOneWeekBeforeDay(displayYear, displayMonth, displayDay);
+    [yearStr, monthStr, dayStr] = [oneWeekBeforeDay.year, oneWeekBeforeDay.month, oneWeekBeforeDay.day];
   } else if (view === 'day') {
     const prevDayObj = dateService.getPrevDay(displayYear, displayMonth, displayDay);
     [yearStr, monthStr, dayStr] = [prevDayObj.year, prevDayObj.month, prevDayObj.day];
@@ -68,8 +68,8 @@ function urlNextStr(view, displayYear, displayMonth, displayDay, dateService) {
     [yearStr, monthStr] = [nextMonthObj.year, nextMonthObj.month]
     dayStr = displayDay;
   } else if (view === 'week') {
-    const oneWeekFromDay = new Date(displayYear, displayMonth, displayDay + 6);
-    [yearStr, monthStr, dayStr] = [oneWeekFromDay.getFullYear(), oneWeekFromDay.getMonth(), oneWeekFromDay.getDate()];
+    const oneWeekFromDay = dateService.getDateOneWeekFromDay(displayYear, displayMonth, displayDay);
+    [yearStr, monthStr, dayStr] = [oneWeekFromDay.year, oneWeekFromDay.month, oneWeekFromDay.day];
   } else if (view === 'day') {
     const nextDayObj = dateService.getNextDay(displayYear, displayMonth, displayDay);
     [yearStr, monthStr, dayStr] = [nextDayObj.year, nextDayObj.month, nextDayObj.day];
