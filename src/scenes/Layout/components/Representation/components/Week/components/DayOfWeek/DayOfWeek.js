@@ -28,11 +28,11 @@ class DayOfWeek extends React.Component {
     render() {
         return (
             <div className="clickable" onClick={this.setModal.bind(this)}>
-                <Header size="tiny">title for {this.props.time}</Header>
+                <Header size="tiny">title for {this.props.time} {this.props.day}</Header>
                 <p>description</p>
                 {
                     this.state.showModal ?
-                    <EditEvent />
+                    <EditEvent setModal={this.setModal} event={this.props} />
                     : null
                 }
             </div>
