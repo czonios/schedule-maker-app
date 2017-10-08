@@ -7,6 +7,7 @@ import * as actions from './data/actions';
 import Month from './Month/Month';
 import Week from './Week/Week';
 import Day from './Day/Day';
+import Day_CardVersion from './Day_CardVersion/Day_CardVersion';
 import { Menu } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
 import ViewHeader from './ViewHeader/ViewHeader';
@@ -39,7 +40,7 @@ const Representation = (props) => {
         </div>
     );
 }
-function chooseView({ displayMonth, displayYear, incrementDisplayMonth, decrementDisplayMonth, url }) {
+function chooseView({ displayMonth, displayYear, displayDay, incrementDisplayMonth, decrementDisplayMonth, url }) {
     //Decide which view to render, based on the URL
     const view = url.match.params.view;
     //don't need the null check for route '/' i think?
@@ -50,20 +51,38 @@ function chooseView({ displayMonth, displayYear, incrementDisplayMonth, decremen
     } else if (view === 'week') {
         return <Week />
     } else if (view === 'day') {
-        return <Day />
+        // return <Day />
+        return <Day_CardVersion />
     }
 }
 
 function mapStateToProps(state, ownProps) {
     const { params } = ownProps.url.match;
+    // const displayYear, displayMonth, displayDay;
+    const [displayYear, displayMonth, displayDay] = [parseInt(params.year, 10), parseInt(params.month, 10) - 1, parseInt(params.day, 10)]
+    const allEvents = state.layout.representation.data.events;
     return {
-        events: state.layout.representation.data.events,
-        displayYear: parseInt(params.year, 10),
-        displayMonth: parseInt(params.month, 10) - 1,
-        displayDay: parseInt(params.day, 10),
+        allEvents,
+        displayDaysEvents: filterEventsByDay(displayYear, displayMonth, displayDay, allEvents),
+        displayMonthsEvents: filterEventsByMonth(displayYear, displayMonth, allEvents),
+        displayYear,
+        displayMonth,
+        displayDay,
     }
 }
-
+function filterEventsByDay(year, month, day, events) {
+    return Object.values(events).filter(event => {
+        return event.year === year
+            && event.month === month
+            && event.day === day;
+    })
+}
+function filterEventsByMonth(year, month, events) {
+    return Object.values(events).filter(event => {
+        return event.year === year
+            && event.month === month
+    })
+}
 function mapDispatchToProps(dispatch) {
     const { incrementDisplayMonth,
         decrementDisplayMonth } = actions;
