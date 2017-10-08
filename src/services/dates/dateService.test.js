@@ -154,17 +154,17 @@ test('getPrevDay rolls back the year, month and day when given Jan 1st', () => {
   })
 })
 
-test('getDateOneWeekBeforeToday returns an object representing the day one week before the given day (if today in monday, return sunday)', () => {
+test('getDateOneWeekBeforeToday returns an object representing the day one week before the given day', () => {
   expect(dateService.getDateOneWeekBeforeDay(2017, 9, 10)).toEqual({
     year: 2017,
     month: 9,
-    day: 4,
+    day: 3,
     monthNameShort: 'Oct',
     monthNameLong: 'October'
   })
 })
-test('getDateOneWeekBeforeToday rolls back the month and day when the given day is <= 6', () => {
-  expect(dateService.getDateOneWeekBeforeDay(2017, 9, 6)).toEqual({
+test('getDateOneWeekBeforeToday rolls back the month and day when the given day is <= 7', () => {
+  expect(dateService.getDateOneWeekBeforeDay(2017, 9, 7)).toEqual({
     year: 2017,
     month: 8,
     day: 30,
@@ -174,7 +174,7 @@ test('getDateOneWeekBeforeToday rolls back the month and day when the given day 
   expect(dateService.getDateOneWeekBeforeDay(2017, 9, 1)).toEqual({
     year: 2017,
     month: 8,
-    day: 25,
+    day: 24,
     monthNameShort: 'Sep',
     monthNameLong: 'September'
   })
@@ -183,14 +183,14 @@ test('getDateOneWeekBeforeToday rolls back the year, month and day, when given a
   expect(dateService.getDateOneWeekBeforeDay(2018, 0, 6)).toEqual({
     year: 2017,
     month: 11,
-    day: 31,
+    day: 30,
     monthNameShort: 'Dec',
     monthNameLong: 'December'
   });
   expect(dateService.getDateOneWeekBeforeDay(2018, 0, 1)).toEqual({
     year: 2017,
     month: 11,
-    day: 26,
+    day: 25,
     monthNameShort: 'Dec',
     monthNameLong: 'December'
   })
@@ -199,7 +199,7 @@ test('getDateOneWeekFromToday returns an object representing the day one week be
   expect(dateService.getDateOneWeekFromDay(2017, 9, 10)).toEqual({
     year: 2017,
     month: 9,
-    day: 16,
+    day: 17,
     monthNameShort: 'Oct',
     monthNameLong: 'October'
   })
@@ -208,14 +208,14 @@ test('getDateOneWeekFromToday rolls over the month and day when the given day is
   expect(dateService.getDateOneWeekFromDay(2017, 9, 31)).toEqual({
     year: 2017,
     month: 10,
-    day: 6,
+    day: 7,
     monthNameShort: 'Nov',
     monthNameLong: 'November'
   });
-  expect(dateService.getDateOneWeekFromDay(2017, 9, 26)).toEqual({
+  expect(dateService.getDateOneWeekFromDay(2017, 9, 27)).toEqual({
     year: 2017,
     month: 10,
-    day: 1,
+    day: 3,
     monthNameShort: 'Nov',
     monthNameLong: 'November'
   })
@@ -224,14 +224,14 @@ test('getDateOneWeekFromToday rolls back the year, month and day, when given a d
   expect(dateService.getDateOneWeekFromDay(2017, 11, 31)).toEqual({
     year: 2018,
     month: 0,
-    day: 6,
+    day: 7,
     monthNameShort: 'Jan',
     monthNameLong: 'January'
   });
   expect(dateService.getDateOneWeekFromDay(2017, 11, 26)).toEqual({
     year: 2018,
     month: 0,
-    day: 1,
+    day: 2,
     monthNameShort: 'Jan',
     monthNameLong: 'January'
   })

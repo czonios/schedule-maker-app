@@ -94,7 +94,7 @@ class DateService {
     }
   }
   getDateOneWeekBeforeDay(year, month, day) {
-    const prevWeekObj = new Date(year, month, day - 6);
+    const prevWeekObj = new Date(year, month, day - 7);
     const prevWeekMonth = prevWeekObj.getMonth();
     return {
       year: prevWeekObj.getFullYear(),
@@ -105,7 +105,7 @@ class DateService {
     }
   }
   getDateOneWeekFromDay(year, month, day) {
-    const nextWeekObj = new Date(year, month, day + 6);
+    const nextWeekObj = new Date(year, month, day + 7);
     const nextWeekMonth = nextWeekObj.getMonth();
     return {
       year: nextWeekObj.getFullYear(),

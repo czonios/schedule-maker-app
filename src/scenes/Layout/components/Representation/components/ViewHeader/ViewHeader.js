@@ -29,10 +29,10 @@ const ViewHeader = ({ view, dateService, displayYear, displayMonth, displayDay }
 };
 
 function generateHeaderText(view, displayYear, displayMonth, displayDay, dateService) {
-  const monthStr = dateService.monthNamesLong[displayMonth];
+  let monthStr = dateService.monthNamesLong[displayMonth];
   //TODO Move dayStr to dateService as a method? Would hide the implementation detail
   //of starting our day indexing on monday instead of sunday
-  const dayStr = dateService.dayNamesLong[new Date(displayYear, displayMonth, displayDay).getDay() - 1] || 'Sunday';
+  let dayStr = dateService.dayNamesLong[new Date(displayYear, displayMonth, displayDay).getDay() - 1] || 'Sunday';
   if (view === 'month') {
     return `${monthStr} ${displayYear}`
   } else if (view === 'week') {
@@ -56,7 +56,8 @@ function generateHeaderText(view, displayYear, displayMonth, displayDay, dateSer
       return day;
     }
     displayDay = findMonday();
-    const oneWeekFromDay = dateService.getDateOneWeekFromDay(displayYear, displayMonth, displayDay);
+    monthStr = dateService.monthNamesLong[displayMonth];
+    const oneWeekFromDay = dateService.getDateOneWeekFromDay(displayYear, displayMonth, displayDay-1);
     return `${displayDay} ${monthStr} to ${oneWeekFromDay.day} ${oneWeekFromDay.monthNameLong}`;
   } else if (view === 'day') {
     return `${dayStr}, ${monthStr} ${displayDay} ${displayYear}`
