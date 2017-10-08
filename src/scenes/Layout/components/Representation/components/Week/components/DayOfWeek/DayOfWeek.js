@@ -1,5 +1,5 @@
 import React from 'react';
-import { Header, Card } from 'semantic-ui-react';
+import { Header } from 'semantic-ui-react';
 //import dateService from '../../../../../../services/dates/dateService';
 
 const DayOfWeek = (props) => (
