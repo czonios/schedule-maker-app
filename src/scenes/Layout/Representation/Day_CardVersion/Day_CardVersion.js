@@ -1,11 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types'
 
-const propTypes = {};
+const propTypes = {
+  events: PropTypes.array.isRequired
+};
 
 const defaultProps = {};
 
-const Day_CardVersion = props => (
+const Day_CardVersion = ({ events }) => (
   <div>
     Day_CardVersion
   </div>

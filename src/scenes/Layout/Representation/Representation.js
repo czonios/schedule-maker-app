@@ -40,7 +40,7 @@ const Representation = (props) => {
         </div>
     );
 }
-function chooseView({ displayMonth, displayYear, displayDay, incrementDisplayMonth, decrementDisplayMonth, url }) {
+function chooseView({ displayMonth, displayYear, displayDay, incrementDisplayMonth, decrementDisplayMonth, url, displayDaysEvents }) {
     //Decide which view to render, based on the URL
     const view = url.match.params.view;
     //don't need the null check for route '/' i think?
@@ -52,7 +52,7 @@ function chooseView({ displayMonth, displayYear, displayDay, incrementDisplayMon
         return <Week />
     } else if (view === 'day') {
         // return <Day />
-        return <Day_CardVersion />
+        return <Day_CardVersion events={displayDaysEvents} />
     }
 }
 
@@ -72,15 +72,17 @@ function mapStateToProps(state, ownProps) {
 }
 function filterEventsByDay(year, month, day, events) {
     return Object.values(events).filter(event => {
-        return event.year === year
-            && event.month === month
-            && event.day === day;
+        const { date } = event;
+        return date.year === year
+            && date.month === month
+            && date.day === day;
     })
 }
 function filterEventsByMonth(year, month, events) {
     return Object.values(events).filter(event => {
-        return event.year === year
-            && event.month === month
+        const { date } = event;
+        return date.year === year
+            && date.month === month
     })
 }
 function mapDispatchToProps(dispatch) {
