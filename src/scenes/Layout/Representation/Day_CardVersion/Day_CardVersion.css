@@ -1,0 +1,7 @@
+.card {
+    min-width: 60%;
+}
+
+div>div>div>.red-background {
+    background-color: rgb(241, 187, 187);
+}
