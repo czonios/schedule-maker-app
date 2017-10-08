@@ -1,4 +1,4 @@
-import * as m from '../../../../services/mock/events/mockEvents';
+import * as m from '../../../../../services/mock/events/mockEvents';
 
 const defaultState = {
   events: {
