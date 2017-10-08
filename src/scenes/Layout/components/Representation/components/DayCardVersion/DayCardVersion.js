@@ -17,7 +17,7 @@ const DayCardVersion = ({ events }) => (
         <Card.Content extra className="event-start">
           {event.time.start}
         </Card.Content>
-        <Card.Content>
+    <Card.Content>
           <Card.Header>
             {event.title}
           </Card.Header>
