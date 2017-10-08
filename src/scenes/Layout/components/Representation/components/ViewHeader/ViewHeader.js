@@ -55,8 +55,9 @@ function generateHeaderText(view, displayYear, displayMonth, displayDay, dateSer
       }
       return day;
     }
-    const oneWeekFromDay = dateService.getDateOneWeekFromDay(displayYear, displayMonth, findMonday());
-    return `${findMonday()} ${monthStr} to ${oneWeekFromDay.day} ${oneWeekFromDay.monthNameLong}`;
+    displayDay = findMonday();
+    const oneWeekFromDay = dateService.getDateOneWeekFromDay(displayYear, displayMonth, displayDay);
+    return `${displayDay} ${monthStr} to ${oneWeekFromDay.day} ${oneWeekFromDay.monthNameLong}`;
   } else if (view === 'day') {
     return `${dayStr}, ${monthStr} ${displayDay} ${displayYear}`
   }
