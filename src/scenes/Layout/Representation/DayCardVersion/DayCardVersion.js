@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types'
 import timeService from '../../../../services/times/timeService';
 import { Card } from 'semantic-ui-react';
-import './Day_CardVersion.css';
+import './DayCardVersion.css';
 
 const propTypes = {
   events: PropTypes.array.isRequired
@@ -10,9 +10,8 @@ const propTypes = {
 
 const defaultProps = {};
 
-const Day_CardVersion = ({ events }) => (
+const DayCardVersion = ({ events }) => (
   <div>
-    {console.log(timeService.sortEventsByTimeMutable(events))}
     {timeService.sortEventsByTimeMutable(events).map((event, i) => (
       <Card key={i} centered >
         <Card.Header>
@@ -34,8 +33,8 @@ const Day_CardVersion = ({ events }) => (
   </div>
 );
 
-Day_CardVersion.propTypes = propTypes;
+DayCardVersion.propTypes = propTypes;
 
-Day_CardVersion.defaultProps = defaultProps;
+DayCardVersion.defaultProps = defaultProps;
 
-export default Day_CardVersion;
+export default DayCardVersion;

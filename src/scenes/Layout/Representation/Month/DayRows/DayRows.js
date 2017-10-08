@@ -88,7 +88,7 @@ export function cellClasses(day) {
 //Consume the 2d array representing the weeks, and generate  5-6 Grid.Rows with the days as columns 
 export function generateRows(events, displayYear, displayMonth, chunkedArr) {
   const eventsPerDayArray = eventsPerDayInMonth(events);
-  console.log(eventsPerDayArray);
+  // console.log(eventsPerDayArray);
   return chunkedArr.map((subArr, i) => {
     return (
       <Grid.Row key={i}>

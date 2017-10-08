@@ -1,7 +1,7 @@
 class TimeService {
-  constructor() {
+  // constructor() {
 
-  }
+  // }
   //returns -1 is a is less than b, 1 if a is greater than b, 0 if they are equal
   //conforms to what .sort() expects from its callback, 
   //cf: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/sort

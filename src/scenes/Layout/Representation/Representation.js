@@ -6,8 +6,8 @@ import PropTypes from 'prop-types';
 import * as actions from './data/actions';
 import Month from './Month/Month';
 import Week from './Week/Week';
-import Day from './Day/Day';
-import Day_CardVersion from './Day_CardVersion/Day_CardVersion';
+// import Day from './Day/Day';
+import DayCardVersion from './DayCardVersion/DayCardVersion';
 import { Menu } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
 import ViewHeader from './ViewHeader/ViewHeader';
@@ -52,7 +52,7 @@ function chooseView({ displayMonth, displayYear, displayDay, incrementDisplayMon
         return <Week />
     } else if (view === 'day') {
         // return <Day />
-        return <Day_CardVersion events={displayDayEvents} />
+        return <DayCardVersion events={displayDayEvents} />
     }
 }
 
