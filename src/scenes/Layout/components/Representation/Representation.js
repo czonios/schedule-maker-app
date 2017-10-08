@@ -41,7 +41,7 @@ const Representation = (props) => {
         </div>
     );
 }
-function chooseView({ displayMonth, displayYear, displayDay, incrementDisplayMonth, decrementDisplayMonth, url, displayDayEvents, displayMonthEvents }) {
+function chooseView({ displayMonth, displayYear, displayDay, incrementDisplayMonth, decrementDisplayMonth, url, displayDayEvents, displayMonthEvents, displayWeekEvents }) {
     //Decide which view to render, based on the URL
     const view = url.match.params.view;
     //don't need the null check for route '/' i think?
@@ -50,7 +50,7 @@ function chooseView({ displayMonth, displayYear, displayDay, incrementDisplayMon
         return <Month events={displayMonthEvents} displayMonth={displayMonth} displayYear={displayYear}
             incrementDisplayMonth={incrementDisplayMonth} decrementDisplayMonth={decrementDisplayMonth} />
     } else if (view === 'week') {
-        return <Week />
+        return <Week events={displayWeekEvents} />
     } else if (view === 'day') {
         // return <Day />
         return <DayCardVersion events={displayDayEvents} />
@@ -65,6 +65,7 @@ function mapStateToProps(state, ownProps) {
     return {
         allEvents,
         displayDayEvents: filterEventsByDay(displayYear, displayMonth, displayDay, allEvents),
+        displayWeekEvents: filterEventsByWeek(displayYear, displayMonth, displayDay, allEvents),
         displayMonthEvents: filterEventsByMonth(displayYear, displayMonth, allEvents),
         displayYear,
         displayMonth,
@@ -84,6 +85,32 @@ function filterEventsByMonth(year, month, events) {
         const { date } = event;
         return date.year === year
             && date.month === month
+    })
+}
+//Week is defined as from the given day (inclusive), thourgh to the next 6 days
+//TODO Make this work for dates in the last week of december (multiple years can be valid)
+function filterEventsByWeek(year, month, day, events) {
+    const daysInMonth = dateService.getDaysCountInMonth(year, month, day);
+    const nextMonth = new Date(year, month + 1, day).getMonth();
+    const validDaysDict = Array.from({ length: 12 });
+    const daysBeforeMonthEnd = daysInMonth - day;
+    //If the day falls within the last week of its month, we have to inlcude events
+    //within a certain span of the beginning of the next month
+    //The logic could all be simplified by making two or more passes over the events array, one for each 
+    //month, but since there could be hundreds or thousands of events, i think its worth the complexity
+    if (daysBeforeMonthEnd <= 6) {
+        validDaysDict[month] = Array.from({ length: daysBeforeMonthEnd }, (_, i) => day + i)
+        validDaysDict[nextMonth] = Array.from({ length: 7 - daysBeforeMonthEnd }, (_, i) => i + 1);
+    } else {
+        validDaysDict[month] = Array.from({ length: 7 }, (_, i) => day + i);
+    }
+    // const validMonths = Object.keys(validDaysDict);
+    console.log(validDaysDict);
+    return Object.values(events).filter(event => {
+        const { date } = event;
+        return date.year === year
+            && validDaysDict[event.month] !== undefined
+            && validDaysDict[event.month].indexOf(event.day) > -1
     })
 }
 function mapDispatchToProps(dispatch) {
