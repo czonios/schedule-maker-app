@@ -1,5 +1,5 @@
 import React from 'react';
-import PropTypes from 'prop-types'
+import PropTypes from 'prop-types';
 import timeService from '../../../../../../services/times/timeService';
 import { Card } from 'semantic-ui-react';
 import './DayCardVersion.css';
@@ -14,9 +14,9 @@ const DayCardVersion = ({ events }) => (
   <div className="day">
     {timeService.sortEventsByTimeMutable(events).map((event, i) => (
       <Card key={i} centered >
-        <Card.Header>
+        <Card.Content extra className="event-start">
           {event.time.start}
-        </Card.Header>
+        </Card.Content>
         <Card.Content>
           <Card.Header>
             {event.title}
@@ -25,7 +25,7 @@ const DayCardVersion = ({ events }) => (
             {event.description}
           </Card.Description>
         </Card.Content>
-        <Card.Content extra className="red-background">
+        <Card.Content extra className="event-end">
           {event.time.end}
         </Card.Content>
       </Card>

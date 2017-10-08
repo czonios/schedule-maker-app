@@ -6,6 +6,11 @@
     min-width: 60%;
 }
 
-div>div>div>.red-background {
-    background-color: rgb(241, 187, 187);
+.extra.content.event-start {
+    background-color: rgba(0, 128, 128, 0.2);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.extra.content.event-end {
+    background-color: rgba(255, 0, 0, 0.2);
 }
