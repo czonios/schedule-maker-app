@@ -18,7 +18,7 @@ const Representation = (props) => {
     const { view, year, month, day } = props.url.match.params;
     return (
         <div className="representation">
-            {/* Could be broken out into its own subcomponent */}
+            {/* Could/should be broken out into its own subcomponent */}
             <Menu tabular>
                 <Menu.Item as={Link} to={`/month/${year}/${month}/${day}`} name='month' active={view === 'month'}>
                     Month
@@ -40,19 +40,19 @@ const Representation = (props) => {
         </div>
     );
 }
-function chooseView({ displayMonth, displayYear, displayDay, incrementDisplayMonth, decrementDisplayMonth, url, displayDaysEvents }) {
+function chooseView({ displayMonth, displayYear, displayDay, incrementDisplayMonth, decrementDisplayMonth, url, displayDayEvents, displayMonthEvents }) {
     //Decide which view to render, based on the URL
     const view = url.match.params.view;
     //don't need the null check for route '/' i think?
     // if (!url.match) return null;
     if (view === 'month') {
-        return <Month displayMonth={displayMonth} displayYear={displayYear}
+        return <Month events={displayMonthEvents} displayMonth={displayMonth} displayYear={displayYear}
             incrementDisplayMonth={incrementDisplayMonth} decrementDisplayMonth={decrementDisplayMonth} />
     } else if (view === 'week') {
         return <Week />
     } else if (view === 'day') {
         // return <Day />
-        return <Day_CardVersion events={displayDaysEvents} />
+        return <Day_CardVersion events={displayDayEvents} />
     }
 }
 
@@ -63,8 +63,8 @@ function mapStateToProps(state, ownProps) {
     const allEvents = state.layout.representation.data.events;
     return {
         allEvents,
-        displayDaysEvents: filterEventsByDay(displayYear, displayMonth, displayDay, allEvents),
-        displayMonthsEvents: filterEventsByMonth(displayYear, displayMonth, allEvents),
+        displayDayEvents: filterEventsByDay(displayYear, displayMonth, displayDay, allEvents),
+        displayMonthEvents: filterEventsByMonth(displayYear, displayMonth, allEvents),
         displayYear,
         displayMonth,
         displayDay,

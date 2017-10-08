@@ -6,14 +6,14 @@ import dateService from '../../../../services/dates/dateService';
 import DayRows from './DayRows/DayRows.js';
 
 
-const Month = ({ displayMonth, displayYear, incrementDisplayMonth, decrementDisplayMonth }) => (
+const Month = ({ displayMonth, displayYear, incrementDisplayMonth, decrementDisplayMonth, events }) => (
   <div className="month-view-wrapper">
     <Grid columns={7} celled>
 
       <Grid.Row>
         {generateWeekdayColumns()}
       </Grid.Row>
-      <DayRows displayMonth={displayMonth} displayYear={displayYear} dateService={dateService} />
+      <DayRows events={events} displayMonth={displayMonth} displayYear={displayYear} dateService={dateService} />
 
     </Grid>
 

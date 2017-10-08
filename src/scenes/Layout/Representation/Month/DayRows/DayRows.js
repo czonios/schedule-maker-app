@@ -4,9 +4,9 @@ import { Grid } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
 import './dayRows.css';
 
-const DayRows = ({ displayMonth, displayYear, dateService }) => (
-
-  generateRows(displayYear, displayMonth, splitDaysIntoWeeks(padDaysInMonthArr(displayYear, displayMonth, dateService)))
+const DayRows = ({ displayMonth, displayYear, dateService, events }) => (
+  //This function need to be cleaned up/broken down, badly
+  generateRows(events, displayYear, displayMonth, splitDaysIntoWeeks(padDaysInMonthArr(displayYear, displayMonth, dateService)))
 
 );
 
@@ -86,8 +86,9 @@ export function cellClasses(day) {
 }
 
 //Consume the 2d array representing the weeks, and generate  5-6 Grid.Rows with the days as columns 
-export function generateRows(displayYear, displayMonth, chunkedArr) {
-
+export function generateRows(events, displayYear, displayMonth, chunkedArr) {
+  const eventsPerDayArray = eventsPerDayInMonth(events);
+  console.log(eventsPerDayArray);
   return chunkedArr.map((subArr, i) => {
     return (
       <Grid.Row key={i}>
@@ -98,7 +99,10 @@ export function generateRows(displayYear, displayMonth, chunkedArr) {
               <Link to={`/day/${displayYear}/${displayMonth + 1}/${day}`} >
                 <div>{day}</div>
               </Link>
-
+              {/* Gross, break out a function for this */}
+              {eventsPerDayArray[day] > 0
+                ? `${eventsPerDayArray[day]} events`
+                : ''}
             </Grid.Column>
           );
         })}
@@ -106,11 +110,20 @@ export function generateRows(displayYear, displayMonth, chunkedArr) {
     );
   });
 }
+//TODO TEST
+export function eventsPerDayInMonth(events) {
+  const daysArr = Array.from({ length: 32 }, (_, i) => 0);
+  return events.reduce((accum, event) => {
+    accum[event.date.day]++;
+    return accum;
+  }, daysArr);
+}
 
 const propTypes = {
   displayMonth: PropTypes.number.isRequired,
   displayYear: PropTypes.number.isRequired,
-  dateService: PropTypes.object.isRequired
+  dateService: PropTypes.object.isRequired,
+  events: PropTypes.array.isRequired
 };
 
 const defaultProps = {};
