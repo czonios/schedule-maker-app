@@ -3,24 +3,17 @@ import PropTypes from 'prop-types';
 import './month.css';
 import { Grid, Header } from 'semantic-ui-react';
 import dateService from '../../../../services/dates/dateService';
-import MonthHeader from './MonthHeader/MonthHeader.js';
 import DayRows from './DayRows/DayRows.js';
 
 
-const Month = ({ displayMonth, displayYear, incrementDisplayMonth, decrementDisplayMonth }) => (
+const Month = ({ displayMonth, displayYear, incrementDisplayMonth, decrementDisplayMonth, events }) => (
   <div className="month-view-wrapper">
-
-
-      <MonthHeader displayMonth={displayMonth} incrementDisplayMonth={incrementDisplayMonth}
-        decrementDisplayMonth={decrementDisplayMonth} displayYear={displayYear}
-        dateService={dateService} />
-
     <Grid columns={7} celled>
 
       <Grid.Row>
         {generateWeekdayColumns()}
       </Grid.Row>
-      <DayRows displayMonth={displayMonth} displayYear={displayYear} dateService={dateService} />
+      <DayRows events={events} displayMonth={displayMonth} displayYear={displayYear} dateService={dateService} />
 
     </Grid>
 

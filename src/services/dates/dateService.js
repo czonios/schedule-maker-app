@@ -3,6 +3,7 @@ class DateService {
   constructor() {
     this.today = new Date();
     this.dayStrRepArr = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
+    this.dayNamesLong = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
     this.monthNamesShort = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
     this.monthNamesLong = ['January', 'Febuary', 'March', 'April', 'May', 'June', 'July',
       'August', 'September', 'October', 'November', 'December'];
@@ -69,14 +70,58 @@ class DateService {
       }
     }
   }
+  getNextDay(year, month, day) {
+    let nextDayObj = new Date(year, month, day + 1)
+    const nextDaysMonth = nextDayObj.getMonth();
+    return {
+      year: nextDayObj.getFullYear(),
+      month: nextDaysMonth,
+      day: nextDayObj.getDate(),
+      monthNameShort: this.monthNamesShort[nextDaysMonth],
+      monthNameLong: this.monthNamesLong[nextDaysMonth]
+    }
+  }
 
+  getPrevDay(year, month, day) {
+    let prevDayObj = new Date(year, month, day - 1)
+    const prevDaysMonth = prevDayObj.getMonth();
+    return {
+      year: prevDayObj.getFullYear(),
+      month: prevDaysMonth,
+      day: prevDayObj.getDate(),
+      monthNameShort: this.monthNamesShort[prevDaysMonth],
+      monthNameLong: this.monthNamesLong[prevDaysMonth]
+    }
+  }
+  getDateOneWeekBeforeDay(year, month, day) {
+    const prevWeekObj = new Date(year, month, day - 7);
+    const prevWeekMonth = prevWeekObj.getMonth();
+    return {
+      year: prevWeekObj.getFullYear(),
+      month: prevWeekMonth,
+      day: prevWeekObj.getDate(),
+      monthNameShort: this.monthNamesShort[prevWeekMonth],
+      monthNameLong: this.monthNamesLong[prevWeekMonth]
+    }
+  }
+  getDateOneWeekFromDay(year, month, day) {
+    const nextWeekObj = new Date(year, month, day + 7);
+    const nextWeekMonth = nextWeekObj.getMonth();
+    return {
+      year: nextWeekObj.getFullYear(),
+      month: nextWeekMonth,
+      day: nextWeekObj.getDate(),
+      monthNameShort: this.monthNamesShort[nextWeekMonth],
+      monthNameLong: this.monthNamesLong[nextWeekMonth]
+    }
+  }
   // getMonthStr :: Num -> String
   getMonthStr(month) {
     return this.monthNamesShort[month];
   }
 
   //getDayStr :: Num -> String mon=0 convention
-  getDayStr(day) {    
+  getDayStr(day) {
     return this.dayStrRepArr[day];
   }
 }
