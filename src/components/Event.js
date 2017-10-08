@@ -15,7 +15,7 @@ class Event {
             year: date.getFullYear(),
             month: date.getMonth(),
             monthString: dateService.getMonthStr(this.date.month),
-            day: this.convertDay(date.getDay()),
+            day: this.dateService.convertDay(date.getDay()),
             dayStr: dateService.getDayStr(this.date.day)
         };
         this.notify = {
@@ -35,13 +35,6 @@ class Event {
         this.tags = tags; //array
         this.notes = notes; //array of objects {id: x, text: "y"}
 
-    }
-
-    //converts day to mon=0 from sun=0
-    convertDay(dayPrev) {
-        if (day === 0)
-            day = 7;
-        return day-1;
     }
 
 }

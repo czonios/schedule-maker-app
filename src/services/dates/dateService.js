@@ -94,7 +94,7 @@ class DateService {
     }
   }
   getDateOneWeekBeforeDay(year, month, day) {
-    const prevWeekObj = new Date(year, month, day - 7);
+    const prevWeekObj = new Date(year, month, day - 6);
     const prevWeekMonth = prevWeekObj.getMonth();
     return {
       year: prevWeekObj.getFullYear(),
@@ -105,7 +105,7 @@ class DateService {
     }
   }
   getDateOneWeekFromDay(year, month, day) {
-    const nextWeekObj = new Date(year, month, day + 7);
+    const nextWeekObj = new Date(year, month, day + 6);
     const nextWeekMonth = nextWeekObj.getMonth();
     return {
       year: nextWeekObj.getFullYear(),
@@ -113,7 +113,7 @@ class DateService {
       day: nextWeekObj.getDate(),
       monthNameShort: this.monthNamesShort[nextWeekMonth],
       monthNameLong: this.monthNamesLong[nextWeekMonth]
-    }
+    };
   }
   // getMonthStr :: Num -> String
   getMonthStr(month) {
@@ -124,6 +124,14 @@ class DateService {
   getDayStr(day) {
     return this.dayStrRepArr[day];
   }
+
+  //converts day to mon=0 from sun=0
+  convertDay(dayPrev) {
+    if (dayPrev === 0)
+        dayPrev = 7;
+      return dayPrev-1;
+  }
+
 }
 
 const dateService = new DateService();

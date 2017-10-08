@@ -5,10 +5,13 @@
 .month-view-wrapper {
     height: 100%;
     padding: 20px;
-    border: 1px solid rgba(0, 128, 128, 0.33);
+    
 }
 
+@media (max-width: 768px) {
 
-.day-name {
-    text-decoration: underline;
+    .month-view-wrapper {
+        padding: 0px;
+    }
+
 }

@@ -5,9 +5,9 @@ import 'semantic-ui-css/semantic.min.css';
 import './layout.css';
 
 // Components
-import { Title } from './Title/Title';
-import { Footer } from './Footer/Footer';
-import Representation from './Representation/Representation';
+import { Title } from './components/Title/Title';
+import { Footer } from './components/Footer/Footer';
+import Representation from './components/Representation/Representation';
 
 /**
  * The Layout class is the page and acts as a wrapper for

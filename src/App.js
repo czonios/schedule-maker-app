@@ -4,7 +4,7 @@ import store from './store';
 import Layout from './scenes/Layout/Layout';
 import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
 import dateService from './services/dates/dateService';
-import NotFound from './scenes/components/NotFound'
+import NotFound from './scenes/components/NotFound';
 
 class App extends Component {
   render() {
@@ -18,9 +18,9 @@ class App extends Component {
               )} />
               <Route path="/:view/:year/:month/:day" component={Layout} />
               <Route component={NotFound} />
-            </ Switch>
+            </Switch>
           </div>
-        </ BrowserRouter>
+        </BrowserRouter>
       </Provider>
     );
   }

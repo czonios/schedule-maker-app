@@ -3,6 +3,7 @@
     margin: auto;
     max-width: 95%;
     background-color: white; 
+    border: 1px solid rgba(0, 128, 128, 0.33);
     box-shadow: 1px 1px 6px 3px rgba(0, 0, 0, 0.5);
     margin-bottom: 200px;
 }

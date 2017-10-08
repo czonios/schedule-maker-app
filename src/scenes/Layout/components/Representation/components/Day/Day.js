@@ -1,7 +1,7 @@
 import React from 'react';
 // import PropTypes from 'prop-types'
 import { Grid, Header, Segment } from 'semantic-ui-react';
-import dateService from '../../../../services/dates/dateService';
+import dateService from '../../../../../../services/dates/dateService';
 import './day.css';
 
 // const propTypes = {};

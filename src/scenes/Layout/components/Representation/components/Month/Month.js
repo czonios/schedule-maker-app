@@ -1,9 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import './month.css';
-import { Grid, Header } from 'semantic-ui-react';
-import dateService from '../../../../services/dates/dateService';
-import DayRows from './DayRows/DayRows.js';
+import { Grid } from 'semantic-ui-react';
+import dateService from '../../../../../../services/dates/dateService';
+import DayRows from './components/DayRows/DayRows.js';
+import WeekdayColumns from '../WeekDayColumns/WeekdayColumns';
 
 
 const Month = ({ displayMonth, displayYear, incrementDisplayMonth, decrementDisplayMonth, events }) => (
@@ -11,7 +12,7 @@ const Month = ({ displayMonth, displayYear, incrementDisplayMonth, decrementDisp
     <Grid columns={7} celled>
 
       <Grid.Row>
-        {generateWeekdayColumns()}
+        <WeekdayColumns />
       </Grid.Row>
       <DayRows events={events} displayMonth={displayMonth} displayYear={displayYear} dateService={dateService} />
 
@@ -19,17 +20,6 @@ const Month = ({ displayMonth, displayYear, incrementDisplayMonth, decrementDisp
 
   </div>
 );
-
-// Generates the columns, named Mon, Tue etc.
-function generateWeekdayColumns() {
-  return dateService.dayStrRepArr.map((dayName, i) => {
-    return (
-      <Grid.Column key={i}>
-        <Header size="medium" className="day-name">{dayName}</Header>
-      </Grid.Column>
-    );
-  });
-}
 
 const propTypes = {
   displayYear: PropTypes.number.isRequired,

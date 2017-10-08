@@ -1,0 +1,18 @@
+@media (max-width: 500px) {
+
+    .ui.celled.grid>.column:not(.row), 
+    .ui.celled.grid>.row>.column {
+        padding-left: 0.5em;
+        padding-right: 0.5em;
+    }
+
+    .ui.medium.header.day-name {
+        font-size: 1em;
+    }
+
+}
+
+
+    
+
+

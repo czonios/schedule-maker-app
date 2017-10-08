@@ -4,14 +4,15 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import * as actions from './data/actions';
-import Month from './Month/Month';
-import Week from './Week/Week';
+import Month from './components/Month/Month';
+import Week from './components/Week/Week';
 // import Day from './Day/Day';
-import DayCardVersion from './DayCardVersion/DayCardVersion';
-import { Menu } from 'semantic-ui-react';
-import { Link } from 'react-router-dom';
-import ViewHeader from './ViewHeader/ViewHeader';
-import dateService from '../../../services/dates/dateService';
+import DayCardVersion from './components/DayCardVersion/DayCardVersion';
+
+import ViewMenu from './components/ViewMenu/ViewMenu';
+
+import ViewHeader from './components/ViewHeader/ViewHeader';
+import dateService from '../../../../services/dates/dateService';
 
 const Representation = (props) => {
     const { displayYear, displayMonth, displayDay } = props;
@@ -19,21 +20,7 @@ const Representation = (props) => {
     return (
         <div className="representation">
             {/* Could/should be broken out into its own subcomponent */}
-            <Menu tabular>
-                <Menu.Item as={Link} to={`/month/${year}/${month}/${day}`} name='month' active={view === 'month'}>
-                    Month
-                </Menu.Item>
-                <Menu.Item as={Link} to={`/week/${year}/${month}/${day}`} name='week' active={view === 'week'}>
-                    Week
-                </Menu.Item>
-                <Menu.Item as={Link} to={`/day/${year}/${month}/${day}`} name='day' active={view === 'day'}>
-                    Day
-                </Menu.Item>
-                <Menu.Menu position="right">
-                    <Menu.Item name='bio' active={false} onClick={this.handleItemClick} />
-                    <Menu.Item name='photos' active={false} onClick={this.handleItemClick} />
-                </Menu.Menu>
-            </Menu>
+            <ViewMenu day={day} month={month} year={year} view={view} />
             <ViewHeader displayMonth={displayMonth} displayYear={displayYear} displayDay={displayDay} dateService={dateService}
                 view={view} />
             {chooseView(props)}

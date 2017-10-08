@@ -3,8 +3,8 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { StaticRouter } from 'react-router';
 import renderer from 'react-test-renderer';
-import dateService from '../../../../.././services/dates/dateService';
-import * as e from '../../../../.././services/mock/events/mockEvents.js';
+import dateService from '../../../../../../../../services/dates/dateService';
+import * as e from '../../../../../../../../services/mock/events/mockEvents.js';
 import DayRows from './DayRows.js';
 
 const nullPaddedArr = [null, null, null, null, null, null, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17,

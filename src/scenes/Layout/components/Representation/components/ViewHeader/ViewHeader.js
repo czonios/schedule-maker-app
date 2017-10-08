@@ -36,14 +36,33 @@ function generateHeaderText(view, displayYear, displayMonth, displayDay, dateSer
   if (view === 'month') {
     return `${monthStr} ${displayYear}`
   } else if (view === 'week') {
-    const oneWeekFromDay = dateService.getDateOneWeekFromDay(displayYear, displayMonth, displayDay);
-    return `${displayDay} ${monthStr} to ${oneWeekFromDay.day} ${oneWeekFromDay.monthNameLong}`;
+    
+    let day = displayDay;
+    // find this week's Monday
+    const findMonday = () => {
+      // loop backwards until we find a monday
+      while (dateService.getDayStr(dateService.convertDay(new Date(displayYear, displayMonth, day).getDay())) !== "Mon") {
+        day--;
+      }
+      // if day is negative, the monday is in the previous month
+      if (day <= 0) {
+        displayMonth--;
+        // if month is December, then the monday is in the previous year
+        if (displayMonth === 11)
+          displayYear--;
+        // so calculate day accordingly
+        day = dateService.getDaysCountInMonth(displayYear, displayMonth) - 1 + day;
+      }
+      return day;
+    }
+    const oneWeekFromDay = dateService.getDateOneWeekFromDay(displayYear, displayMonth, findMonday());
+    return `${findMonday()} ${monthStr} to ${oneWeekFromDay.day} ${oneWeekFromDay.monthNameLong}`;
   } else if (view === 'day') {
     return `${dayStr}, ${monthStr} ${displayDay} ${displayYear}`
   }
 }
 
-//These two functin could be merged into one, and then passed in a flag for 'next' or 'prev'
+//These two functions could be merged into one, and then passed in a flag for 'next' or 'prev'
 //Not doing that for now, I think it'll make testing them harder, and might result in a big messy function
 function urlPrevStr(view, displayYear, displayMonth, displayDay, dateService) {
   let yearStr, monthStr, dayStr;
