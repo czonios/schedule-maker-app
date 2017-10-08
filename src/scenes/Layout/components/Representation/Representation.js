@@ -14,6 +14,20 @@ import ViewMenu from './components/ViewMenu/ViewMenu';
 import ViewHeader from './components/ViewHeader/ViewHeader';
 import dateService from '../../../../services/dates/dateService';
 
+const cellColors = [
+    "red",
+    "orange",
+    "yellow",
+    "olive",
+    "green",
+    "blue",
+    "violet",
+    "purple",
+    "pink",
+    "brown",
+    "black"
+];
+
 const Representation = (props) => {
     const { displayYear, displayMonth, displayDay } = props;
     const { view, year, month, day } = props.url.match.params;

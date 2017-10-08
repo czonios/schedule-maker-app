@@ -6,6 +6,119 @@
     border: 1px solid rgba(0, 128, 128, 0.33);
     box-shadow: 1px 1px 6px 3px rgba(0, 0, 0, 0.5);
     margin-bottom: 200px;
+
+}
+
+/* colors of boxes */ 
+.ui.grid>.red.column,
+.ui.grid>.red.row,
+.ui.grid>.row>.red.column {
+    background-color: rgba(255, 0, 0, 0.2) !important;
+    height: 100%;
+    margin-top: 0;
+    -webkit-box-shadow: -1px 0 0 0 #C3C3C4;
+    box-shadow: -1px 0 0 0 #C4C4C4;
+}
+
+
+.ui.grid>.orange.column,
+.ui.grid>.orange.row,
+.ui.grid>.row>.orange.column {
+    background-color: rgba(255, 162, 0, 0.2) !important;
+    height: 100%;
+    margin-top: 0;
+    -webkit-box-shadow: -1px 0 0 0 #C3C3C4;
+    box-shadow: -1px 0 0 0 #C4C4C4;
+}
+
+.ui.grid>.yellow.column,
+.ui.grid>.yellow.row,
+.ui.grid>.row>.yellow.column {
+    background-color: rgba(255, 255, 0, 0.2) !important;
+    height: 100%;
+    margin-top: 0;
+    -webkit-box-shadow: -1px 0 0 0 #C3C3C4;
+    box-shadow: -1px 0 0 0 #C4C4C4;
+}
+
+.ui.grid>.olive.column,
+.ui.grid>.olive.row,
+.ui.grid>.row>.olive.column {
+    background-color: rgba(128, 128, 0, 0.2) !important;
+    height: 100%;
+    margin-top: 0;
+    -webkit-box-shadow: -1px 0 0 0 #C3C3C4;
+    box-shadow: -1px 0 0 0 #C4C4C4;
+}
+
+.ui.grid>.green.column,
+.ui.grid>.green.row,
+.ui.grid>.row.green.column {
+    background-color: rgba(0, 128, 0, 0.2) !important;
+    height: 100%;
+    margin-top: 0;
+    -webkit-box-shadow: -1px 0 0 0 #C3C3C4;
+    box-shadow: -1px 0 0 0 #C4C4C4;
+}
+
+.ui.grid>.blue.column,
+.ui.grid>.blue.row,
+.ui.grid>.row>.blue.column {
+    background-color: rgba(0, 0, 255, 0.2) !important;
+    height: 100%;
+    margin-top: 0;
+    -webkit-box-shadow: -1px 0 0 0 #C3C3C4;
+    box-shadow: -1px 0 0 0 #C4C4C4;
+}
+
+.ui.grid>.violet.column,
+.ui.grid>.violet.row,
+.ui.grid>.row>.violet.column {
+    background-color: rgba(238, 130, 238, 0.2) !important;
+    height: 100%;
+    margin-top: 0;
+    -webkit-box-shadow: -1px 0 0 0 #C3C3C4;
+    box-shadow: -1px 0 0 0 #C4C4C4;
+}
+
+.ui.grid>.purple.column,
+.ui.grid>.purple.row,
+.ui.grid>.row>.purple.column {
+    background-color: rgba(128, 0, 128, 0.2) !important;
+    height: 100%;
+    margin-top: 0;
+    -webkit-box-shadow: -1px 0 0 0 #C3C3C4;
+    box-shadow: -1px 0 0 0 #C4C4C4;
+}
+
+.ui.grid>.pink.column,
+.ui.grid>.pink.row,
+.ui.grid>.row>.pink.column {
+    background-color: rgba(255, 192, 204, 0.2) !important;
+    height: 100%;
+    margin-top: 0;
+    -webkit-box-shadow: -1px 0 0 0 #C3C3C4;
+    box-shadow: -1px 0 0 0 #C4C4C4;
+}
+
+.ui.grid>.brown.column,
+.ui.grid>.brown.row,
+.ui.grid>.row>.brown.column {
+    background-color: rgba(165, 42, 42, 0.2) !important;
+    height: 100%;
+    margin-top: 0;
+    -webkit-box-shadow: -1px 0 0 0 #C3C3C4;
+    box-shadow: -1px 0 0 0 #C4C4C4;
+}
+
+.ui.grid>.black.column,
+.ui.grid>.black.row,
+.ui.grid>.row>.black.column {
+    background-color: rgba(0, 0, 0, 0.2) !important;
+    height: 100%;
+    margin-top: 0;
+    -webkit-box-shadow: -1px 0 0 0 #C3C3C4;
+    box-shadow: -1px 0 0 0 #C4C4C4;
 }
 
 /* don't get too wide on wide viewports */

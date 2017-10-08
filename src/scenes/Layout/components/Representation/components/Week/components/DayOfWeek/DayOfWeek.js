@@ -5,7 +5,7 @@ import { Header } from 'semantic-ui-react';
 const DayOfWeek = (props) => (
     <div>
         <Header size="tiny">title for {props.time}</Header>
-        <p></p>
+        <p>description</p>
     </div>
 );
 
