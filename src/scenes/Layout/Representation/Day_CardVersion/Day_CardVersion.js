@@ -11,7 +11,14 @@ const defaultProps = {};
 
 const Day_CardVersion = ({ events }) => (
   <div>
-    {/* timeService.sort */}
+    {console.log(timeService.sortEventsByTimeMutable(events))}
+    {timeService.sortEventsByTimeMutable(events).map((event, i) => (
+      <Card key={i}>
+        <Card.Header>
+          {event.title}
+        </Card.Header>
+      </Card>
+    ))}
   </div>
 );
 

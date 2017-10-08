@@ -1,3 +1,7 @@
+//I'm now using these for mocking in tests of timeService;
+//If you want to experiment with different shapes for out mock events, start another file
+//like mockEventsV2 or whatever, and write them there, and import them into src/Representation/data/reducer.js
+//to use as the default state and get them loaded up into the redux store
 export const mockEvent1 = {
 
   title: "mockEvent1",

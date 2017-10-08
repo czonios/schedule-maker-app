@@ -20,6 +20,11 @@ class TimeService {
   sortTimesMutable(timeArr) {
     return timeArr.sort(this.compareTimes);
   }
+  sortEventsByTimeMutable(events) {
+    return events.sort((a, b) => {
+      return this.compareTimes(a.time.start, b.time.start);
+    })
+  }
 }
 const timeService = new TimeService();
 export default timeService;
