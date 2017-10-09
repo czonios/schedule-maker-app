@@ -157,6 +157,9 @@ class DateService {
     }
     return mondaysArr;
   }
+  getMondayPreviousToDay(year, month, day) {
+
+  }
 }
 
 const dateService = new DateService();
