@@ -14,7 +14,7 @@ import ViewMenu from './components/ViewMenu/ViewMenu';
 import ViewHeader from './components/ViewHeader/ViewHeader';
 import dateService from '../../../../services/dates/dateService';
 
-const cellColors = [
+export const cellColors = [
     "red",
     "orange",
     "yellow",

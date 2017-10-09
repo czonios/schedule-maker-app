@@ -25,14 +25,7 @@ class Event {
             end: end
         };
         this.repeated = repeated;
-        this.date = {
-            dateStr: date.toString(),
-            year: date.getFullYear(),
-            month: date.getMonth(),
-            monthStr: dateService.getMonthStr(date.getMonth()),
-            day: dateService.convertDay(date.getDay()),
-            dayStr: dateService.getDayStr(dateService.convertDay(date.getDay()))
-        };
+        this.date = date;
         this.notify = {
             enabled: notifyBool,
             time: notifyTimeBefore//this.time.start - notifyTimeBefore
@@ -59,14 +52,7 @@ Event.propTypes = {
     desciption: PropTypes.string,
     time: PropTypes.objectOf(PropTypes.string, PropTypes.string),
     repeated: PropTypes.bool, 
-    date: PropTypes.objectOf(
-        PropTypes.string, 
-        PropTypes.number, 
-        PropTypes.number,
-        PropTypes.string,
-        PropTypes.number,
-        PropTypes.string
-    ),
+    date: PropTypes.objectOf(Date),
     notify: PropTypes.objectOf(PropTypes.bool, PropTypes.string),
     repdays: PropTypes.objectOf(PropTypes.bool),
     color: PropTypes.string,

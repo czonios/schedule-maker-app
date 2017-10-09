@@ -30,15 +30,7 @@ class Event {
       end: end
     };
     this.repeated = repeated;
-    this.date = {
-      dateStr: date.toString(),
-      year: date.getFullYear(),
-      month: date.getMonth(),
-      monthString: dateService.getMonthStr(date.getMonth()),
-      // day: dateService.convertDay(date.getDay()),
-      day: date.getDate(),
-      dayStr: dateService.getDayStr(dateService.convertDay(date.getDay()))
-    };
+    this.date = date;
     this.notify = {
       enabled: notifyBool,
       time: this.time.start - notifyTimeBefore
