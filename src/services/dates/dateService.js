@@ -128,10 +128,35 @@ class DateService {
   //converts day to mon=0 from sun=0
   convertDay(dayPrev) {
     if (dayPrev === 0)
-        dayPrev = 7;
-      return dayPrev-1;
+      dayPrev = 7;
+    return dayPrev - 1;
   }
 
+  // getWeekOfDay_startingFromJan1st() {
+
+  // }
+
+  getDatesInWeekAroundDay_weeksIndexedAtMonday(year, month, day) {
+
+  }
+  // dateOfFirstMondayInMonth :: (Number, Number) -> Number
+  dateOfFirstMondayInMonth(year, month) {
+    const dayOfWeekForFirst7DaysInMonth = [1, 2, 3, 4, 5, 6, 7].map(date => {
+      return new Date(year, month, date).getDay();
+    });
+    return dayOfWeekForFirst7DaysInMonth.indexOf(1) + 1;
+  }
+  //datesOfAllMondaysInMonth :: (Number, Number) -> [Number]
+  datesOfAllMondaysInMonth(year, month) {
+    const first = this.dateOfFirstMondayInMonth(year, month);
+    let i = first;
+    const mondaysArr = [];
+    while (i <= this.getDaysCountInMonth(year, month)) {
+      mondaysArr.push(i);
+      i += 7;
+    }
+    return mondaysArr;
+  }
 }
 
 const dateService = new DateService();
