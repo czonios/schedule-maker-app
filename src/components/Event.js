@@ -1,4 +1,5 @@
 import dateService from '../services/dates/dateService';
+import PropTypes from 'prop-types';
 
 /**
  * title: (String) title of the scheduled event
@@ -28,13 +29,13 @@ class Event {
             dateStr: date.toString(),
             year: date.getFullYear(),
             month: date.getMonth(),
-            monthString: dateService.getMonthStr(date.getMonth()),
+            monthStr: dateService.getMonthStr(date.getMonth()),
             day: dateService.convertDay(date.getDay()),
             dayStr: dateService.getDayStr(dateService.convertDay(date.getDay()))
         };
         this.notify = {
             enabled: notifyBool,
-            time: this.time.start - notifyTimeBefore
+            time: notifyTimeBefore//this.time.start - notifyTimeBefore
         };
         this.repeatOnDay = {
             mon: repDays[0],
@@ -51,6 +52,26 @@ class Event {
 
     }
 
+}
+
+Event.propTypes = {
+    title: PropTypes.string,
+    desciption: PropTypes.string,
+    time: PropTypes.objectOf(PropTypes.string, PropTypes.string),
+    repeated: PropTypes.bool, 
+    date: PropTypes.objectOf(
+        PropTypes.string, 
+        PropTypes.number, 
+        PropTypes.number,
+        PropTypes.string,
+        PropTypes.number,
+        PropTypes.string
+    ),
+    notify: PropTypes.objectOf(PropTypes.bool, PropTypes.string),
+    repdays: PropTypes.objectOf(PropTypes.bool),
+    color: PropTypes.string,
+    tags: PropTypes.arrayOf(PropTypes.string),
+    notes: PropTypes.arrayOf(PropTypes.objectOf(PropTypes.number, PropTypes.string))
 }
 
 export default Event;
