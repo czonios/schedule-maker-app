@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import { Button, Image, Header } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
 import './viewHeader.css';
+import dateService from '../../../../../../services/dates/dateService';
 
 
 const ViewHeader = ({ view, dateService, displayYear, displayMonth, displayDay }) => {
@@ -32,7 +33,7 @@ function generateHeaderText(view, displayYear, displayMonth, displayDay, dateSer
   let monthStr = dateService.monthNamesLong[displayMonth];
   //TODO Move dayStr to dateService as a method? Would hide the implementation detail
   //of starting our day indexing on monday instead of sunday
-  let dayStr = dateService.dayNamesLong[new Date(displayYear, displayMonth, displayDay).getDay() - 1] || 'Sunday';
+  let dayStr = dateService.dayNamesLong[dateService.convertDay(new Date(displayYear, displayMonth, displayDay).getDay())];
   if (view === 'month') {
     return `${monthStr} ${displayYear}`
   } else if (view === 'week') {
