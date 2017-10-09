@@ -276,3 +276,20 @@ test('getDayStr returns undefined if it gets parameter > 6 (0-6 days)', () => {
   expect(dateService.getDayStr(7)).toEqual(undefined);
 });
 
+test('dateOfFirstMondayInMonth returns the date (number) of the first mon in month for given year and month', () => {
+  expect(
+    [[2015, 0], [2016, 3], [2017, 6], [2018, 7], [2019, 11], [2020, 8]]
+      .map(date => dateService.dateOfFirstMondayInMonth(date[0], date[1]))
+  ).toEqual([5, 4, 3, 6, 2, 7])
+});
+
+test('datesOfAllMondaysInMonth returns an array with the dates (numbers) of all the mondays for the given year and month', () => {
+  expect(
+    [[2017, 0], [2017, 6], [2017, 5]]
+      .map(date => dateService.datesOfAllMondaysInMonth(date[0], date[1]))
+  ).toEqual([
+    [2, 9, 16, 23, 30],
+    [3, 10, 17, 24, 31],
+    [5, 12, 19, 26]
+  ])
+});

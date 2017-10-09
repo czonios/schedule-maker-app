@@ -70,6 +70,7 @@ function mapStateToProps(state, ownProps) {
         displayYear,
         displayMonth,
         displayDay,
+        dayOfWeekAs0: state.UI.dayOfWeekAs0
     }
 }
 function filterEventsByDay(year, month, day, events) {

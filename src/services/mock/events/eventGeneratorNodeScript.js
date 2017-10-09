@@ -212,7 +212,8 @@ createMockEvents('generatedMockEvents3.js', 500);
 // Make changes to the arguments provided to the Event constructor below in order change
 // data for the mock events produced
 // One exception, change the arguments to generateStartEnd to change 
-// the min start or max end time for events
+// the min start or max end time for events (don't use 00 for the minutes segment
+// of an end time for now, its bugged)
 function generateMockEvents(count) {
   const mockEventArr = [];
   for (let i = 0; i < count; i++) {
