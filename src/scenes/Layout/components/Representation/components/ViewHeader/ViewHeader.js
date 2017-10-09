@@ -52,7 +52,7 @@ function generateHeaderText(view, displayYear, displayMonth, displayDay, dateSer
         if (displayMonth === 11)
           displayYear--;
         // so calculate day accordingly
-        day = dateService.getDaysCountInMonth(displayYear, displayMonth) - 1 + day;
+        day = dateService.getDaysCountInMonth(displayYear, displayMonth) + day;
       }
       return day;
     }
