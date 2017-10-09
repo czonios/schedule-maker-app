@@ -87,7 +87,7 @@ function filterEventsByMonth(year, month, events) {
             && date.month === month
     })
 }
-//Week is defined as from the given day (inclusive), thourgh to the next 6 days
+//Week is defined as from the given day (inclusive), thourgh to the next 6 days <- NEEDS CHANGE
 //TODO Make this work for dates in the last week of december (multiple years can be valid)
 function filterEventsByWeek(year, month, day, events) {
     const daysInMonth = dateService.getDaysCountInMonth(year, month, day);
@@ -105,7 +105,7 @@ function filterEventsByWeek(year, month, day, events) {
         validDaysDict[month] = Array.from({ length: 7 }, (_, i) => day + i);
     }
     // const validMonths = Object.keys(validDaysDict);
-    console.log(validDaysDict);
+    // console.log(validDaysDict);
     return Object.values(events).filter(event => {
         const { date } = event;
         return date.year === year

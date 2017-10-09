@@ -1,4 +1,10 @@
-var fs = require('fs');
+const fs = require('fs');
+const util = require('util');
+// const writeFilePromisified = util.promisify(fs.writeFile);
+
+
+
+
 /**
  * title: (String) title of the scheduled event
  * desciption: (String) a short description
@@ -13,6 +19,7 @@ var fs = require('fs');
  * tags: (String[]) array of tags for filtering events, e.g. ["study","algorithms"]
  * notes: (object[]) notes for the particular event, array of object {id: id, text: "text"}
  */
+
 class Event {
 
   constructor(title, description, start, end, repeated, date, notifyBool, notifyTimeBefore, repDays, color, tags, notes) {
@@ -28,7 +35,8 @@ class Event {
       year: date.getFullYear(),
       month: date.getMonth(),
       monthString: dateService.getMonthStr(date.getMonth()),
-      day: dateService.convertDay(date.getDay()),
+      // day: dateService.convertDay(date.getDay()),
+      day: date.getDate(),
       dayStr: dateService.getDayStr(dateService.convertDay(date.getDay()))
     };
     this.notify = {
@@ -188,9 +196,23 @@ class DateService {
 
 };
 
+const dateService = new DateService();
 
 const loremStr = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.";
 const loremSplitArr = loremStr.split(' ');
+
+
+//*********************************   USE *********************************** */
+//Navigate to this directory in the terminal and enter 'node eventGeneratorNodeScript.js'
+
+// Make changes to the arguments to createMockEvents here to change the number of 
+// mock events produced or to change the filename of the output
+createMockEvents('generatedMockEvents3.js', 500);
+
+// Make changes to the arguments provided to the Event constructor below in order change
+// data for the mock events produced
+// One exception, change the arguments to generateStartEnd to change 
+// the min start or max end time for events
 function generateMockEvents(count) {
   const mockEventArr = [];
   for (let i = 0; i < count; i++) {
@@ -219,6 +241,45 @@ function generateMockEvents(count) {
   }
   return mockEventArr;
 }
+function createMockEvents(filename, count) {
+  const start = Date.now();
+  const mockEvents = generateMockEvents(count);
+  mockEventsStr = JSON.stringify(mockEvents);
+  mockEventsStr = `const mockEvents = ${mockEventsStr}; export default mockEvents`;
+  fs.writeFile(`./${filename}`, mockEventsStr, (error) => {
+    if (error) {
+      console.log(`There was an error while attempting to create mock events: ${error}`);
+    } else {
+      console.log(`
+      ${count} mock events generated successfully and stored in src/services/mock/events/${filename} as a JSON string.
+      Runtime: ${Date.now() - start} ms.
+      `);
+    }
+  })
+}
+//CRA isnt using node 8+ so i cant use the promisified version... or something?
+// const writeFilePromisified = fs.writeFile;
+// function createMockEvents(filename, count) {
+//   const start = Date.now();
+//   const mockEvents = generateMockEvents(count);
+
+//   writeFilePromisified(`./${filename}`, JSON.stringify(mockEvents))
+//     .then(something => {
+//       console.log(`
+//       ${count} mock events generated successfully and stored in src/services/mock/events/${filename} as a JSON string.
+//       Runtime: ${Date.now() - start} ms.
+//       `);
+//     })
+//     .catch(error => {
+//       console.log(`There was an error while attempting to create mock events: ${error}`);
+//     })
+
+// }
+
+
+
+
+
 function randomIntBetween(min, max) {
   return Math.floor(Math.random() * (max - min) + min);
 }
@@ -260,8 +321,6 @@ function* generateStartEnd(earliest, latest) {
 //necesarily need to be the case, if the end times hours > start time hours
 // console.log(timeGenerator.next().value, timeGenerator.next().value);
 
-const dateService = new DateService();
-
 function generateDate(earliestLatestDateObj) {
   const { yearEarliest, yearLatest, monthEarliest, monthLatest, dayEarliest, dayLatest } = earliestLatestDateObj;
   return new Date(
@@ -279,14 +338,5 @@ function generateDate(earliestLatestDateObj) {
 // console.log(generateStartEnd('02:43:00', '03:12:00').next(), generateStartEnd('02:43:00', '03:12:00').next());
 
 // const mockEvents = generateMockEvents(5);
-function createMockEvents(filename, count) {
-  const mockEvents = generateMockEvents(count);
 
-  fs.writeFile(`./${filename}`, JSON.stringify(mockEvents), (err) => {
-    if (err) console.log(err);
-    console.log('file wrriten');
-  })
-
-}
-createMockEvents('mockevents1.json', 100);
 // console.log(mockEvents);

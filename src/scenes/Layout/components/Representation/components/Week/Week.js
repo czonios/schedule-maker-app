@@ -65,7 +65,7 @@ const Week = ({ events }) => (
   </div>
 );
 
-// Week.propTypes = propTypes;
+Week.propTypes = propTypes;
 
 // Week.defaultProps = defaultProps;
 
