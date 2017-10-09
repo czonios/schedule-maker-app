@@ -1,6 +1,10 @@
-# Schedule Maker
+<p align="center">
+<img src="/icon/cal512.png" alt="Calendar icon" width="200">
+</p>
 
-A web application that makes it easy to create a weekly schedule, meant for students, professionals, parents, and anyone wanting to take control of their free time.
+<h1 align="center"> Schedule Maker </h1>
+
+<em>A web application that makes it easy to create a weekly schedule. Meant for students, professionals, parents, and anyone looking to organize their life.</em>
 
 ## Project Set Up
 
