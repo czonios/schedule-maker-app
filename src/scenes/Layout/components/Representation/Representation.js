@@ -6,6 +6,7 @@ import PropTypes from 'prop-types';
 import * as actions from './data/actions';
 import Month from './components/Month/Month';
 import Week from './components/Week/Week';
+import WeekCardVersion from './components/Week/components/WeekCardVersion/WeekCardVersion';
 // import Day from './Day/Day';
 import DayCardVersion from './components/DayCardVersion/DayCardVersion';
 
@@ -37,7 +38,8 @@ function chooseView({ displayMonth, displayYear, displayDay, incrementDisplayMon
         return <Month events={displayMonthEvents} displayMonth={displayMonth} displayYear={displayYear}
             incrementDisplayMonth={incrementDisplayMonth} decrementDisplayMonth={decrementDisplayMonth} />
     } else if (view === 'week') {
-        return <Week events={displayWeekEvents} />
+        // return <Week events={displayWeekEvents} />
+        return <WeekCardVersion events={displayWeekEvents} />
     } else if (view === 'day') {
         // return <Day />
         return <DayCardVersion events={displayDayEvents} />
