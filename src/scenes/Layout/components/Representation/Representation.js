@@ -3,11 +3,12 @@ import './representation.css';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import * as actions from './data/actions';
+import { toggleGridOrCardDisplay } from '../../../.././data/actions';
+import * as actions from './data/actions'
 import Month from './components/Month/Month';
 import Week from './components/Week/Week';
 import WeekCardVersion from './components/Week/components/WeekCardVersion/WeekCardVersion';
-// import Day from './Day/Day';
+import Day from './components/Day/Day';
 import DayCardVersion from './components/DayCardVersion/DayCardVersion';
 
 import ViewMenu from './components/ViewMenu/ViewMenu';
@@ -17,19 +18,20 @@ import dateService from '../../../../services/dates/dateService';
 
 
 const Representation = (props) => {
-    const { displayYear, displayMonth, displayDay } = props;
+    const { displayYear, displayMonth, displayDay, gridOrCardDisplay, toggleGridOrCardDisplay } = props;
     const { view, year, month, day } = props.url.match.params;
     return (
         <div className="representation">
             {/* Could/should be broken out into its own subcomponent */}
-            <ViewMenu day={day} month={month} year={year} view={view} />
+            <ViewMenu day={day} month={month} year={year} view={view}
+                gridOrCardDisplay={gridOrCardDisplay} toggleGridOrCardDisplay={toggleGridOrCardDisplay} />
             <ViewHeader displayMonth={displayMonth} displayYear={displayYear} displayDay={displayDay} dateService={dateService}
                 view={view} />
             {chooseView(props)}
         </div>
     );
 }
-function chooseView({ displayMonth, displayYear, displayDay, incrementDisplayMonth, decrementDisplayMonth, url, displayDayEvents, displayMonthEvents, displayWeekEvents }) {
+function chooseView({ displayMonth, displayYear, displayDay, incrementDisplayMonth, decrementDisplayMonth, url, displayDayEvents, displayMonthEvents, displayWeekEvents, gridOrCardDisplay }) {
     //Decide which view to render, based on the URL
     const view = url.match.params.view;
     //don't need the null check for route '/' i think?
@@ -38,11 +40,18 @@ function chooseView({ displayMonth, displayYear, displayDay, incrementDisplayMon
         return <Month events={displayMonthEvents} displayMonth={displayMonth} displayYear={displayYear}
             incrementDisplayMonth={incrementDisplayMonth} decrementDisplayMonth={decrementDisplayMonth} />
     } else if (view === 'week') {
+        // console.log(toggleGridOrCardDisplay);
         // return <Week events={displayWeekEvents} />
-        return <WeekCardVersion events={displayWeekEvents} />
+        // return <WeekCardVersion events={displayWeekEvents} />
+        return gridOrCardDisplay === 'grid'
+            ? <Week events={displayWeekEvents} />
+            : <WeekCardVersion events={displayWeekEvents} />
     } else if (view === 'day') {
         // return <Day />
-        return <DayCardVersion events={displayDayEvents} />
+        // return <DayCardVersion events={displayDayEvents} />
+        return gridOrCardDisplay === 'grid'
+            ? <Day />
+            : <DayCardVersion events={displayDayEvents} />
     }
 }
 
@@ -59,7 +68,8 @@ function mapStateToProps(state, ownProps) {
         displayYear,
         displayMonth,
         displayDay,
-        dayOfWeekAs0: state.UI.dayOfWeekAs0
+        dayOfWeekAs0: state.UI.dayOfWeekAs0,
+        gridOrCardDisplay: state.UI.gridOrCardDisplay
     }
 }
 function filterEventsByDay(year, month, day, events) {
@@ -103,7 +113,8 @@ function mapDispatchToProps(dispatch) {
         decrementDisplayMonth } = actions;
     return bindActionCreators({
         incrementDisplayMonth,
-        decrementDisplayMonth
+        decrementDisplayMonth,
+        toggleGridOrCardDisplay
     }, dispatch);
 };
 
@@ -112,7 +123,8 @@ const propTypes = {
     displayYear: PropTypes.number.isRequired,
     incrementDisplayMonth: PropTypes.func.isRequired,
     decrementDisplayMonth: PropTypes.func.isRequired,
-    url: PropTypes.object.isRequired
+    url: PropTypes.object.isRequired,
+    gridOrCardDisplay: PropTypes.string.isRequired
 }
 Representation.propTypes = propTypes;
 

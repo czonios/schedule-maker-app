@@ -3,6 +3,9 @@ import PropTypes from 'prop-types'
 import { Grid, Header } from 'semantic-ui-react';
 import WeekdayColumns from '../../.././WeekDayColumns/WeekdayColumns';
 import DayCardVersion from '../../.././DayCardVersion/DayCardVersion.js'
+import dateService from '../../../../../../../../services/dates/dateService';
+import './WeekCardVersion.css'
+
 
 const propTypes = {
   events: PropTypes.array.isRequired
@@ -10,55 +13,27 @@ const propTypes = {
 
 const defaultProps = {};
 
-const WeekCardVersion = ({ events }) => (
-  <div>
-    <Grid columns={8} celled>
+const WeekCardVersion = ({ events }) => {
+  return (
+    // style={{ 'display': 'flex' }}
+    <div className="weekViewWrapper">
+      {[0, 1, 2, 3, 4, 5, 6].map(dayOfWeekVal => {
+        const dayEvents = events.filter(event => event.date.dayOfWeek === dayOfWeekVal);
+        return (
+          <div key={dayOfWeekVal} className="weekdayColumn">
+            <div className="dayHeader" >
+              {dateService.dayStrRepArr[dayOfWeekVal]}
+            </div>
+            <div >
+              <DayCardVersion events={dayEvents} condensed={true} />
+            </div>
+          </div>
+        )
+      })}
+    </div>
+  )
+}
 
-      <Grid.Row>
-        <Grid.Column><Header></Header></Grid.Column>
-        <WeekdayColumns />
-      </Grid.Row>
-      <Grid.Row>
-        {[0, 1, 2, 3, 4, 5, 6].map(day => {
-          <Grid.Column key={day}>
-            <DayCardVersion events={events} />
-          </Grid.Column>
-        })}
-        <Grid.Column>
-          <DayCardVersion events={events} />
-        </Grid.Column>
-
-        <Grid.Column>
-          <DayCardVersion events={events} />
-        </Grid.Column>
-
-        <Grid.Column>
-          <DayCardVersion events={events} />
-        </Grid.Column>
-
-        <Grid.Column>
-          <DayCardVersion events={events} />
-        </Grid.Column>
-
-        <Grid.Column>
-          <DayCardVersion events={events} />
-        </Grid.Column>
-
-        <Grid.Column>
-          <DayCardVersion events={events} />
-        </Grid.Column>
-
-        <Grid.Column>
-          <DayCardVersion events={events} />
-        </Grid.Column>
-
-
-
-      </Grid.Row>
-
-    </Grid>
-  </div>
-);
 
 WeekCardVersion.propTypes = propTypes;
 
