@@ -157,8 +157,43 @@ class DateService {
     }
     return mondaysArr;
   }
-  getMondayPreviousToDay(year, month, day) {
-
+  // Doesn't work for rolling back the year yet
+  //getFirstMondayPreviousOrEqualToDay :: (Number, Number, Number) -> Object
+  getFirstMondayPreviousOrEqualToDay(year, month, day) {
+    // Return object's shape:
+    const prevMondayDate = {
+      year,
+      month,
+      day
+    }
+    const mondaysInMonth = this.datesOfAllMondaysInMonth(year, month);
+    // const daysInMonth = this.getDaysCountInMonth(year, month, day);
+    if (new Date(year, month, day).getDay() === 1) {
+      //Given day is a Monday
+      return prevMondayDate;
+    } else if (day <= 6) {
+      // Within the first week of the month
+      if (mondaysInMonth.every(mondayDate => mondayDate > day)) {
+        // Theres no mondayDate within the first 6 days, whose date is less than day, so
+        // get the last monday of the previous month
+        const previousMonthMondayDates = this.datesOfAllMondaysInMonth(year, month - 1);
+        const lastMonday = previousMonthMondayDates[previousMonthMondayDates.length - 1];
+        prevMondayDate.day = lastMonday;
+        prevMondayDate.month = month - 1 > 0 ? month - 1 : 11
+      } else {
+        // There was a monday within the first week, before the day
+        prevMondayDate.day = mondaysInMonth[0];
+      }
+    } else {
+      // Any day outside of the first week of the month
+      for (let i = 0; i < mondaysInMonth.length; i++) {
+        if (mondaysInMonth[i + 1] > day) {
+          prevMondayDate.day = mondaysInMonth[i];
+          break;
+        }
+      }
+    }
+    return prevMondayDate;
   }
 }
 

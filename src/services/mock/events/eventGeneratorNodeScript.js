@@ -20,6 +20,8 @@ const util = require('util');
  * notes: (object[]) notes for the particular event, array of object {id: id, text: "text"}
  */
 
+
+
 class Event {
 
   constructor(title, description, start, end, repeated, date, notifyBool, notifyTimeBefore, repDays, color, tags, notes) {
@@ -30,7 +32,12 @@ class Event {
       end: end
     };
     this.repeated = repeated;
-    this.date = date;
+    this.date = {
+      year: date.getFullYear(),
+      month: date.getMonth(),
+      day: date.getDate(),
+      dayOfWeek: date.getDay()
+    };
     this.notify = {
       enabled: notifyBool,
       time: this.time.start - notifyTimeBefore

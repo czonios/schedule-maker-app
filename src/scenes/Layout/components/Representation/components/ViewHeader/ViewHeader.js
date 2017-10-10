@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import { Button, Image, Header } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
 import './viewHeader.css';
-import dateService from '../../../../../../services/dates/dateService';
+// import dateService from '../../../../../../services/dates/dateService';
 
 
 const ViewHeader = ({ view, dateService, displayYear, displayMonth, displayDay }) => {
@@ -37,7 +37,7 @@ function generateHeaderText(view, displayYear, displayMonth, displayDay, dateSer
   if (view === 'month') {
     return `${monthStr} ${displayYear}`
   } else if (view === 'week') {
-    
+
     let day = displayDay;
     // find this week's Monday
     const findMonday = () => {
@@ -58,7 +58,7 @@ function generateHeaderText(view, displayYear, displayMonth, displayDay, dateSer
     }
     displayDay = findMonday();
     monthStr = dateService.monthNamesLong[displayMonth];
-    const oneWeekFromDay = dateService.getDateOneWeekFromDay(displayYear, displayMonth, displayDay-1);
+    const oneWeekFromDay = dateService.getDateOneWeekFromDay(displayYear, displayMonth, displayDay - 1);
     return `${displayDay} ${monthStr} to ${oneWeekFromDay.day} ${oneWeekFromDay.monthNameLong}`;
   } else if (view === 'day') {
     return `${dayStr}, ${monthStr} ${displayDay} ${displayYear}`

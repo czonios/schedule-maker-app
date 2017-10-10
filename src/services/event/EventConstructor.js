@@ -1,4 +1,4 @@
-import dateService from '../services/dates/dateService';
+import dateService from '../../services/dates/dateService';
 import PropTypes from 'prop-types';
 
 /**
@@ -25,7 +25,12 @@ class Event {
             end: end
         };
         this.repeated = repeated;
-        this.date = date;
+        this.date = {
+            year: date.getFullYear(),
+            month: date.getMonth(),
+            day: date.getDate(),
+            dayOfWeek: date.getDay()
+        }
         this.notify = {
             enabled: notifyBool,
             time: notifyTimeBefore//this.time.start - notifyTimeBefore
@@ -51,7 +56,7 @@ Event.propTypes = {
     title: PropTypes.string,
     desciption: PropTypes.string,
     time: PropTypes.objectOf(PropTypes.string, PropTypes.string),
-    repeated: PropTypes.bool, 
+    repeated: PropTypes.bool,
     date: PropTypes.objectOf(Date),
     notify: PropTypes.objectOf(PropTypes.bool, PropTypes.string),
     repdays: PropTypes.objectOf(PropTypes.bool),

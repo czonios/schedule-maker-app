@@ -1,0 +1,18 @@
+.weekViewWrapper {
+    display: flex;
+    /* flex-direction: column; */
+}
+
+.weekdayColumn {
+    /* text-align: center; */
+    /* border-left: 1px solid grey;
+    border-right: 1px solid grey; */
+    flex: 1;
+}
+
+.dayHeader {
+    text-align: center;
+    border-left: 1px solid grey;
+    border-right: 1px solid grey;
+    border-bottom: 1px solid grey;
+}

@@ -1,9 +1,10 @@
 import React from 'react';
 import { Menu } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
+import GridCardToggle from '.././GridCardToggle/GridCardToggle';
 
 
-export const ViewMenu = ({ day, month, year, view }) => {
+export const ViewMenu = ({ day, month, year, view, gridOrCardDisplay, toggleGridOrCardDisplay }) => {
 
     return (
         <Menu tabular>
@@ -17,6 +18,10 @@ export const ViewMenu = ({ day, month, year, view }) => {
 
             <Menu.Item as={Link} to={`/day/${year}/${month}/${day}`} name='day' active={view === 'day'}>
                 Day
+            </Menu.Item>
+
+            <Menu.Item position="right">
+                <GridCardToggle gridOrCardDisplay={gridOrCardDisplay} toggleGridOrCardDisplay={toggleGridOrCardDisplay} />
             </Menu.Item>
         </Menu>
     );

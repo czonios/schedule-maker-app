@@ -293,3 +293,56 @@ test('datesOfAllMondaysInMonth returns an array with the dates (numbers) of all 
     [5, 12, 19, 26]
   ])
 });
+test('getFirstMondayPreviousOrEqualToDay returns an object with date information for the first monday before a certain date', () => {
+  expect(
+    [[2017, 9, 9], [2017, 9, 8]]
+      .map(date => dateService.getFirstMondayPreviousOrEqualToDay(date[0], date[1], date[2]))
+  ).toEqual([
+    {
+      'year': 2017,
+      'month': 9,
+      'day': 9
+    },
+    {
+      'year': 2017,
+      'month': 9,
+      'day': 2
+    }
+  ])
+})
+test(`getFirstMondayPreviousOrEqualToDay gets the last monday of the previous
+      month, when given a day in the first week of the month, before any monday`, () => {
+    expect(
+      [[2017, 9, 1], [2018, 2, 4]]
+        .map(date => dateService.getFirstMondayPreviousOrEqualToDay(date[0], date[1], date[2]))
+    ).toEqual([
+      {
+        'year': 2017,
+        'month': 8,
+        'day': 25
+      },
+      {
+        'year': 2018,
+        'month': 1,
+        'day': 26
+      }
+    ])
+  })
+test(`getFirstMondayPreviousOrEqualToDay gets the first monday of the month, when given 
+    a day in the first week of the month, but after a monday`, () => {
+    expect(
+      [[2017, 9, 4], [2017, 9, 6]]
+        .map(date => dateService.getFirstMondayPreviousOrEqualToDay(date[0], date[1], date[2]))
+    ).toEqual([
+      {
+        'year': 2017,
+        'month': 9,
+        'day': 2
+      },
+      {
+        'year': 2017,
+        'month': 9,
+        'day': 2
+      }
+    ])
+  })
