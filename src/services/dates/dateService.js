@@ -167,7 +167,7 @@ class DateService {
       day
     }
     const mondaysInMonth = this.datesOfAllMondaysInMonth(year, month);
-    const daysInMonth = this.getDaysCountInMonth(year, month, day);
+    // const daysInMonth = this.getDaysCountInMonth(year, month, day);
     if (new Date(year, month, day).getDay() === 1) {
       //Given day is a Monday
       return prevMondayDate;

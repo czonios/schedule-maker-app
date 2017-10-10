@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types'
-import { Grid, Header } from 'semantic-ui-react';
-import WeekdayColumns from '../../.././WeekDayColumns/WeekdayColumns';
+// import { Grid, Header } from 'semantic-ui-react';
+// import WeekdayColumns from '../../.././WeekDayColumns/WeekdayColumns';
 import DayCardVersion from '../../.././DayCardVersion/DayCardVersion.js'
 import dateService from '../../../../../../../../services/dates/dateService';
 import './WeekCardVersion.css'

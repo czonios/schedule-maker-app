@@ -16,7 +16,6 @@ import ViewMenu from './components/ViewMenu/ViewMenu';
 import ViewHeader from './components/ViewHeader/ViewHeader';
 import dateService from '../../../../services/dates/dateService';
 
-
 const Representation = (props) => {
     const { displayYear, displayMonth, displayDay, gridOrCardDisplay, toggleGridOrCardDisplay } = props;
     const { view, year, month, day } = props.url.match.params;
@@ -92,10 +91,10 @@ function filterEventsByMonth(year, month, events) {
 //Week is defined as from the monday before or on the event day,
 //through to the next sunday
 function filterEventsByWeek(year, month, day, events) {
-    const daysInMonth = dateService.getDaysCountInMonth(year, month, day);
-    const nextMonth = new Date(year, month + 1, day).getMonth();
-    const validDaysDict = Array.from({ length: 12 });
-    const daysBeforeMonthEnd = daysInMonth - day;
+    // const daysInMonth = dateService.getDaysCountInMonth(year, month, day);
+    // const nextMonth = new Date(year, month + 1, day).getMonth();
+    // const validDaysDict = Array.from({ length: 12 });
+    // const daysBeforeMonthEnd = daysInMonth - day;
     const monday = dateService.getFirstMondayPreviousOrEqualToDay(year, month, day);
     // If the day falls within the first week of the month, before a monday,
 
