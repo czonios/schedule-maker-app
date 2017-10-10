@@ -1,16 +1,17 @@
 import Event from './Event';
+import { cellColors } from '../scenes/Layout/components/Representation/Representation';
 
 let e = new Event(
     'study', 
     'clean write my notes to the notebooks', 
     "18:00", 
     "20:30", 
-    false, 
+    true, 
     new Date(2017, 9, 8), 
     false, 
     null, 
-    [false,false,false,false,false,false], 
-    "white", 
+    [false,false,true,false,false,false,false], 
+    "red", 
     [
         "study", 
         "university", 
@@ -51,23 +52,7 @@ test('Event should have a repeated field being true or false', () => {
 });
 
 test('Event date should be an object holding the Date in various formats', () => {
-    expect(typeof e.date).toBe('object');
-    expect(typeof e.date.dateStr).toBe('string');
-    expect(typeof e.date.year).toBe('number');
-    expect(typeof e.date.month).toBe('number');
-    expect(typeof e.date.monthStr).toBe('string');
-    expect(typeof e.date.day).toBe('number');
-    expect(typeof e.date.dayStr).toBe('string');
-});
-
-test('Event date month should be 0-11', () => {
-    expect(e.date.month).toBeGreaterThanOrEqual(0);
-    expect(e.date.month).toBeLessThanOrEqual(11);
-});
-
-test('Event date day should be 1-31', () => {
-    expect(e.date.month).toBeGreaterThanOrEqual(1);
-    expect(e.date.month).toBeLessThanOrEqual(31);
+    expect(e.date).toBeInstanceOf(Date);
 });
 
 test('Event notify should be an object holding a bool and an optional string', () => {
@@ -81,5 +66,93 @@ test('Event notify time should be null if notify not enabled', () => {
         expect(e.notify.time).toBe(null);
 });
 
+test('Event notify time should not be null if notify is enabled', () => {
+    if (e.notify.enabled)
+        expect(e.notify.time).not.toBe(null);
+});
 
+test('Event repeatOnDay should be an object made of booleans', () => {
+    expect(typeof e.repeatOnDay).toBe('object');
+    expect(typeof e.repeatOnDay.mon).toBe('boolean');
+    expect(typeof e.repeatOnDay.tue).toBe('boolean');
+    expect(typeof e.repeatOnDay.wed).toBe('boolean');
+    expect(typeof e.repeatOnDay.thu).toBe('boolean');
+    expect(typeof e.repeatOnDay.fri).toBe('boolean');
+    expect(typeof e.repeatOnDay.sat).toBe('boolean');
+    expect(typeof e.repeatOnDay.sun).toBe('boolean');
+});
+
+test('Event: all repeatOnDay properties should be false if repeated=false', () => {
+    if (!e.repeated) {
+        expect(e.repeatOnDay.mon).toBe(false);
+        expect(e.repeatOnDay.tue).toBe(false);
+        expect(e.repeatOnDay.wed).toBe(false);
+        expect(e.repeatOnDay.thu).toBe(false);
+        expect(e.repeatOnDay.fri).toBe(false);
+        expect(e.repeatOnDay.sat).toBe(false);
+        expect(e.repeatOnDay.sun).toBe(false);
+    }
+});
+
+test('Event: at least one repeatOnDay propertiy should be true if repeated=true', () => {
+    if (e.repeated) {
+        expect(
+            e.repeatOnDay.mon ||
+            e.repeatOnDay.tue ||
+            e.repeatOnDay.wed ||
+            e.repeatOnDay.thu ||
+            e.repeatOnDay.fri ||
+            e.repeatOnDay.sat ||
+            e.repeatOnDay.sun
+        ).toBe(true);
+    }
+});
+
+test('Event: color should be a string', () => {
+    expect(typeof e.color).toBe('string');
+});
+
+test('Event: color should be one of the valid colors', () => {
+    expect(cellColors).toContain(e.color);
+});
+
+test('Event: tags should be an array', () => {
+    expect(e.tags).toBeInstanceOf(Array);
+});
+
+test('Event: tags should be an array of strings', () => {
+    for (let i=0; i<e.tags.length; i++) {
+        expect(typeof e.tags[i]).toBe('string');
+    }
+    
+});
+
+test('Event: notes should be an array', () => {
+    expect(e.notes).toBeInstanceOf(Array);
+});
+
+test('Event: notes should be an array of objects', () => {
+    for (let i=0; i<e.notes.length; i++) {
+        expect(typeof e.notes[i]).toBe('object');
+    }
+});
+
+test('Event: Each note should have an id property and a text property', () => {
+    for (let i=0; i<e.notes.length; i++) {
+        expect(e.notes[i]).toHaveProperty('id');
+        expect(e.notes[i]).toHaveProperty('text');
+    }
+});
+
+test('Event: Each note id should be a number', () => {
+    for (let i=0; i<e.notes.length; i++) {
+        expect(e.notes[i].id).not.toBe(NaN);
+    }
+});
+
+test('Event: Each note text should be a string', () => {
+    for (let i=0; i<e.notes.length; i++) {
+        expect(typeof e.notes[i].text).toBe('string');
+    }
+});
 
