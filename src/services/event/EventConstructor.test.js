@@ -54,7 +54,7 @@ test('Event should have a repeated field being true or false', () => {
 test('Event date should contain fields year, month and day for the provided date', () => {
     expect(e.date.year).toBe(2017);
     expect(e.date.month).toBe(9);
-    expect(e.date.date).toBe(8)
+    expect(e.date.day).toBe(8)
 });
 
 test('Event notify should be an object holding a bool and an optional string', () => {

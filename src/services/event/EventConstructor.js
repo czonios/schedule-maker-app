@@ -28,7 +28,7 @@ class Event {
         this.date = {
             year: date.getFullYear(),
             month: date.getMonth(),
-            date: date.getDate()
+            day: date.getDate()
         }
         this.notify = {
             enabled: notifyBool,
