@@ -25,7 +25,11 @@ class Event {
             end: end
         };
         this.repeated = repeated;
-        this.date = date;
+        this.date = {
+            year: date.getFullYear(),
+            month: date.getMonth(),
+            date: date.getDate()
+        }
         this.notify = {
             enabled: notifyBool,
             time: notifyTimeBefore//this.time.start - notifyTimeBefore
