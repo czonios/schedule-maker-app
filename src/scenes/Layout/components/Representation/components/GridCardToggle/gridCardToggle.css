@@ -1,0 +1,34 @@
+.ui.small.header.view-option {
+    display: inline;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.ui.toggle.checkbox .box:before, 
+.ui.toggle.checkbox label:before,
+.ui.toggle.checkbox input:focus~.box:before, 
+.ui.toggle.checkbox input:focus~label:before {
+    background-color: rgba(0, 128, 128, 0.2);
+}
+
+.ui.toggle.checkbox .box:after, 
+.ui.toggle.checkbox label:after,
+.ui.toggle.checkbox input:focus~.box:after, 
+.ui.toggle.checkbox input:focus~label:after {
+    background-color: teal;
+}
+
+.ui.toggle.checkbox input:checked~.box:before.toggle-view, 
+.ui.toggle.checkbox input:checked~label:before.toggle-view,
+.ui.toggle.checkbox input:focus~.box:before.toggle-view, 
+.ui.toggle.checkbox input:focus~label:before.toggle-view{
+    background-color: rgba(0, 128, 128, 0.2) !important; 
+}
+
+.ui.toggle.checkbox input:checked~.box:before,
+.ui.toggle.checkbox input:checked~label:before,
+.ui.toggle.checkbox input:focus:checked~.box:before, 
+.ui.toggle.checkbox input:focus:checked~label:before {
+    background-color: rgba(0, 128, 128, 0.2) !important;
+}
+

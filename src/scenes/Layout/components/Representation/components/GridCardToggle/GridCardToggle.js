@@ -1,6 +1,7 @@
 import React from 'react';
-import PropTypes from 'prop-types'
-import { Checkbox } from 'semantic-ui-react'
+import PropTypes from 'prop-types';
+import { Checkbox, Header } from 'semantic-ui-react';
+import './gridCardToggle.css';
 
 const propTypes = {
   gridOrCardDisplay: PropTypes.string.isRequired,
@@ -11,9 +12,9 @@ const defaultProps = {};
 
 const GridCardToggle = ({ gridOrCardDisplay, toggleGridOrCardDisplay }) => (
   <div>
-    <span>Grid</span>
-    <Checkbox onChange={toggleGridOrCardDisplay} checked={gridOrCardDisplay === 'card'} toggle />
-    <span>Cards</span>
+    <Header size="small" className="view-option">Grid</Header>
+    <Checkbox className="toggle-view" onChange={toggleGridOrCardDisplay} checked={gridOrCardDisplay === 'card'} toggle />
+    <Header size="small" className="view-option">Cards</Header>
   </div>
 )
 
