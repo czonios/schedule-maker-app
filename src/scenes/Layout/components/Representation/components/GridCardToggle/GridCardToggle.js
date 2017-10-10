@@ -11,7 +11,6 @@ const defaultProps = {};
 
 const GridCardToggle = ({ gridOrCardDisplay, toggleGridOrCardDisplay }) => (
   <div>
-    <p>Display</p>
     <span>Grid</span>
     <Checkbox onChange={toggleGridOrCardDisplay} checked={gridOrCardDisplay === 'card'} toggle />
     <span>Cards</span>
