@@ -1,4 +1,4 @@
-import dateService from '../services/dates/dateService';
+import dateService from '../../services/dates/dateService';
 import PropTypes from 'prop-types';
 
 /**
@@ -51,7 +51,7 @@ Event.propTypes = {
     title: PropTypes.string,
     desciption: PropTypes.string,
     time: PropTypes.objectOf(PropTypes.string, PropTypes.string),
-    repeated: PropTypes.bool, 
+    repeated: PropTypes.bool,
     date: PropTypes.objectOf(Date),
     notify: PropTypes.objectOf(PropTypes.bool, PropTypes.string),
     repdays: PropTypes.objectOf(PropTypes.bool),

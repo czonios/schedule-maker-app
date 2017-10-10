@@ -1,4 +1,4 @@
-import Event from '../../../components/Event';
+import Event from '../.././event/EventConstructor';
 
 //I'm now using these for mocking in tests of timeService;
 //If you want to experiment with different shapes for out mock events, start another file
