@@ -88,30 +88,25 @@ function filterEventsByMonth(year, month, events) {
             && date.month === month
     })
 }
-//Week is defined as from the given day (inclusive), thourgh to the next 6 days <- NEEDS CHANGE
-//TODO Make this work for dates in the last week of december (multiple years can be valid)
+//TODO Make this work for dates in the last week of a month and for the
+//last week of december (multiple years can be valid)
+//Week is defined as from the monday before or on the event day,
+//through to the next sunday
 function filterEventsByWeek(year, month, day, events) {
     const daysInMonth = dateService.getDaysCountInMonth(year, month, day);
     const nextMonth = new Date(year, month + 1, day).getMonth();
     const validDaysDict = Array.from({ length: 12 });
     const daysBeforeMonthEnd = daysInMonth - day;
-    //If the day falls within the last week of its month, we have to inlcude events
-    //within a certain span of the beginning of the next month
-    //The logic could all be simplified by making two or more passes over the events array, one for each 
-    //month, but since there could be hundreds or thousands of events, i think its worth the complexity
-    if (daysBeforeMonthEnd <= 6) {
-        validDaysDict[month] = Array.from({ length: daysBeforeMonthEnd }, (_, i) => day + i)
-        validDaysDict[nextMonth] = Array.from({ length: 7 - daysBeforeMonthEnd }, (_, i) => i + 1);
-    } else {
-        validDaysDict[month] = Array.from({ length: 7 }, (_, i) => day + i);
-    }
-    // const validMonths = Object.keys(validDaysDict);
-    // console.log(validDaysDict);
+    const monday = dateService.getFirstMondayPreviousOrEqualToDay(year, month, day);
+    // If the day falls within the first week of the month, before a monday,
+
+    // Elsee
     return Object.values(events).filter(event => {
         const { date } = event;
         return date.year === year
-            && validDaysDict[event.month] !== undefined
-            && validDaysDict[event.month].indexOf(event.day) > -1
+            && date.month === month
+            && date.day >= monday.day
+            && date.day <= monday.day + 6
     })
 }
 function mapDispatchToProps(dispatch) {
