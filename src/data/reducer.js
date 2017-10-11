@@ -1,10 +1,13 @@
 import {
-  TOGGLE_GRID_OR_CARD_DISPLAY
+  TOGGLE_GRID_OR_CARD_DISPLAY,
+  DISPLAY_EVENT_MODAL,
+  DISMISS_EVENT_MODAL
 } from './actions';
 
 const initState = {
   dayOfWeekAs0: 'monday',
-  gridOrCardDisplay: 'grid'
+  gridOrCardDisplay: 'grid',
+  eventModal: false
 };
 
 const UI = (state = initState, action) => {
@@ -13,6 +16,16 @@ const UI = (state = initState, action) => {
       return {
         ...state,
         gridOrCardDisplay: state.gridOrCardDisplay === 'grid' ? 'card' : 'grid'
+      }
+    case DISPLAY_EVENT_MODAL:
+      return {
+        ...state,
+        eventModal: true
+      }
+    case DISMISS_EVENT_MODAL:
+      return {
+        ...state,
+        eventModal: false
       }
     default:
       return state;

@@ -6,15 +6,16 @@ import './DayCardVersion.css';
 
 const propTypes = {
   events: PropTypes.array.isRequired,
-  condensed: PropTypes.bool
+  condensed: PropTypes.bool,
+  displayEventModal: PropTypes.func.isRequired
 };
 
 const defaultProps = {};
 
-const DayCardVersion = ({ events, condensed }) => {
+const DayCardVersion = ({ events, condensed, displayEventModal }) => {
   if (condensed) {
     return (
-      <div className="day">
+      <div className="day" onClick={displayEventModal}>
         {timeService.sortEventsByTimeMutable(events).map((event, i) => {
           return (
             <Card key={i} fluid style={{ 'width': '100%', 'padding': '0px' }}>
@@ -40,7 +41,7 @@ const DayCardVersion = ({ events, condensed }) => {
     <div className="day">
       {timeService.sortEventsByTimeMutable(events).map((event, i) => {
         return (
-          <Card key={i} centered >
+          <Card key={i} centered onClick={displayEventModal}>
             <Card.Content extra className="event-start">
               {event.time.start}
             </Card.Content>

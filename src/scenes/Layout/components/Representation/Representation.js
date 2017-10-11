@@ -3,7 +3,7 @@ import './representation.css';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { toggleGridOrCardDisplay } from '../../../.././data/actions';
+import { toggleGridOrCardDisplay, displayEventModal } from '../../../.././data/actions';
 import Month from './components/Month/Month';
 import Week from './components/Week/Week';
 import WeekCardVersion from './components/Week/components/WeekCardVersion/WeekCardVersion';
@@ -29,7 +29,7 @@ const Representation = (props) => {
         </div>
     );
 }
-function chooseView({ displayMonth, displayYear, displayDay, url, displayDayEvents, displayMonthEvents, displayWeekEvents, gridOrCardDisplay }) {
+function chooseView({ displayMonth, displayYear, displayDay, url, displayDayEvents, displayMonthEvents, displayWeekEvents, gridOrCardDisplay, displayEventModal }) {
     //Decide which view to render, based on the URL
     const view = url.match.params.view;
     //don't need the null check for route '/' i think?
@@ -48,7 +48,7 @@ function chooseView({ displayMonth, displayYear, displayDay, url, displayDayEven
         // return <DayCardVersion events={displayDayEvents} />
         return gridOrCardDisplay === 'grid'
             ? <Day />
-            : <DayCardVersion events={displayDayEvents} />
+            : <DayCardVersion events={displayDayEvents} displayEventModal={displayEventModal} />
     }
 }
 
@@ -107,7 +107,8 @@ function filterEventsByWeek(year, month, day, events) {
 }
 function mapDispatchToProps(dispatch) {
     return bindActionCreators({
-        toggleGridOrCardDisplay
+        toggleGridOrCardDisplay,
+        displayEventModal
     }, dispatch);
 };
 
@@ -115,7 +116,8 @@ const propTypes = {
     displayMonth: PropTypes.number.isRequired,
     displayYear: PropTypes.number.isRequired,
     url: PropTypes.object.isRequired,
-    gridOrCardDisplay: PropTypes.string.isRequired
+    gridOrCardDisplay: PropTypes.string.isRequired,
+    displayEventModal: PropTypes.func.isRequired
 }
 Representation.propTypes = propTypes;
 

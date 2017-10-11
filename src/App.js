@@ -5,6 +5,7 @@ import Layout from './scenes/Layout/Layout';
 import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
 import dateService from './services/dates/dateService';
 import NotFound from './scenes/components/NotFound';
+import EventModal from './scenes/components/GlobalModals/EventModal';
 
 class App extends Component {
   render() {
@@ -12,6 +13,7 @@ class App extends Component {
       <Provider store={store} >
         <BrowserRouter>
           <div className="App">
+            <EventModal />
             <Switch>
               <Route path="/" exact render={() => (
                 <Redirect to={`/month${urlPathForToday()}`} />
