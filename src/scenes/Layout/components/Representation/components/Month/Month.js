@@ -7,7 +7,7 @@ import DayRows from './components/DayRows/DayRows.js';
 import WeekdayColumns from '../WeekDayColumns/WeekdayColumns';
 
 
-const Month = ({ displayMonth, displayYear, incrementDisplayMonth, decrementDisplayMonth, events }) => (
+const Month = ({ displayMonth, displayYear, events }) => (
   <div className="month-view-wrapper">
     <Grid columns={7} celled>
 
@@ -24,8 +24,6 @@ const Month = ({ displayMonth, displayYear, incrementDisplayMonth, decrementDisp
 const propTypes = {
   displayYear: PropTypes.number.isRequired,
   displayMonth: PropTypes.number.isRequired,
-  incrementDisplayMonth: PropTypes.func.isRequired,
-  decrementDisplayMonth: PropTypes.func.isRequired,
 };
 
 const defaultProps = {

@@ -1,7 +1,5 @@
 import React from 'react';
-import PropTypes from 'prop-types'
-// import { Grid, Header } from 'semantic-ui-react';
-// import WeekdayColumns from '../../.././WeekDayColumns/WeekdayColumns';
+import PropTypes from 'prop-types';
 import DayCardVersion from '../../.././DayCardVersion/DayCardVersion.js'
 import dateService from '../../../../../../../../services/dates/dateService';
 import './WeekCardVersion.css'
@@ -15,7 +13,6 @@ const defaultProps = {};
 
 const WeekCardVersion = ({ events }) => {
   return (
-    // style={{ 'display': 'flex' }}
     <div className="weekViewWrapper">
       {[1, 2, 3, 4, 5, 6, 0].map(dayOfWeekVal => {
         const dayEvents = events.filter(event => event.date.dayOfWeek === dayOfWeekVal);

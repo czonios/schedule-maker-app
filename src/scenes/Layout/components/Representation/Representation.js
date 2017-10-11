@@ -4,7 +4,6 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { toggleGridOrCardDisplay } from '../../../.././data/actions';
-import * as actions from './data/actions'
 import Month from './components/Month/Month';
 import Week from './components/Week/Week';
 import WeekCardVersion from './components/Week/components/WeekCardVersion/WeekCardVersion';
@@ -30,14 +29,13 @@ const Representation = (props) => {
         </div>
     );
 }
-function chooseView({ displayMonth, displayYear, displayDay, incrementDisplayMonth, decrementDisplayMonth, url, displayDayEvents, displayMonthEvents, displayWeekEvents, gridOrCardDisplay }) {
+function chooseView({ displayMonth, displayYear, displayDay, url, displayDayEvents, displayMonthEvents, displayWeekEvents, gridOrCardDisplay }) {
     //Decide which view to render, based on the URL
     const view = url.match.params.view;
     //don't need the null check for route '/' i think?
     // if (!url.match) return null;
     if (view === 'month') {
-        return <Month events={displayMonthEvents} displayMonth={displayMonth} displayYear={displayYear}
-            incrementDisplayMonth={incrementDisplayMonth} decrementDisplayMonth={decrementDisplayMonth} />
+        return <Month events={displayMonthEvents} displayMonth={displayMonth} displayYear={displayYear} />
     } else if (view === 'week') {
         // console.log(toggleGridOrCardDisplay);
         // return <Week events={displayWeekEvents} />
@@ -108,11 +106,7 @@ function filterEventsByWeek(year, month, day, events) {
     })
 }
 function mapDispatchToProps(dispatch) {
-    const { incrementDisplayMonth,
-        decrementDisplayMonth } = actions;
     return bindActionCreators({
-        incrementDisplayMonth,
-        decrementDisplayMonth,
         toggleGridOrCardDisplay
     }, dispatch);
 };
@@ -120,8 +114,6 @@ function mapDispatchToProps(dispatch) {
 const propTypes = {
     displayMonth: PropTypes.number.isRequired,
     displayYear: PropTypes.number.isRequired,
-    incrementDisplayMonth: PropTypes.func.isRequired,
-    decrementDisplayMonth: PropTypes.func.isRequired,
     url: PropTypes.object.isRequired,
     gridOrCardDisplay: PropTypes.string.isRequired
 }
