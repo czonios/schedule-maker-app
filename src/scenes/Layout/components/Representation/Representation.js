@@ -3,7 +3,7 @@ import './representation.css';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { toggleGridOrCardDisplay, displayEventModal } from '../../../.././data/actions';
+import { toggleGridOrCardDisplay, displayEventModal, deleteEvent } from '../../../.././data/actions';
 import Month from './components/Month/Month';
 import Week from './components/Week/Week';
 import WeekCardVersion from './components/Week/components/WeekCardVersion/WeekCardVersion';
@@ -29,7 +29,9 @@ const Representation = (props) => {
         </div>
     );
 }
-function chooseView({ displayMonth, displayYear, displayDay, url, displayDayEvents, displayMonthEvents, displayWeekEvents, gridOrCardDisplay, displayEventModal }) {
+function chooseView({ displayMonth, displayYear, displayDay, url, displayDayEvents,
+    displayMonthEvents, displayWeekEvents, gridOrCardDisplay, displayEventModal,
+    deleteEvent }) {
     //Decide which view to render, based on the URL
     const view = url.match.params.view;
     //don't need the null check for route '/' i think?
@@ -48,7 +50,8 @@ function chooseView({ displayMonth, displayYear, displayDay, url, displayDayEven
         // return <DayCardVersion events={displayDayEvents} />
         return gridOrCardDisplay === 'grid'
             ? <Day />
-            : <DayCardVersion events={displayDayEvents} displayEventModal={displayEventModal} />
+            : <DayCardVersion events={displayDayEvents} displayEventModal={displayEventModal}
+                deleteEvent={deleteEvent} />
     }
 }
 
@@ -112,7 +115,8 @@ function filterEventsByWeek(year, month, day, events) {
 function mapDispatchToProps(dispatch) {
     return bindActionCreators({
         toggleGridOrCardDisplay,
-        displayEventModal
+        displayEventModal,
+        deleteEvent
     }, dispatch);
 };
 
@@ -121,7 +125,8 @@ const propTypes = {
     displayYear: PropTypes.number.isRequired,
     url: PropTypes.object.isRequired,
     gridOrCardDisplay: PropTypes.string.isRequired,
-    displayEventModal: PropTypes.func.isRequired
+    displayEventModal: PropTypes.func.isRequired,
+    deleteEvent: PropTypes.func.isRequired
 }
 Representation.propTypes = propTypes;
 

@@ -21,10 +21,10 @@ const UI = (state = initState, action) => {
         gridOrCardDisplay: state.gridOrCardDisplay === 'grid' ? 'card' : 'grid'
       }
     case DISPLAY_EVENT_MODAL:
-      // console.log(action.payload.event);
+      // console.log(payload);
       return {
         ...state,
-        eventModal: payload.data.name
+        eventModal: payload
       }
     case DISMISS_EVENT_MODAL:
       return {
