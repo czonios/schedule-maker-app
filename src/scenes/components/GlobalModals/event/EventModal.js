@@ -35,7 +35,8 @@ class EventModal extends Component {
           EventModal
         </Modal.Header>
         <Modal.Content>
-          <EventForm eventModalData={eventModalData} submitEditedEvent={submitEditedEvent} />
+          <EventForm eventModalData={eventModalData} submitEditedEvent={submitEditedEvent}
+            dismissEventModal={dismissEventModal} />
         </Modal.Content>
       </Modal>
     );
