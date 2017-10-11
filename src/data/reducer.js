@@ -1,7 +1,8 @@
 import {
   TOGGLE_GRID_OR_CARD_DISPLAY,
   DISPLAY_EVENT_MODAL,
-  DISMISS_EVENT_MODAL
+  DISMISS_EVENT_MODAL,
+  SUBMIT_EDITED_EVENT
 } from './actions';
 
 const initState = {
@@ -11,7 +12,8 @@ const initState = {
 };
 
 const UI = (state = initState, action) => {
-  console.log('action.payload at top of UI reducer', action.payload)
+  // console.log('action.payload at top of UI reducer', action.payload);
+  const { payload } = action;
   switch (action.type) {
     case TOGGLE_GRID_OR_CARD_DISPLAY:
       return {
@@ -19,9 +21,10 @@ const UI = (state = initState, action) => {
         gridOrCardDisplay: state.gridOrCardDisplay === 'grid' ? 'card' : 'grid'
       }
     case DISPLAY_EVENT_MODAL:
+      // console.log(action.payload.event);
       return {
         ...state,
-        eventModal: true
+        eventModal: payload.data.name
       }
     case DISMISS_EVENT_MODAL:
       return {

@@ -41,7 +41,7 @@ const DayCardVersion = ({ events, condensed, displayEventModal }) => {
     <div className="day">
       {timeService.sortEventsByTimeMutable(events).map((event, i) => {
         return (
-          <Card key={i} centered onClick={(event, data) => displayEventModal(event, data)}>
+          <Card key={i} centered name={event.id} onClick={(event, data) => displayEventModal(event.target, data)}>
             <Card.Content extra className="event-start">
               {event.time.start}
             </Card.Content>

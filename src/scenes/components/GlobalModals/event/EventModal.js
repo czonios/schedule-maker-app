@@ -3,10 +3,21 @@ import PropTypes from 'prop-types';
 import { Modal } from 'semantic-ui-react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { displayEventModal, dismissEventModal } from '../../../.././data/actions';
+import { displayEventModal, dismissEventModal, submitEditedEvent } from '../../../.././data/actions';
 import EventForm from './EventForm';
 
-const propTypes = {};
+const propTypes = {
+  eventModal: PropTypes.oneOfType([
+    PropTypes.bool,
+    PropTypes.string
+  ]).isRequired,
+  eventModalData: PropTypes.oneOfType([
+    PropTypes.bool,
+    PropTypes.object
+  ]).isRequired,
+  dismissEventModal: PropTypes.func.isRequired,
+  submitEditedEvent: PropTypes.func.isRequired
+};
 
 const defaultProps = {};
 
@@ -17,14 +28,14 @@ class EventModal extends Component {
   }
 
   render() {
-    const { eventModal, dismissEventModal } = this.props;
+    const { eventModal, dismissEventModal, eventModalData, submitEditedEvent } = this.props;
     return (
-      <Modal open={eventModal} closeIcon dimmer="blurring" onClose={dismissEventModal}>
+      <Modal open={eventModal ? true : false} closeIcon dimmer="blurring" onClose={dismissEventModal}>
         <Modal.Header>
           EventModal
         </Modal.Header>
         <Modal.Content>
-          <EventForm />
+          <EventForm eventModalData={eventModalData} submitEditedEvent={submitEditedEvent} />
         </Modal.Content>
       </Modal>
     );
@@ -37,15 +48,17 @@ EventModal.defaultProps = defaultProps;
 
 const mapStateToProps = state => {
   const { UI } = state;
+  const eventModal = UI.eventModal;
   return {
-    eventModal: UI.eventModal,
-    // eventData: state.
+    eventModal,
+    eventModalData: state.layout.representation.data.events.byId[eventModal] || false
   }
 }
 const mapDispatchToProps = dispatch =>
   bindActionCreators({
     displayEventModal,
-    dismissEventModal
+    dismissEventModal,
+    submitEditedEvent
   }, dispatch);
 
 export default connect(mapStateToProps, mapDispatchToProps)(EventModal);
