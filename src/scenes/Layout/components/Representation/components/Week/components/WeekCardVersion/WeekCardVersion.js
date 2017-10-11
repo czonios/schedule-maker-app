@@ -17,12 +17,12 @@ const WeekCardVersion = ({ events }) => {
   return (
     // style={{ 'display': 'flex' }}
     <div className="weekViewWrapper">
-      {[0, 1, 2, 3, 4, 5, 6].map(dayOfWeekVal => {
+      {[1, 2, 3, 4, 5, 6, 0].map(dayOfWeekVal => {
         const dayEvents = events.filter(event => event.date.dayOfWeek === dayOfWeekVal);
         return (
           <div key={dayOfWeekVal} className="weekdayColumn">
             <div className="dayHeader" >
-              {dateService.dayStrRepArr[dayOfWeekVal]}
+              {dateService.dayStrRepArr[dateService.convertDay(dayOfWeekVal)]}
             </div>
             <div >
               <DayCardVersion events={dayEvents} condensed={true} />
