@@ -19,9 +19,11 @@ const DayCardVersion = ({ events, condensed, displayEventModal, deleteEvent }) =
       <div className="day" >
         {timeService.sortEventsByTimeMutable(events).map((event, i) => {
           return (
-            <Card key={i} onClick={(event, data) => displayEventModal(event, data)} fluid style={{ 'width': '100%', 'padding': '0px' }}>
+            <Card key={i} fluid style={{ 'width': '100%', 'padding': '0px' }}>
               <Card.Content extra className="event-start">
                 {event.time.start}
+                <Icon name="pencil" onClick={() => displayEventModal(event.id)} />
+                <Icon name="delete" onClick={() => deleteEvent(event.id)} />
               </Card.Content>
               <Card.Content>
                 <Card.Header>
