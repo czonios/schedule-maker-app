@@ -12,8 +12,16 @@ import mockEvents3 from '../../../../../services/mock/events/generatedMockEvents
 //     mockEvent7: m.mockEvent7
 //   }
 // }
+const byId = mockEvents3.reduce((accum, event) => {
+  accum[event.id] = event;
+  return accum;
+}, {});
+const allIds = mockEvents3.map(event => event.id);
 const defaultState = {
-  events: mockEvents3
+  events: {
+    byId,
+    allIds
+  }
 }
 
 export default function data(state = defaultState, action) {

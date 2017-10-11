@@ -7,10 +7,11 @@ export function toggleGridOrCardDisplay() {
     type: TOGGLE_GRID_OR_CARD_DISPLAY
   }
 }
-export function displayEventModal(payload) {
+export function displayEventModal(event, data) {
+  console.log('received event and data at displayEventModal action creator', event, data)
   return {
     type: DISPLAY_EVENT_MODAL,
-    // payload
+    payload: { event, data }
   }
 }
 export function dismissEventModal(payload) {

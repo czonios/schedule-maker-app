@@ -15,10 +15,10 @@ const defaultProps = {};
 const DayCardVersion = ({ events, condensed, displayEventModal }) => {
   if (condensed) {
     return (
-      <div className="day" onClick={displayEventModal}>
+      <div className="day" >
         {timeService.sortEventsByTimeMutable(events).map((event, i) => {
           return (
-            <Card key={i} fluid style={{ 'width': '100%', 'padding': '0px' }}>
+            <Card key={i} onClick={(event, data) => displayEventModal(event, data)} fluid style={{ 'width': '100%', 'padding': '0px' }}>
               <Card.Content extra className="event-start">
                 {event.time.start}
               </Card.Content>
@@ -41,7 +41,7 @@ const DayCardVersion = ({ events, condensed, displayEventModal }) => {
     <div className="day">
       {timeService.sortEventsByTimeMutable(events).map((event, i) => {
         return (
-          <Card key={i} centered onClick={displayEventModal}>
+          <Card key={i} centered onClick={(event, data) => displayEventModal(event, data)}>
             <Card.Content extra className="event-start">
               {event.time.start}
             </Card.Content>

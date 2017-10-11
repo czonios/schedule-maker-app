@@ -56,7 +56,11 @@ function mapStateToProps(state, ownProps) {
     const { params } = ownProps.url.match;
     // const displayYear, displayMonth, displayDay;
     const [displayYear, displayMonth, displayDay] = [parseInt(params.year, 10), parseInt(params.month, 10) - 1, parseInt(params.day, 10)]
-    const allEvents = state.layout.representation.data.events;
+    // @TEMP
+    // After normalizing the event data shape in the redux store, this transformation should
+    // be unnecesary. Come back and delete it and refactor the filtering functions
+    // after the Event's shape is finally settled (for perf reasons).
+    const allEvents = Object.values(state.layout.representation.data.events.byId);
     return {
         allEvents,
         displayDayEvents: filterEventsByDay(displayYear, displayMonth, displayDay, allEvents),

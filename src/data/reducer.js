@@ -6,11 +6,12 @@ import {
 
 const initState = {
   dayOfWeekAs0: 'monday',
-  gridOrCardDisplay: 'grid',
+  gridOrCardDisplay: 'card',
   eventModal: false
 };
 
 const UI = (state = initState, action) => {
+  console.log('action.payload at top of UI reducer', action.payload)
   switch (action.type) {
     case TOGGLE_GRID_OR_CARD_DISPLAY:
       return {

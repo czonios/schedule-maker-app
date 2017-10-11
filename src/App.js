@@ -5,7 +5,7 @@ import Layout from './scenes/Layout/Layout';
 import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
 import dateService from './services/dates/dateService';
 import NotFound from './scenes/components/NotFound';
-import EventModal from './scenes/components/GlobalModals/EventModal';
+import EventModal from './scenes/components/GlobalModals/event/EventModal';
 
 class App extends Component {
   render() {
