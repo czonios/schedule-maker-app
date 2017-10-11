@@ -6,12 +6,13 @@ import './WeekCardVersion.css'
 
 
 const propTypes = {
-  events: PropTypes.array.isRequired
+  events: PropTypes.array.isRequired,
+  displayEventModal: PropTypes.func.isRequired
 };
 
 const defaultProps = {};
 
-const WeekCardVersion = ({ events }) => {
+const WeekCardVersion = ({ events, displayEventModal }) => {
   return (
     <div className="weekViewWrapper">
       {[1, 2, 3, 4, 5, 6, 0].map(dayOfWeekVal => {
@@ -22,7 +23,7 @@ const WeekCardVersion = ({ events }) => {
               {dateService.dayStrRepArr[dateService.convertDay(dayOfWeekVal)]}
             </div>
             <div >
-              <DayCardVersion events={dayEvents} condensed={true} />
+              <DayCardVersion events={dayEvents} condensed={true} displayEventModal={displayEventModal} />
             </div>
           </div>
         )
