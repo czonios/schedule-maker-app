@@ -95,7 +95,6 @@ export function generateRows(events, displayYear, displayMonth, chunkedArr) {
         {subArr.map((day, j) => {
           return (
             <Grid.Column className={cellClasses(day)} key={j} color={cellColor(day)} >
-
               <Link to={`/day/${displayYear}/${displayMonth + 1}/${day}`} >
                 <div>{day}</div>
               </Link>
