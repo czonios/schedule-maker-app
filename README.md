@@ -2,13 +2,13 @@
 <img src="/icon/cal512.png" alt="Calendar icon" width="200">
 </p>
 
-<h1 align="center"> Schedule Maker </h1>
+<h1 align="center"> Schedule Maker - Organizer </h1>
 
 <em>A web application that makes it easy to create a weekly schedule. Meant for students, professionals, parents, and anyone looking to organize their life.</em>
 
 ## Project Set Up
 
-These instructions will get this project up and running in your local machine.
+These instructions will get this project up and running on your local machine.
 
 ### Prerequisites
 
@@ -51,7 +51,7 @@ zypper install nodejs4
 
 ### Installing
 
-First, you need to clone the repository:
+First, you need to clone the repository. Run the following command:
 
 ```
 git clone https://github.com/czonios/schedule-maker-app.git
@@ -71,9 +71,17 @@ npm install
 
 ## Running Tests
 
-Run the following code in your terminal
+Run the following command in your terminal
 ```
 npm run test
+```
+or just
+```
+npm test
+```
+or, if you're really lazy
+```
+npm t
 ```
 
 ## Deployment
