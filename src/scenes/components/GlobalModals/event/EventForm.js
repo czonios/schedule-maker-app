@@ -56,7 +56,10 @@ class EventForm extends Component {
   }
   handleChange = (e, { name, value }) => this.setState({ [name]: value });
   handleTimeChange = (e, { name, value }) => this.setState({ time: { ...this.state.time, [name]: value } });
-  handleSubmit = () => this.props.submitEditedEvent(this.state);
+  handleSubmit = () => { 
+    this.props.submitEditedEvent(this.state);
+    this.props.dismissEventModal();
+  }
   handleDismiss = (e) => {
     e.preventDefault();
     this.props.dismissEventModal();

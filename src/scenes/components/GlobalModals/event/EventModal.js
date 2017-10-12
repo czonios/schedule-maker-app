@@ -32,7 +32,7 @@ class EventModal extends Component {
     return (
       <Modal open={eventModal ? true : false} closeIcon dimmer="blurring" onClose={dismissEventModal}>
         <Modal.Header>
-          EventModal
+          Edit Event
         </Modal.Header>
         <Modal.Content>
           <EventForm eventModalData={eventModalData} submitEditedEvent={submitEditedEvent}
