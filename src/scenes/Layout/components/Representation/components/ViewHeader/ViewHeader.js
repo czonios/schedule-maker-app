@@ -12,7 +12,7 @@ const ViewHeader = ({ view, dateService, displayYear, displayMonth, displayDay }
     <div className="centered">
       <Link to={urlPrevStr(view, displayYear, displayMonth, displayDay, dateService)} >
         <Button basic compact >
-          <Image className="arrow" size="mini" src={require('./img/arrow-left.svg')} alt="<" />
+           <Image className="arrow" size="mini" src={require('./img/arrow-left.svg')} alt="<" />
         </Button>
       </Link>
 

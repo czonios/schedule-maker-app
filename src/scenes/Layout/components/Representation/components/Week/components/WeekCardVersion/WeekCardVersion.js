@@ -1,4 +1,5 @@
 import React from 'react';
+import { Header, Divider } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
 import DayCardVersion from '../../.././DayCardVersion/DayCardVersion.js'
 import dateService from '../../../../../../../../services/dates/dateService';
@@ -21,7 +22,9 @@ const WeekCardVersion = ({ events, displayEventModal, deleteEvent }) => {
         return (
           <div key={dayOfWeekVal} className="weekdayColumn">
             <div className="dayHeader" >
-              {dateService.dayStrRepArr[dateService.convertDay(dayOfWeekVal)]}
+              <Header size="medium" className="day-name">
+                {dateService.dayStrRepArr[dateService.convertDay(dayOfWeekVal)]}
+              </Header>
             </div>
             <div >
               <DayCardVersion events={dayEvents} condensed={true} displayEventModal={displayEventModal}
