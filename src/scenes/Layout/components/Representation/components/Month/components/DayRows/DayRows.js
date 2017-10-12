@@ -79,7 +79,7 @@ const propTypes = {
   displayMonth: PropTypes.number.isRequired,
   displayYear: PropTypes.number.isRequired,
   dateService: PropTypes.object.isRequired,
-  events: PropTypes.array.isRequired
+  events: PropTypes.array.isRequired,
 };
 
 const defaultProps = {};

@@ -37,7 +37,8 @@ function chooseView({ displayMonth, displayYear, displayDay, url, displayDayEven
     //don't need the null check for route '/' i think?
     // if (!url.match) return null;
     if (view === 'month') {
-        return <Month events={displayMonthEvents} displayMonth={displayMonth} displayYear={displayYear} />
+        return <Month events={displayMonthEvents} displayMonth={displayMonth} displayYear={displayYear}
+        />
     } else if (view === 'week') {
         // console.log(toggleGridOrCardDisplay);
         // return <Week events={displayWeekEvents} />

@@ -3,6 +3,10 @@ import PropTypes from 'prop-types';
 import { Grid, } from 'semantic-ui-react';
 import { Link } from 'react-router-dom'
 import AddEventIcon from '../../../.././AddEventIcon/AddEventIcon';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { displayEventModal } from '../../../../../../../../.././data/actions';
+import HoverableIcon from '../../../../../../../.././components/HoverableIcon/HoverableIcon';
 
 
 const propTypes = {
@@ -12,7 +16,8 @@ const propTypes = {
   //   PropTypes.number,
   //   null
   // ]), // How to do ProptTypes.onOfType number || null?
-  events: PropTypes.array.isRequired
+  events: PropTypes.array.isRequired,
+  displayEventModal: PropTypes.func.isRequired
 
 };
 
@@ -37,16 +42,15 @@ class MonthDayCell extends Component {
   render() {
     const { acceptedDays, cellClasses, cellColor, eventsPerDayArray } = this
     const { isHoveredOver } = this.state;
-    const { day, displayYear, displayMonth, } = this.props;
+    const { day, displayYear, displayMonth, displayEventModal } = this.props;
     return (
       <Grid.Column className={cellClasses(day)} color={cellColor(day)}
-        onMouseOver={this.handleHover} onMouseOut={this.handleHover}>
+        onMouseEnter={this.handleHoverEnter} onMouseLeave={this.handleHoverExit}>
         <Link to={`/day/${displayYear}/${displayMonth + 1}/${day}`} >
           <div>{day}</div>
         </Link>
-        {acceptedDays.includes(day) && <AddEventIcon onlyShowOnHover={true}
-          isHoveredOver={isHoveredOver}
-        />}
+        {acceptedDays.includes(day) && <HoverableIcon name="add" show={isHoveredOver}
+          onClickCb={displayEventModal} cbArgs={'NEW_EVENT'} />}
         {/* Gross, break out a function for this */}
         {eventsPerDayArray[day] > 0
           ? `${eventsPerDayArray[day]} events`
@@ -80,17 +84,25 @@ class MonthDayCell extends Component {
     else
       return "no-day shadow";
   }
-  handleHover = () => {
-    if (this.state.isHoveredOver === false) {
-      this.setState({ isHoveredOver: true });
-    } else {
-      this.setState({ isHoveredOver: false });
-    }
+  handleHoverEnter = () => {
+    this.setState({ isHoveredOver: true });
+  }
+  handleHoverExit = () => {
+    this.setState({ isHoveredOver: false });
   }
 }
+
+const mapStateToProps = state => {
+  // const {  } = state;
+  return {}
+}
+
+const mapDispatchToProps = dispatch => bindActionCreators({
+  displayEventModal
+}, dispatch);
 
 MonthDayCell.propTypes = propTypes;
 
 MonthDayCell.defaultProps = defaultProps;
 
-export default MonthDayCell;
+export default connect(mapStateToProps, mapDispatchToProps)(MonthDayCell);
