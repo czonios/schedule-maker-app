@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import timeService from '../../../../../../services/times/timeService';
 import { Card, Icon } from 'semantic-ui-react';
 import './DayCardVersion.css';
+import AddEventIcon from '.././AddEventIcon/AddEventIcon';
 
 const propTypes = {
   events: PropTypes.array.isRequired,
@@ -24,6 +25,7 @@ const DayCardVersion = ({ events, condensed, displayEventModal, deleteEvent }) =
                 {event.time.start}
                 <Icon link name="pencil" onClick={() => displayEventModal(event.id)} />
                 <Icon link name="delete" onClick={() => deleteEvent(event.id)} />
+                <AddEventIcon />
               </Card.Content>
               <Card.Content>
                 <Card.Header>
@@ -49,6 +51,7 @@ const DayCardVersion = ({ events, condensed, displayEventModal, deleteEvent }) =
               {event.time.start}
               <Icon name="pencil" onClick={() => displayEventModal(event.id)} />
               <Icon name="delete" onClick={() => deleteEvent(event.id)} />
+              <AddEventIcon />
             </Card.Content>
             <Card.Content>
               <Card.Header>

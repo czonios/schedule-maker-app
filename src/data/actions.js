@@ -3,6 +3,7 @@ export const DISPLAY_EVENT_MODAL = 'DISPLAY_EVENT_MODAL';
 export const DISMISS_EVENT_MODAL = 'DISMISS_DISPLAY_MODAL';
 export const SUBMIT_EDITED_EVENT = 'SUMBIT_EDITED_EVENT';
 export const DELETE_EVENT = 'DELETE_EVENT';
+export const CREATE_NEW_EVENT = 'CREATE_NEW_EVENT';
 
 export function toggleGridOrCardDisplay() {
   return {
@@ -31,5 +32,10 @@ export function deleteEvent(payload) {
   return {
     type: DELETE_EVENT,
     payload
+  }
+}
+export function createNewEvent() {
+  return {
+    type: CREATE_NEW_EVENT,
   }
 }

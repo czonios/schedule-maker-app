@@ -9,7 +9,8 @@ const propTypes = {
     PropTypes.object
   ]).isRequired,
   submitEditedEvent: PropTypes.func.isRequired,
-  dismissEventModal: PropTypes.func.isRequired
+  dismissEventModal: PropTypes.func.isRequired,
+  isNewEvent: PropTypes.bool.isRequired
 };
 
 const defaultProps = {};
@@ -17,20 +18,25 @@ const defaultProps = {};
 class EventForm extends Component {
   constructor(props) {
     super(props);
-    const { eventModalData } = props;
-    const { date, description, id, notes, repeated, tags, time, title } = eventModalData;
-    // const { year, month, day, dayOfWeek } = date;
-    // const { state, end } = time;
-    this.state = {
-      date,
-      description,
-      id,
-      notes,
-      repeated,
-      tags,
-      time,
-      title
-    };
+    const { eventModalData, isNewEvent } = props;
+    if (isNewEvent === false) {
+      const { date, description, id, notes, repeated, tags, time, title } = eventModalData;
+      // const { year, month, day, dayOfWeek } = date;
+      // const { state, end } = time;
+      this.state = {
+        date,
+        description,
+        id,
+        notes,
+        repeated,
+        tags,
+        time,
+        title
+      };
+    }
+    // else if (isNewEvent === true) {
+
+    // }
   }
 
   render() {
@@ -56,7 +62,7 @@ class EventForm extends Component {
   }
   handleChange = (e, { name, value }) => this.setState({ [name]: value });
   handleTimeChange = (e, { name, value }) => this.setState({ time: { ...this.state.time, [name]: value } });
-  handleSubmit = () => { 
+  handleSubmit = () => {
     this.props.submitEditedEvent(this.state);
     this.props.dismissEventModal();
   }
