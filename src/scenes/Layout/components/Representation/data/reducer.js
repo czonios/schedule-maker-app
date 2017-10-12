@@ -21,19 +21,38 @@ export default function data(state = defaultState, action) {
   const { payload } = action;
   switch (action.type) {
     case SUBMIT_EDITED_EVENT:
-      console.log(action.payload);
+      // console.log(action.payload);
       const { id, title, description, date, time } = action.payload;
-      return {
-        events: {
-          ...state.events,
-          byId: {
-            ...state.events.byId,
-            [id]: {
-              ...state.events.byId[id],
-              title,
-              description,
-              date,
-              time
+      if (state.events.allIds.indexOf(id) === -1) { //New event
+        return {
+          events: {
+            allIds: state.events.allIds.concat(id),
+            byId: {
+              ...state.events.byId,
+              [id]: {
+                id,
+                title,
+                description,
+                date,
+                time
+              }
+            }
+          }
+        }
+
+      } else {                       // Existing event
+        return {
+          events: {
+            ...state.events,
+            byId: {
+              ...state.events.byId,
+              [id]: {
+                ...state.events.byId[id],
+                title,
+                description,
+                date,
+                time
+              }
             }
           }
         }
