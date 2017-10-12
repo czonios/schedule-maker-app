@@ -20,3 +20,11 @@
 .dayHeader:last-child {
     border-right: none;
 }
+
+@media (max-width: 500px) {
+    
+    
+    .ui.medium.header.day-name {
+        font-size: 1em;
+    }
+}
