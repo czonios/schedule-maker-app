@@ -7,17 +7,25 @@ import { createNewEvent, displayEventModal } from '../../../../../.././data/acti
 
 const propTypes = {
   createNewEvent: PropTypes.func.isRequired,
-  displayEventModal: PropTypes.func.isRequired
+  displayEventModal: PropTypes.func.isRequired,
+  onlyShowOnHover: PropTypes.bool,
+  isHoveredOver: PropTypes.bool
 };
 
-const defaultProps = {};
+const defaultProps = {
+  onlyShowOnHover: false,
+  isHoveredOver: false
+};
 
-const AddEventIcon = ({ createNewEvent, displayEventModal }) => (
-  <div>
-    <Icon link name="add" onClick={handleClick(displayEventModal)} />
-    {/* <Icon link name="add" onClick={() => displayEventModal('NEW_EVENT')} /> */}
-  </div>
-);
+const AddEventIcon = ({ createNewEvent, displayEventModal, onlyShowOnHover, isHoveredOver }) => {
+  if (onlyShowOnHover === true
+    && isHoveredOver === false) return null;
+  else return (
+    <div>
+      <Icon link name="add" onClick={handleClick(displayEventModal)} />
+    </div>
+  )
+};
 
 // Should handle callbacks like this rather than inline on the onClick (for perf), 
 // but is there a better way to do it?

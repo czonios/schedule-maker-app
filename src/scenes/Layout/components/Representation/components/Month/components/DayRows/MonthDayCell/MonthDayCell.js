@@ -11,7 +11,7 @@ const propTypes = {
   // day: PropTypes.oneOf([
   //   PropTypes.number,
   //   null
-  // ]), // How to do ProptTypes.onOfType?
+  // ]), // How to do ProptTypes.onOfType number || null?
   events: PropTypes.array.isRequired
 
 };
@@ -30,19 +30,23 @@ class MonthDayCell extends Component {
     ];
     this.eventsPerDayArray = this.eventsPerDayInMonth(this.props.events);
     this.state = {
-      hoveringOver: false
+      isHoveredOver: false
     };
   }
 
   render() {
     const { acceptedDays, cellClasses, cellColor, eventsPerDayArray } = this
+    const { isHoveredOver } = this.state;
     const { day, displayYear, displayMonth, } = this.props;
     return (
-      <Grid.Column className={cellClasses(day)} color={cellColor(day)} >
+      <Grid.Column className={cellClasses(day)} color={cellColor(day)}
+        onMouseOver={this.handleHover} onMouseOut={this.handleHover}>
         <Link to={`/day/${displayYear}/${displayMonth + 1}/${day}`} >
           <div>{day}</div>
         </Link>
-        {acceptedDays.includes(day) && <AddEventIcon />}
+        {acceptedDays.includes(day) && <AddEventIcon onlyShowOnHover={true}
+          isHoveredOver={isHoveredOver}
+        />}
         {/* Gross, break out a function for this */}
         {eventsPerDayArray[day] > 0
           ? `${eventsPerDayArray[day]} events`
@@ -75,6 +79,13 @@ class MonthDayCell extends Component {
       return;
     else
       return "no-day shadow";
+  }
+  handleHover = () => {
+    if (this.state.isHoveredOver === false) {
+      this.setState({ isHoveredOver: true });
+    } else {
+      this.setState({ isHoveredOver: false });
+    }
   }
 }
 
