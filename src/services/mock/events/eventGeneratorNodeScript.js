@@ -24,7 +24,8 @@ const util = require('util');
 
 class Event {
 
-  constructor(title, description, start, end, repeated, date, notifyBool, notifyTimeBefore, repDays, color, tags, notes) {
+  constructor(id, title, description, start, end, repeated, date, notifyBool, notifyTimeBefore, repDays, color, tags, notes) {
+    this.id = id;
     this.title = title;
     this.description = description;
     this.time = {
@@ -218,6 +219,7 @@ function generateMockEvents(count) {
   for (let i = 0; i < count; i++) {
     const timeGenerator = generateStartEnd('06:00:00', '20:59:00');
     mockEventArr.push(new Event(
+      `event${i}`,
       generateTitle(1, 8),
       generateDescription(3, 25),
       timeGenerator.next().value,

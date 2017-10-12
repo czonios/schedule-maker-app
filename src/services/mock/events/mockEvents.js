@@ -5,6 +5,7 @@ import Event from '../.././event/EventConstructor';
 //like mockEventsV2 or whatever, and write them there, and import them into src/Representation/data/reducer.js
 //to use as the default state and get them loaded up into the redux store
 export const mockEvent1 = new Event(
+  'event2039032',
   'study',
   'clean write my notes to the notebooks',
   "18:00",

@@ -2,6 +2,7 @@ import Event from './EventConstructor';
 import { cellColors } from '.././UI/cellColors';
 
 let e = new Event(
+    'event23423',
     'study',
     'clean write my notes to the notebooks',
     "18:00",

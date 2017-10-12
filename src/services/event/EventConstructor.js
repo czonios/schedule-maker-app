@@ -2,6 +2,7 @@ import dateService from '../../services/dates/dateService';
 import PropTypes from 'prop-types';
 
 /**
+ * id: (String) unique id for the event
  * title: (String) title of the scheduled event
  * desciption: (String) a short description
  * start: (hh:mm) time of start
@@ -17,7 +18,8 @@ import PropTypes from 'prop-types';
  */
 class Event {
 
-    constructor(title, description, start, end, repeated, date, notifyBool, notifyTimeBefore, repDays, color, tags, notes) {
+    constructor(id, title, description, start, end, repeated, date, notifyBool, notifyTimeBefore, repDays, color, tags, notes) {
+        this.id = id;
         this.title = title;
         this.description = description;
         this.time = {

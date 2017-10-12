@@ -3,8 +3,7 @@ import './representation.css';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { toggleGridOrCardDisplay } from '../../../.././data/actions';
-import * as actions from './data/actions'
+import { toggleGridOrCardDisplay, displayEventModal, deleteEvent } from '../../../.././data/actions';
 import Month from './components/Month/Month';
 import Week from './components/Week/Week';
 import WeekCardVersion from './components/Week/components/WeekCardVersion/WeekCardVersion';
@@ -30,27 +29,30 @@ const Representation = (props) => {
         </div>
     );
 }
-function chooseView({ displayMonth, displayYear, displayDay, incrementDisplayMonth, decrementDisplayMonth, url, displayDayEvents, displayMonthEvents, displayWeekEvents, gridOrCardDisplay }) {
+function chooseView({ displayMonth, displayYear, displayDay, url, displayDayEvents,
+    displayMonthEvents, displayWeekEvents, gridOrCardDisplay, displayEventModal,
+    deleteEvent }) {
     //Decide which view to render, based on the URL
     const view = url.match.params.view;
     //don't need the null check for route '/' i think?
     // if (!url.match) return null;
     if (view === 'month') {
-        return <Month events={displayMonthEvents} displayMonth={displayMonth} displayYear={displayYear}
-            incrementDisplayMonth={incrementDisplayMonth} decrementDisplayMonth={decrementDisplayMonth} />
+        return <Month events={displayMonthEvents} displayMonth={displayMonth} displayYear={displayYear} />
     } else if (view === 'week') {
         // console.log(toggleGridOrCardDisplay);
         // return <Week events={displayWeekEvents} />
         // return <WeekCardVersion events={displayWeekEvents} />
         return gridOrCardDisplay === 'grid'
             ? <Week events={displayWeekEvents} />
-            : <WeekCardVersion events={displayWeekEvents} />
+            : <WeekCardVersion events={displayWeekEvents} displayEventModal={displayEventModal}
+                deleteEvent={deleteEvent} />
     } else if (view === 'day') {
         // return <Day />
         // return <DayCardVersion events={displayDayEvents} />
         return gridOrCardDisplay === 'grid'
             ? <Day />
-            : <DayCardVersion events={displayDayEvents} />
+            : <DayCardVersion events={displayDayEvents} displayEventModal={displayEventModal}
+                deleteEvent={deleteEvent} />
     }
 }
 
@@ -58,7 +60,11 @@ function mapStateToProps(state, ownProps) {
     const { params } = ownProps.url.match;
     // const displayYear, displayMonth, displayDay;
     const [displayYear, displayMonth, displayDay] = [parseInt(params.year, 10), parseInt(params.month, 10) - 1, parseInt(params.day, 10)]
-    const allEvents = state.layout.representation.data.events;
+    // @TEMP
+    // After normalizing the event data shape in the redux store, this transformation should
+    // be unnecesary. Come back and delete it and refactor the filtering functions
+    // after the Event's shape is finally settled (for perf reasons).
+    const allEvents = Object.values(state.layout.representation.data.events.byId);
     return {
         allEvents,
         displayDayEvents: filterEventsByDay(displayYear, displayMonth, displayDay, allEvents),
@@ -108,22 +114,20 @@ function filterEventsByWeek(year, month, day, events) {
     })
 }
 function mapDispatchToProps(dispatch) {
-    const { incrementDisplayMonth,
-        decrementDisplayMonth } = actions;
     return bindActionCreators({
-        incrementDisplayMonth,
-        decrementDisplayMonth,
-        toggleGridOrCardDisplay
+        toggleGridOrCardDisplay,
+        displayEventModal,
+        deleteEvent
     }, dispatch);
 };
 
 const propTypes = {
     displayMonth: PropTypes.number.isRequired,
     displayYear: PropTypes.number.isRequired,
-    incrementDisplayMonth: PropTypes.func.isRequired,
-    decrementDisplayMonth: PropTypes.func.isRequired,
     url: PropTypes.object.isRequired,
-    gridOrCardDisplay: PropTypes.string.isRequired
+    gridOrCardDisplay: PropTypes.string.isRequired,
+    displayEventModal: PropTypes.func.isRequired,
+    deleteEvent: PropTypes.func.isRequired
 }
 Representation.propTypes = propTypes;
 
