@@ -2,7 +2,7 @@ import {
   TOGGLE_GRID_OR_CARD_DISPLAY,
   DISPLAY_EVENT_MODAL,
   DISMISS_EVENT_MODAL,
-  SUBMIT_EDITED_EVENT
+  // SUBMIT_EDITED_EVENT
 } from './actions';
 
 const initState = {

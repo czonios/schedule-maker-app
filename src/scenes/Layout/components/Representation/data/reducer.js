@@ -22,8 +22,6 @@ export default function data(state = defaultState, action) {
   switch (action.type) {
     case SUBMIT_EDITED_EVENT:
       const { id, title, description, date, time } = action.payload;
-      console.log(action);
-      console.dir(state);
       return {
         events: {
           ...state.events,
