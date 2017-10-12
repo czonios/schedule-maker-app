@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Grid, } from 'semantic-ui-react';
 import { Link } from 'react-router-dom'
-import AddEventIcon from '../../../.././AddEventIcon/AddEventIcon';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { displayEventModal } from '../../../../../../../../.././data/actions';
