@@ -22,8 +22,8 @@ const DayCardVersion = ({ events, condensed, displayEventModal, deleteEvent }) =
             <Card key={i} fluid style={{ 'width': '100%', 'padding': '0px' }}>
               <Card.Content extra className="event-start">
                 {event.time.start}
-                <Icon name="pencil" onClick={() => displayEventModal(event.id)} />
-                <Icon name="delete" onClick={() => deleteEvent(event.id)} />
+                <Icon link name="pencil" onClick={() => displayEventModal(event.id)} />
+                <Icon link name="delete" onClick={() => deleteEvent(event.id)} />
               </Card.Content>
               <Card.Content>
                 <Card.Header>
