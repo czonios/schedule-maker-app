@@ -1,0 +1,17 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`MonthDayCell redners properly 1`] = `
+<div
+  className="grey column no-day shadow"
+  onMouseEnter={[Function]}
+  onMouseLeave={[Function]}
+>
+  <a
+    href="/day/2016/3/undefined"
+    onClick={[Function]}
+  >
+    <div />
+  </a>
+  
+</div>
+`;

@@ -1,8 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types'
 import { Grid } from 'semantic-ui-react';
-import { Link } from 'react-router-dom';
 import './dayRows.css';
+// import AddEventIcon from '../../.././AddEventIcon/AddEventIcon';
+import MonthDayCell from './MonthDayCell/MonthDayCell';
 
 const DayRows = ({ displayMonth, displayYear, dateService, events }) => (
   //This function need to be cleaned up/broken down, badly
@@ -10,13 +11,6 @@ const DayRows = ({ displayMonth, displayYear, dateService, events }) => (
 
 );
 
-const acceptedDays = [
-  1, 2, 3, 4, 5, 6, 7,
-  8, 9, 10, 11, 12, 13,
-  14, 15, 16, 17, 18, 19,
-  20, 21, 22, 23, 24, 25,
-  26, 27, 28, 29, 30, 31
-];
 
 /**
  * padDaysInMonthArr concatenates null to the beginning and end of the
@@ -66,63 +60,26 @@ export function splitDaysIntoWeeks(paddedArr) {
   return chunckArr;
 }
 
-// decide if a cell should be greyed out
-export function cellColor(day) {
-
-  if (acceptedDays.includes(day))
-    return;
-  else
-    return "grey";
-}
-
-// gives custom classes to greyed out cells
-// such as background color and a more defined shadow
-export function cellClasses(day) {
-
-  if (acceptedDays.includes(day))
-    return;
-  else
-    return "no-day shadow";
-}
 
 //Consume the 2d array representing the weeks, and generate  5-6 Grid.Rows with the days as columns 
 export function generateRows(events, displayYear, displayMonth, chunkedArr) {
-  const eventsPerDayArray = eventsPerDayInMonth(events);
-  // console.log(eventsPerDayArray);
   return chunkedArr.map((subArr, i) => {
     return (
       <Grid.Row key={i}>
         {subArr.map((day, j) => {
-          return (
-            <Grid.Column className={cellClasses(day)} key={j} color={cellColor(day)} >
-              <Link to={`/day/${displayYear}/${displayMonth + 1}/${day}`} >
-                <div>{day}</div>
-              </Link>
-              {/* Gross, break out a function for this */}
-              {eventsPerDayArray[day] > 0
-                ? `${eventsPerDayArray[day]} events`
-                : ''}
-            </Grid.Column>
-          );
+          return <MonthDayCell key={j} day={day} displayYear={displayYear}
+            displayMonth={displayMonth} events={events} />
         })}
       </Grid.Row>
     );
   });
-}
-//TODO TEST
-export function eventsPerDayInMonth(events) {
-  const daysArr = Array.from({ length: 32 }, (_, i) => 0);
-  return events.reduce((accum, event) => {
-    accum[event.date.day]++;
-    return accum;
-  }, daysArr);
 }
 
 const propTypes = {
   displayMonth: PropTypes.number.isRequired,
   displayYear: PropTypes.number.isRequired,
   dateService: PropTypes.object.isRequired,
-  events: PropTypes.array.isRequired
+  events: PropTypes.array.isRequired,
 };
 
 const defaultProps = {};
