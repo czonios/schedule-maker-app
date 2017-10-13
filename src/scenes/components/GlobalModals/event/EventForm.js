@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Form, Input, TextArea, Message } from 'semantic-ui-react';
 import { generateUniqueId } from '../../../.././services/event/UniqueEventId';
+import validation from '../../../.././services/form/validation';
 
 const propTypes = {
   eventModalData: PropTypes.oneOfType([
@@ -80,35 +81,40 @@ class EventForm extends Component {
 
   render() {
     const { handleChange, handleDateChange, handleTimeChange, handleSubmit,
-      formHasErrors, formHasErrorOnField, handleDismiss } = this;
+      formHasErrors, fieldHasError, handleDismiss, runValidators } = this;
     const { dismissEventModal, isNewEvent } = this.props;
     // if (isNewEvent === false) {
     const { date, description, id, notes, repeated, tags, time, title } = this.state.event;
     // }
     return (
-      <Form onSubmit={handleSubmit} error={false}>
+      <Form onSubmit={handleSubmit} error={formHasErrors()}>
         <Message error >
-          <Message.Header>Invalid Fields</Message.Header>
-          <Message.Content>sddkdj</Message.Content>
+          <Message.List>Invalid Fields
+          {this.state.errors.map((error, i) => (
+              <Message.Item key={i}>
+                {error.message}
+              </Message.Item>
+            ))}
+          </Message.List>
         </Message>
         <Form.Field required name='title' control={Input} label="Title" value={title}
           onChange={handleChange} />
-        <Form.Field name='description' control={TextArea} label="Description" value={description}
-          onChange={handleChange} />
-        <Form.Field name='start' control={Input} label="Start Time" value={time.start}
-          onChange={handleTimeChange} />
-        <Form.Field name='end' control={Input} label="End Time" value={time.end}
-          onChange={handleTimeChange} />
+        <Form.Field name='description' control={TextArea} label="Description"
+          value={description} onChange={handleChange} />
+        <Form.Field required name='start' control={Input} label="Start Time"
+          value={time.start} onChange={handleTimeChange} />
+        <Form.Field required name='end' control={Input} label="End Time"
+          value={time.end} onChange={handleTimeChange} />
         <Form.Group>
           <Form.Field required name='day' control={Input} label="Date" value={date.day}
-            onChange={handleDateChange} error={formHasErrorOnField('day')} />
+            onChange={handleDateChange} error={fieldHasError('day')} onBlur={runValidators} />
           <Form.Field required name='month' control={Input} label="Month" value={date.month}
-            onChange={handleDateChange} error={formHasErrorOnField('month')} />
+            onChange={handleDateChange} error={fieldHasError('month')} onBlur={runValidators} />
           <Form.Field required name='year' control={Input} label="Year" value={date.year}
-            onChange={handleDateChange} error={formHasErrorOnField('year')} />
+            onChange={handleDateChange} error={fieldHasError('year')} onBlur={runValidators} />
         </Form.Group>
         <Form.Group>
-          <Form.Button color="green" content="Save Changes" />
+          <Form.Button active={formHasErrors()} color="green" content="Save Changes" />
           <Form.Button onClick={handleDismiss} color="red" content="Discard Changes" />
         </Form.Group>
         {/* <Form.Field name='title' control={Input} label="Title" value={title} onChange={this.handleChange} /> */}
@@ -129,16 +135,26 @@ class EventForm extends Component {
       }
     }
   });
-  handleDateChange = (e, { name, value }) => this.setState({
-    event: {
-      ...this.state.event,
-      date: {
-        ...this.state.event.date,
-        [name]: value
+  handleDateChange = (e, { name, value }) => {
+    // const errors = formvalid()
+    this.setState({
+      // error: formvalidserveice ? this.state.error : this.state.errors.concat()
+      event: {
+        ...this.state.event,
+        date: {
+          ...this.state.event.date,
+          [name]: value
+        }
       }
-    }
-  });
+    });
+  }
   handleSubmit = () => {
+    // runValidators could go in a componentDidUpdate, but we would probably
+    // need to debounce the keystrokes
+    // this.runValidators()
+    //   .then(formErrorStatus => {
+    //     if formErrorStatus ===
+    //   })
     //ParseInt the date fields
     const { year, month, day } = Object.entries(this.state.event.date).reduce((accum, entry) => {
       accum[entry[0]] = parseInt(entry[1], 10);
@@ -169,8 +185,26 @@ class EventForm extends Component {
   formHasErrors = () => {
     return this.state.errors.length > 0;
   }
-  formHasErrorOnField = (fieldName) => {
-    return this.state.errors.some(event => event.field = fieldName);
+  fieldHasError = (fieldName) => {
+    return this.state.errors.some(event => event.field === fieldName);
+  }
+  runValidators = () => {
+    console.log('runningValidators');
+
+    const { year, month, day } = Object.entries(this.state.event.date).reduce((accum, entry) => {
+      accum[entry[0]] = parseInt(entry[1], 10);
+      return accum;
+    }, {});
+
+    const errors = [].concat(
+      validation.checkDate(year, month, day)
+    )
+    console.log(errors);
+    // if (errors.length > 0) {
+    this.setState({
+      errors
+    })
+    // }
   }
 }
 
