@@ -32,16 +32,18 @@ export class MonthDayCell extends Component {
       20, 21, 22, 23, 24, 25,
       26, 27, 28, 29, 30, 31
     ];
-    this.eventsPerDayArray = this.eventsPerDayInMonth(this.props.events);
     this.state = {
-      isHoveredOver: false
+      isHoveredOver: false,
+      eventsPerDayArray: this.eventsPerDayInMonth(this.props.events)
     };
   }
-
+  componentWillReceiveProps(nextProps) {
+    this.setState({ eventsPerDayArray: this.eventsPerDayInMonth(nextProps.events) });
+  }
   render() {
-    const { acceptedDays, cellClasses, cellColor, eventsPerDayArray } = this
-    const { isHoveredOver } = this.state;
-    const { day, displayYear, displayMonth, displayEventModal } = this.props;
+    const { acceptedDays, cellClasses, cellColor } = this
+    const { isHoveredOver, eventsPerDayArray } = this.state;
+    const { day, displayYear, displayMonth, displayEventModal, } = this.props;
     return (
       <Grid.Column className={cellClasses(day)} color={cellColor(day)}
         onMouseEnter={this.handleHoverEnter} onMouseLeave={this.handleHoverExit}>
