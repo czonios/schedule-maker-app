@@ -25,7 +25,11 @@ class EventForm extends Component {
       // const { year, month, day, dayOfWeek } = date;
       // const { state, end } = time;
       this.state = {
-        date,
+        //Add one to the date, for display purposes
+        date: {
+          ...date,
+          month: date.month + 1
+        },
         description,
         id,
         notes,
@@ -37,7 +41,9 @@ class EventForm extends Component {
     }
     // @Temp
     // There is definitely some more elegant way of handling this default/empty state for
-    // New events.
+    // new events.
+    // This also won't work once we're prepulating the date field from add event clicks
+    // on the month view.
     else if (isNewEvent === true) {
       this.state = {
         date: {
@@ -80,6 +86,14 @@ class EventForm extends Component {
         <Form.Field name='end' control={Input} label="End Time" value={time.end}
           onChange={this.handleTimeChange} />
         <Form.Group>
+          <Form.Field name='day' control={Input} label="Date" value={date.day}
+            onChange={this.handleDateChange} />
+          <Form.Field name='month' control={Input} label="Month" value={date.month}
+            onChange={this.handleDateChange} />
+          <Form.Field name='year' control={Input} label="Year" value={date.year}
+            onChange={this.handleDateChange} />
+        </Form.Group>
+        <Form.Group>
           <Form.Button color="green" content="Save Changes" />
           <Form.Button onClick={this.handleDismiss} color="red" content="Discard Changes" />
         </Form.Group>
@@ -89,9 +103,24 @@ class EventForm extends Component {
   }
   handleChange = (e, { name, value }) => this.setState({ [name]: value });
   handleTimeChange = (e, { name, value }) => this.setState({ time: { ...this.state.time, [name]: value } });
+  handleDateChange = (e, { name, value }) => this.setState({
+    date: { ...this.state.date, [name]: parseInt(value, 10) }
+  });
   handleSubmit = () => {
-    this.props.submitEditedEvent(this.state);
-    this.props.dismissEventModal();
+    //Derive and set day of week, then dispatch the submit action; dispatch 
+    //has to be in the setState callback, because setting state is async
+    const { year, month, day } = this.state.date;
+    this.setState({
+      date: {
+        ...this.state.date,
+        dayOfWeek: new Date(year, month, day).getDay(),
+        // Decrement the month, since we're converting back from a display value with 1 indexing
+        month: month - 1
+      }
+    }, () => {
+      this.props.submitEditedEvent(this.state);
+      this.props.dismissEventModal();
+    })
   }
   handleDismiss = (e) => {
     e.preventDefault();
