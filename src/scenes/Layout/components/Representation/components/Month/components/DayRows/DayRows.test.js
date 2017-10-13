@@ -1,4 +1,4 @@
-import { cellColor, cellClasses, padDaysInMonthArr, splitDaysIntoWeeks, generateRows } from './DayRows';
+import { padDaysInMonthArr, splitDaysIntoWeeks, generateRows } from './DayRows';
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { StaticRouter } from 'react-router';
@@ -18,37 +18,7 @@ const chunkedArr = [
     [30, 31, null, null, null, null, null]
 ];
 
-test('Cell color should be default if there is a day in it', () => {
-    expect(cellColor(1)).toBe(undefined);
-});
 
-test('Cell color should be gray if there is NO day in that cell', () => {
-    expect(cellColor(undefined)).toBe("grey");
-});
-
-test('Cell color should be gray if there is NO day in that cell', () => {
-    expect(cellColor(-1)).toBe("grey");
-});
-
-test('Cell color should be gray if there is NO day in that cell', () => {
-    expect(cellColor("asd")).toBe("grey");
-});
-
-test('Cell should have no classes if it has a day in it', () => {
-    expect(cellClasses(1)).toBe(undefined);
-});
-
-test('Cell classes should be appropriate if it DOES NOT have a day in it', () => {
-    expect(cellClasses(undefined)).toBe("no-day shadow");
-});
-
-test('Cell classes should be appropriate if it DOES NOT have a day in it', () => {
-    expect(cellClasses(-1)).toBe("no-day shadow");
-});
-
-test('Cell classes should be appropriate if it DOES NOT have a day in it', () => {
-    expect(cellClasses("asd")).toBe("no-day shadow");
-});
 
 test('padDaysInMonthArr should add nulls to the begining and end of the array', () => {
     expect(padDaysInMonthArr(2017, 9, dateService)).toEqual(nullPaddedArr);

@@ -22,7 +22,7 @@ const propTypes = {
 
 const defaultProps = {};
 
-class MonthDayCell extends Component {
+export class MonthDayCell extends Component {
   constructor(props) {
     super(props);
     this.acceptedDays = [
@@ -104,4 +104,7 @@ MonthDayCell.propTypes = propTypes;
 
 MonthDayCell.defaultProps = defaultProps;
 
+// export mapDispatchToProps;
+// export { MonthDayCell };
+// export monthDayCellInstance;
 export default connect(mapStateToProps, mapDispatchToProps)(MonthDayCell);

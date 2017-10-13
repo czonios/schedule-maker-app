@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import timeService from '../../../../../../services/times/timeService';
-import { Card, Icon } from 'semantic-ui-react';
+import { Card } from 'semantic-ui-react';
 import './DayCardVersion.css';
 // import AddEventIcon from '.././AddEventIcon/AddEventIcon';
 import HoverableIcon from '../../../../.././components/HoverableIcon/HoverableIcon';
