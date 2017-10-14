@@ -33,7 +33,7 @@ class DayCardVersion extends Component {
               <Card key={i} fluid style={{ 'width': '100%', 'padding': '0px' }}
                 onMouseEnter={() => this.handleHoverEnter(event.id)} onMouseLeave={this.handleHoverExit}               >
                 <Card.Content extra className="event-start">
-                  {timeService.removeLeadingZero(event.time.start)}
+                  {event.time.start}
                   <HoverableIcon show={isHoveredOver === event.id} name="pencil" onClickCb={displayEventModal}
                     cbArgs={event.id} />
                   <HoverableIcon show={isHoveredOver === event.id} name="x" onClickCb={deleteEvent}
@@ -45,7 +45,7 @@ class DayCardVersion extends Component {
                   </Card.Header>
                 </Card.Content>
                 <Card.Content extra className="event-end">
-                  {timeService.removeLeadingZero(event.time.end)}
+                  {event.time.end}
                 </Card.Content>
               </Card>
             )
@@ -61,7 +61,7 @@ class DayCardVersion extends Component {
             <Card key={i} centered onMouseEnter={() => this.handleHoverEnter(event.id)}
               onMouseLeave={this.handleHoverExit}  >
               <Card.Content extra className="event-start">
-                {timeService.removeLeadingZero(event.time.start)}
+                {event.time.start}
                 <HoverableIcon show={isHoveredOver === event.id} name="pencil" onClickCb={displayEventModal}
                   cbArgs={event.id} />
                 <HoverableIcon show={isHoveredOver === event.id} name="x" onClickCb={deleteEvent}
@@ -76,7 +76,7 @@ class DayCardVersion extends Component {
                 </Card.Description>
               </Card.Content>
               <Card.Content extra className="event-end">
-                {timeService.removeLeadingZero(event.time.end)}
+                {event.time.end}
               </Card.Content>
             </Card>
           )

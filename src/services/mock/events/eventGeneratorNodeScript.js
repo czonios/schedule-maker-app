@@ -303,19 +303,25 @@ function* generateStartEnd(earliest, latest) {
   const startMinute = randomIntBetween(0, latestMinute - 1);
   let startStr = `${startHour}:${startMinute}`;
   //Add zeros in front of hour and min if necesary
-  startStr = startStr
-    .split(':')
-    .map(time => time.length === 1 ? `0${time}` : time)
-    .join(':')
+  // startStr = startStr
+  //   .split(':')
+  //   .map(time => time.length === 1 ? `0${time}` : time)
+  //   .join(':')
+  startStr = startStr.split(':');
+  startStr[1] = startStr[1].length === 1 ? `0${startStr[1]}` : startStr[1];
+  startStr = startStr.join(':');
   yield startStr;
 
   const endHour = randomIntBetween(startHour, latestHour + 1);
   const endMinute = randomIntBetween(startMinute, latestMinute);
   let endStr = `${endHour}:${endMinute}`
-  endStr = endStr
-    .split(':')
-    .map(time => time.length === 1 ? `0${time}` : time)
-    .join(':')
+  // endStr = endStr
+  //   .split(':')
+  //   .map(time => time.length === 1 ? `0${time}` : time)
+  //   .join(':')
+  endStr = endStr.split(':');
+  endStr[1] = endStr[1].length === 1 ? `0${endStr[1]}` : endStr[1];
+  endStr = endStr.join(':');
   yield endStr;
 }
 //TODO it has issues as written if the minutes of the latestTime are 00, eg '20:00:00'
