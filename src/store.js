@@ -28,6 +28,9 @@ const store = createStore(rootReducer, defaultState, enhancers);
 
 // Save the events to localStorage on any state change
 store.subscribe(() => {
+  // This stores state on every state change, so it should be debounced
+  // if we every add any actions to the app the fire rapidly and 
+  // update the store quickly
   saveState(store.getState().layout.representation.data.events);
 })
 
