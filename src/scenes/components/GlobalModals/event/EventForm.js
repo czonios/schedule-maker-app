@@ -117,7 +117,6 @@ class EventForm extends Component {
           <Form.Button active={formHasErrors()} color="green" content="Save Changes" />
           <Form.Button onClick={handleDismiss} color="red" content="Discard Changes" />
         </Form.Group>
-        {/* <Form.Field name='title' control={Input} label="Title" value={title} onChange={this.handleChange} /> */}
       </Form>
     );
   }
@@ -136,9 +135,7 @@ class EventForm extends Component {
     }
   });
   handleDateChange = (e, { name, value }) => {
-    // const errors = formvalid()
     this.setState({
-      // error: formvalidserveice ? this.state.error : this.state.errors.concat()
       event: {
         ...this.state.event,
         date: {
@@ -149,12 +146,6 @@ class EventForm extends Component {
     });
   }
   handleSubmit = () => {
-    // runValidators could go in a componentDidUpdate, but we would probably
-    // need to debounce the keystrokes
-    // this.runValidators()
-    //   .then(formErrorStatus => {
-    //     if formErrorStatus ===
-    //   })
     //ParseInt the date fields
     const { year, month, day } = Object.entries(this.state.event.date).reduce((accum, entry) => {
       accum[entry[0]] = parseInt(entry[1], 10);
@@ -189,8 +180,6 @@ class EventForm extends Component {
     return this.state.errors.some(event => event.field === fieldName);
   }
   runValidators = () => {
-    console.log('runningValidators');
-
     const { year, month, day } = Object.entries(this.state.event.date).reduce((accum, entry) => {
       accum[entry[0]] = parseInt(entry[1], 10);
       return accum;
@@ -199,12 +188,9 @@ class EventForm extends Component {
     const errors = [].concat(
       validation.checkDate(year, month, day)
     )
-    console.log(errors);
-    // if (errors.length > 0) {
     this.setState({
       errors
     })
-    // }
   }
 }
 
