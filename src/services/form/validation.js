@@ -51,6 +51,7 @@ class Validation {
     return errArray;
   }
   validFormat = (timestamp) => {
+    console.log('running validFormal');
     const [hours, minutes] = timestamp.split(':');
     // console.log('hours and minutes in timeService.validFormat', hours, minutes)
     // console.log(hours !== undefined

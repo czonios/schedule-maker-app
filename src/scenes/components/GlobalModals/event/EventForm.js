@@ -81,7 +81,7 @@ class EventForm extends Component {
 
   render() {
     const { handleChange, handleDateChange, handleTimeChange, handleSubmit,
-      formHasErrors, fieldHasError, handleDismiss, runValidators } = this;
+      formHasErrors, fieldHasError, handleDismiss, runValidators, fieldNotEmpty } = this;
     const { dismissEventModal, isNewEvent } = this.props;
     // if (isNewEvent === false) {
     const { date, description, id, notes, repeated, tags, time, title } = this.state.event;
@@ -101,12 +101,16 @@ class EventForm extends Component {
           onChange={handleChange} />
         <Form.Field name='description' control={TextArea} label="Description"
           value={description} onChange={handleChange} />
-        <Form.Field required name='start' control={Input} label="Start Time"
-          value={time.start} onChange={handleTimeChange} error={fieldHasError('start')}
-          onBlur={runValidators} />
-        <Form.Field required name='end' control={Input} label="End Time"
-          value={time.end} onChange={handleTimeChange} error={fieldHasError('end')}
-          onBlur={runValidators} />
+        <Form.Group>
+          <Form.Field required name='start' control={Input} label="Start Time"
+            value={time.start} onChange={handleTimeChange}
+            error={fieldHasError('start')}
+            onBlur={runValidators} />
+          <Form.Field required name='end' control={Input} label="End Time"
+            value={time.end} onChange={handleTimeChange}
+            error={fieldHasError('end')}
+            onBlur={runValidators} />
+        </Form.Group>
         <Form.Group>
           <Form.Field required name='day' control={Input} label="Date" value={date.day}
             onChange={handleDateChange} error={fieldHasError('day')} onBlur={runValidators} />
@@ -181,6 +185,7 @@ class EventForm extends Component {
   fieldHasError = (fieldName) => {
     return this.state.errors.some(event => event.field === fieldName);
   }
+
   runValidators = () => {
     const { year, month, day } = Object.entries(this.state.event.date).reduce((accum, entry) => {
       accum[entry[0]] = parseInt(entry[1], 10);
@@ -188,10 +193,16 @@ class EventForm extends Component {
     }, {});
     const { start, end } = this.state.event.time;
     console.log('running validators');
-    const errors = [].concat(
-      validation.checkDate(year, month, day),
+    let errors = [];
+
+    //Don't run a validation if a relevant field is empty; the 'required'
+    //attribute on the element itself takes care of empty fields
+    if (year && month && day) errors = errors.concat(
+      validation.checkDate(year, month, day)
+    );
+    if (start && end) errors = errors.concat(
       validation.checkTime(start, end)
-    )
+    );
     console.log('error found after validation', errors);
     this.setState({
       errors
