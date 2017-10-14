@@ -102,9 +102,11 @@ class EventForm extends Component {
         <Form.Field name='description' control={TextArea} label="Description"
           value={description} onChange={handleChange} />
         <Form.Field required name='start' control={Input} label="Start Time"
-          value={time.start} onChange={handleTimeChange} />
+          value={time.start} onChange={handleTimeChange} error={fieldHasError('start')}
+          onBlur={runValidators} />
         <Form.Field required name='end' control={Input} label="End Time"
-          value={time.end} onChange={handleTimeChange} />
+          value={time.end} onChange={handleTimeChange} error={fieldHasError('end')}
+          onBlur={runValidators} />
         <Form.Group>
           <Form.Field required name='day' control={Input} label="Date" value={date.day}
             onChange={handleDateChange} error={fieldHasError('day')} onBlur={runValidators} />
@@ -184,10 +186,13 @@ class EventForm extends Component {
       accum[entry[0]] = parseInt(entry[1], 10);
       return accum;
     }, {});
-
+    const { start, end } = this.state.event.time;
+    console.log('running validators');
     const errors = [].concat(
-      validation.checkDate(year, month, day)
+      validation.checkDate(year, month, day),
+      validation.checkTime(start, end)
     )
+    console.log('error found after validation', errors);
     this.setState({
       errors
     })
