@@ -103,24 +103,27 @@ class EventForm extends Component {
           value={description} onChange={handleChange} />
         <Form.Group>
           <Form.Field required name='start' control={Input} label="Start Time"
-            value={time.start} onChange={handleTimeChange}
+            value={time.start} onChange={handleTimeChange} placeholder="9:00"
             error={fieldHasError('start')}
             onBlur={runValidators} />
           <Form.Field required name='end' control={Input} label="End Time"
-            value={time.end} onChange={handleTimeChange}
+            placeholder="17:00" value={time.end} onChange={handleTimeChange}
             error={fieldHasError('end')}
             onBlur={runValidators} />
         </Form.Group>
         <Form.Group>
-          <Form.Field required name='day' control={Input} label="Date" value={date.day}
-            onChange={handleDateChange} error={fieldHasError('day')} onBlur={runValidators} />
+          <Form.Field required name='day' control={Input} label="Day" value={date.day}
+            onChange={handleDateChange} error={fieldHasError('day')} onBlur={runValidators}
+            placeholder="14" />
           <Form.Field required name='month' control={Input} label="Month" value={date.month}
-            onChange={handleDateChange} error={fieldHasError('month')} onBlur={runValidators} />
+            onChange={handleDateChange} error={fieldHasError('month')} onBlur={runValidators}
+            placeholder="10" />
           <Form.Field required name='year' control={Input} label="Year" value={date.year}
-            onChange={handleDateChange} error={fieldHasError('year')} onBlur={runValidators} />
+            onChange={handleDateChange} error={fieldHasError('year')} onBlur={runValidators}
+            placeholder="2017" />
         </Form.Group>
         <Form.Group>
-          <Form.Button active={formHasErrors()} color="green" content="Save Changes" />
+          <Form.Button color={formHasErrors() ? 'grey' : 'green'} content="Save Changes" />
           <Form.Button onClick={handleDismiss} color="red" content="Discard Changes" />
         </Form.Group>
       </Form>
@@ -151,7 +154,11 @@ class EventForm extends Component {
       }
     });
   }
-  handleSubmit = () => {
+  handleSubmit = (e) => {
+    if (this.formHasErrors()) { //dont submit if there are errors
+      e.preventDefault();
+      return;
+    }
     //ParseInt the date fields
     const { year, month, day } = Object.entries(this.state.event.date).reduce((accum, entry) => {
       accum[entry[0]] = parseInt(entry[1], 10);
@@ -192,7 +199,7 @@ class EventForm extends Component {
       return accum;
     }, {});
     const { start, end } = this.state.event.time;
-    console.log('running validators');
+    // console.log('running validators');
     let errors = [];
 
     //Don't run a validation if a relevant field is empty; the 'required'
@@ -203,7 +210,7 @@ class EventForm extends Component {
     if (start && end) errors = errors.concat(
       validation.checkTime(start, end)
     );
-    console.log('error found after validation', errors);
+    console.log('errors found after validation:', errors);
     this.setState({
       errors
     })
