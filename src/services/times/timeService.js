@@ -23,6 +23,12 @@ class TimeService {
       return this.compareTimes(a.time.start, b.time.start);
     })
   }
+  removeLeadingZero(timestamp) {
+    let [hours, minutes] = timestamp.split(':');
+    if (hours.length === 2
+      && hours[0] === '0') hours = hours[1];
+    return `${hours}:${minutes}`;
+  }
 }
 const timeService = new TimeService();
 export default timeService;

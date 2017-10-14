@@ -195,6 +195,7 @@ class DateService {
     }
     return prevMondayDate;
   }
+
 }
 
 const dateService = new DateService();
