@@ -46,7 +46,7 @@ function chooseView({ displayMonth, displayYear, displayDay, url, displayDayEven
         return gridOrCardDisplay === 'grid'
             ? <Week events={displayWeekEvents} />
             : <WeekCardVersion events={displayWeekEvents} displayEventModal={displayEventModal}
-                deleteEvent={deleteEvent} />
+                deleteEvent={deleteEvent} displayYear={displayYear} displayMonth={displayMonth} />
     } else if (view === 'day') {
         // return <Day />
         // return <DayCardVersion events={displayDayEvents} />
