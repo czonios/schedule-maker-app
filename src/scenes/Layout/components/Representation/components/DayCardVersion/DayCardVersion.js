@@ -11,9 +11,9 @@ const propTypes = {
   condensed: PropTypes.bool,
   displayEventModal: PropTypes.func.isRequired,
   deleteEvent: PropTypes.func.isRequired,
-  displayYear: PropTypes.number.isRequired,
-  displayMonth: PropTypes.number.isRequired,
-  displayDay: PropTypes.number.isRequired,
+  displayYear: PropTypes.number,
+  displayMonth: PropTypes.number,
+  displayDay: PropTypes.number,
 };
 
 const defaultProps = {};
