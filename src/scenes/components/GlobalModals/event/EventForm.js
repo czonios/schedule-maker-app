@@ -164,6 +164,7 @@ class EventForm extends Component {
       accum[entry[0]] = parseInt(entry[1], 10);
       return accum;
     }, {});
+    console.log(year, month, day);
     //Derive and set day of week, then dispatch the submit action; dispatch 
     //has to be in the setState callback, because setting state is async
     this.setState({
@@ -174,7 +175,7 @@ class EventForm extends Component {
           // Decrement the month, since we're converting back from a display value with 1 indexing
           month: month - 1,
           day,
-          dayOfWeek: new Date(year, month, day).getDay(),
+          dayOfWeek: new Date(year, month - 1, day).getDay(),
         }
       }
     }, () => {
