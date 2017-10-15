@@ -5,10 +5,11 @@ import dateService from '../../../../../../../../../services/dates/dateService';
 import HoverableIcon from '../../../../../../../.././components/HoverableIcon/HoverableIcon';
 
 const propTypes = {
-  dayOfWeekVal: PropTypes.number.isRequired,
   displayEventModal: PropTypes.func.isRequired,
   displayYear: PropTypes.number.isRequired,
-  displayMonth: PropTypes.number.isRequired
+  displayMonth: PropTypes.number.isRequired,
+  displayDay: PropTypes.number.isRequired,
+  dayOfWeekVal: PropTypes.number.isRequired //from the parent's loop, not the event itself
 };
 
 const defaultProps = {};
@@ -22,13 +23,17 @@ class DayHeader extends Component {
   }
 
   render() {
-    const { dayOfWeekVal, displayEventModal, displayYear, displayMonth } = this.props;
+    const { dayOfWeekVal, displayEventModal, displayYear, displayMonth, displayDay } = this.props;
     const { isHoveredOver } = this.state;
+    // The + and - of constants below is because dayOfWeekVal is a display number, thus with
+    // monday indexed at 0 instead of sunday
+    const day = dateService.getFirstMondayPreviousOrEqualToDay(displayYear, displayMonth, displayDay).day
+      + (dayOfWeekVal === 0 ? 6 : dayOfWeekVal - 1);
     return (
       <Header size="medium" className="day-name" onMouseEnter={this.handleHoverEnter} onMouseLeave={this.handleHoverExit}>
         {dateService.dayStrRepArr[dateService.convertDay(dayOfWeekVal)]}
         <HoverableIcon name="add" onClickCb={displayEventModal} show={isHoveredOver}
-          cbArgs={{ year: displayYear, month: displayMonth, day: '' }} />
+          cbArgs={{ year: displayYear, month: displayMonth, day }} />
       </Header>
     );
   }
