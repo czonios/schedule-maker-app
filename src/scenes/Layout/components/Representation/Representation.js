@@ -54,7 +54,8 @@ function chooseView({ displayMonth, displayYear, displayDay, url, displayDayEven
         return gridOrCardDisplay === 'grid'
             ? <Day />
             : <DayCardVersion events={displayDayEvents} displayEventModal={displayEventModal}
-                deleteEvent={deleteEvent} />
+                deleteEvent={deleteEvent} displayYear={displayYear} displayMonth={displayMonth}
+                displayDay={displayDay} />
     }
 }
 
