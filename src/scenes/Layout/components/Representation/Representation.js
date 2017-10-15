@@ -93,26 +93,38 @@ function filterEventsByMonth(year, month, events) {
             && date.month === month
     })
 }
-//TODO Make this work for dates in the last week of a month and for the
-//last week of december (multiple years can be valid)
-//Week is defined as from the monday before or on the event day,
-//through to the next sunday
-function filterEventsByWeek(year, month, day, events) {
-    // const daysInMonth = dateService.getDaysCountInMonth(year, month, day);
-    // const nextMonth = new Date(year, month + 1, day).getMonth();
-    // const validDaysDict = Array.from({ length: 12 });
-    // const daysBeforeMonthEnd = daysInMonth - day;
-    const monday = dateService.getFirstMondayPreviousOrEqualToDay(year, month, day);
-    // If the day falls within the first week of the month, before a monday,
 
-    // Elsee
-    return Object.values(events).filter(event => {
-        const { date } = event;
-        return date.year === year
-            && date.month === month
-            && date.day >= monday.day
-            && date.day <= monday.day + 6
-    })
+// 'Week' is defined as from the monday before or on the event day,
+// through to the next sunday
+function filterEventsByWeek(year, month, day, events) {
+    const daysInMonth = dateService.getDaysCountInMonth(year, month, day);
+    const monday = dateService.getFirstMondayPreviousOrEqualToDay(year, month, day);
+    const daysFromMondayToMonthEnd = daysInMonth - monday.day;
+
+    if (daysFromMondayToMonthEnd < 7) {
+        // If the monday falls within the last week of the month, we have to include
+        // days within a certain range of the beginning of the next month
+        return Object.values(events).filter(event => {
+            const { date } = event;
+            if (date.year !== year) return false;
+            else if (date.month === month) {
+                return date.day >= monday.day
+                    && date.day <= monday.day + 6
+            } else if (date.month === month + 1) {
+                // Include days from the next month's first week
+                return date.day <= 6 - daysFromMondayToMonthEnd
+            } else return false;
+        })
+    } else {
+        // Monday isn't within the last week: we can look only at this month's events
+        return Object.values(events).filter(event => {
+            const { date } = event;
+            return date.year === year
+                && date.month === month
+                && date.day >= monday.day
+                && date.day <= monday.day + 6
+        })
+    }
 }
 function mapDispatchToProps(dispatch) {
     return bindActionCreators({

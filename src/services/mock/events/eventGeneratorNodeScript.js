@@ -217,7 +217,7 @@ createMockEvents('generatedMockEvents3.js', 500);
 function generateMockEvents(count) {
   const mockEventArr = [];
   for (let i = 0; i < count; i++) {
-    const timeGenerator = generateStartEnd('06:00:00', '20:59:00');
+    const timeGenerator = generateStartEnd('06:00', '20:59');
     mockEventArr.push(new Event(
       `event${i}`,
       generateTitle(1, 8),
@@ -301,21 +301,27 @@ function* generateStartEnd(earliest, latest) {
 
   const startHour = randomIntBetween(earliestHour, latestHour + 1);
   const startMinute = randomIntBetween(0, latestMinute - 1);
-  let startStr = `${startHour}:${startMinute}:00`;
+  let startStr = `${startHour}:${startMinute}`;
   //Add zeros in front of hour and min if necesary
-  startStr = startStr
-    .split(':')
-    .map(time => time.length === 1 ? `0${time}` : time)
-    .join(':')
+  // startStr = startStr
+  //   .split(':')
+  //   .map(time => time.length === 1 ? `0${time}` : time)
+  //   .join(':')
+  startStr = startStr.split(':');
+  startStr[1] = startStr[1].length === 1 ? `0${startStr[1]}` : startStr[1];
+  startStr = startStr.join(':');
   yield startStr;
 
   const endHour = randomIntBetween(startHour, latestHour + 1);
   const endMinute = randomIntBetween(startMinute, latestMinute);
-  let endStr = `${endHour}:${endMinute}:00`
-  endStr = endStr
-    .split(':')
-    .map(time => time.length === 1 ? `0${time}` : time)
-    .join(':')
+  let endStr = `${endHour}:${endMinute}`
+  // endStr = endStr
+  //   .split(':')
+  //   .map(time => time.length === 1 ? `0${time}` : time)
+  //   .join(':')
+  endStr = endStr.split(':');
+  endStr[1] = endStr[1].length === 1 ? `0${endStr[1]}` : endStr[1];
+  endStr = endStr.join(':');
   yield endStr;
 }
 //TODO it has issues as written if the minutes of the latestTime are 00, eg '20:00:00'
@@ -335,9 +341,9 @@ function generateDate(earliestLatestDateObj) {
 // console.log(generateTitle(1, 8));
 // console.log(loremSplitArr.length);
 // console.log(generateDescription(1, 50));
-// const it = generateStartEnd('02:43:00', '23:12:00');
+// const it = generateStartEnd('02:43:', '23:12:');
 // console.log(it.next(), it.next());
-// console.log(generateStartEnd('02:43:00', '03:12:00').next(), generateStartEnd('02:43:00', '03:12:00').next());
+// console.log(generateStartEnd('02:43:', '03:12:').next(), generateStartEnd('02:43:', '03:12:').next());
 
 // const mockEvents = generateMockEvents(5);
 
