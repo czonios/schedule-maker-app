@@ -8,9 +8,10 @@ import EventForm from './EventForm';
 
 const propTypes = {
   eventModal: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.object
-  ]).isRequired,
+    PropTypes.bool,
+    PropTypes.object,
+    PropTypes.string
+  ]),
   eventModalData: PropTypes.object.isRequired,
   dismissEventModal: PropTypes.func.isRequired,
   submitEditedEvent: PropTypes.func.isRequired
@@ -48,7 +49,7 @@ const mapStateToProps = state => {
   const { UI } = state;
   const eventModal = UI.eventModal;
   let eventModalData;
-  if (typeof eventModal === String) {
+  if (typeof eventModal === 'string') {
     //existing event
     eventModalData = state.layout.representation.data.events.byId[eventModal];
   } else {
