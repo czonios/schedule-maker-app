@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import DayCardVersion from '../../.././DayCardVersion/DayCardVersion.js'
+import { Icon } from 'semantic-ui-react';
 
 import './WeekCardVersion.css'
 import DayHeader from './DayHeader/DayHeader';
@@ -28,6 +29,9 @@ const WeekCardVersion = ({ events, displayEventModal, deleteEvent, displayYear, 
               <DayHeader dayOfWeekVal={dayOfWeekVal} displayEventModal={displayEventModal}
                 displayYear={displayYear} displayMonth={displayMonth} displayDay={displayDay}
               />
+            </div>
+            <div className="add-event clickable">
+              <Icon name="plus" size="tiny" onClick={displayEventModal} />
             </div>
             <div >
               <DayCardVersion events={dayEvents} condensed={true} displayEventModal={displayEventModal}

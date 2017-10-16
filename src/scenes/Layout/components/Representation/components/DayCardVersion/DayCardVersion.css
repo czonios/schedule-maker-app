@@ -7,12 +7,12 @@
 }
 
 .extra.content.event-start {
-    background-color: rgba(0, 128, 128, 0.2);
+    background-color: rgba(0, 128, 128, 0.15);
     border-bottom: 1px solid rgba(0, 0, 0, 0.05);
 }
 
 .extra.content.event-end {
-    background-color: rgba(255, 0, 0, 0.2);
+    background-color: rgba(255, 0, 0, 0.15);
 }
 
 .mouseHoverTargetWrapper {
