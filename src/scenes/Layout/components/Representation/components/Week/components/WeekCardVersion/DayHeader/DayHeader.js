@@ -27,13 +27,11 @@ class DayHeader extends Component {
     const { isHoveredOver } = this.state;
     // The + and - of constants below is because dayOfWeekVal is a display number, thus with
     // monday indexed at 0 instead of sunday
-    const day = dateService.getFirstMondayPreviousOrEqualToDay(displayYear, displayMonth, displayDay).day
-      + (dayOfWeekVal === 0 ? 6 : dayOfWeekVal - 1);
+
     return (
       <Header size="medium" className="day-name" onMouseEnter={this.handleHoverEnter} onMouseLeave={this.handleHoverExit}>
         {dateService.dayStrRepArr[dateService.convertDay(dayOfWeekVal)]}
-        <HoverableIcon name="add" onClickCb={displayEventModal} show={isHoveredOver}
-          cbArgs={{ year: displayYear, month: displayMonth, day }} />
+
       </Header>
     );
   }

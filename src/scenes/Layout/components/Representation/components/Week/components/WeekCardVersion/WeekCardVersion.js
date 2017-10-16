@@ -1,6 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import DayCardVersion from '../../.././DayCardVersion/DayCardVersion.js'
+import HoverableIcon from '../../../../../../.././components/HoverableIcon/HoverableIcon';
+import dateService from '../../../../../../../../services/dates/dateService';
 import { Icon, Divider } from 'semantic-ui-react';
 
 import './WeekCardVersion.css';
@@ -19,6 +21,7 @@ const defaultProps = {};
 
 const WeekCardVersion = ({ events, displayEventModal, deleteEvent, displayYear, displayMonth,
   displayDay }) => {
+
   return (
     <div className="weekViewWrapper">
       {[1, 2, 3, 4].map(dayOfWeekVal => {
@@ -32,7 +35,11 @@ const WeekCardVersion = ({ events, displayEventModal, deleteEvent, displayYear, 
               <Divider />
             </div>
             <div className="add-event clickable">
-              <Icon name="plus" size="tiny" onClick={displayEventModal} />
+              <HoverableIcon name="add" onClickCb={displayEventModal} show={true}
+                cbArgs={{
+                  year: displayYear, month: displayMonth,
+                  day: calculateDay(displayYear, displayMonth, displayDay, dayOfWeekVal)
+                }} />
               <Divider />
             </div>
             <div>
@@ -56,7 +63,11 @@ const WeekCardVersion = ({ events, displayEventModal, deleteEvent, displayYear, 
               <Divider />
             </div>
             <div className="add-event clickable">
-              <Icon name="plus" size="tiny" onClick={displayEventModal} />
+              <HoverableIcon name="add" onClickCb={displayEventModal} show={true}
+                cbArgs={{
+                  year: displayYear, month: displayMonth,
+                  day: calculateDay(displayYear, displayMonth, displayDay, dayOfWeekVal)
+                }} />
               <Divider />
             </div>
             <div>
@@ -70,6 +81,10 @@ const WeekCardVersion = ({ events, displayEventModal, deleteEvent, displayYear, 
   )
 }
 
+const calculateDay = (year, month, day, dayOfWeekVal) => {
+  return dateService.getFirstMondayPreviousOrEqualToDay(year, month, day).day
+    + (dayOfWeekVal === 0 ? 6 : dayOfWeekVal - 1);
+}
 
 WeekCardVersion.propTypes = propTypes;
 
