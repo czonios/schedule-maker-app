@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import DayCardVersion from '../../.././DayCardVersion/DayCardVersion.js'
 import HoverableIcon from '../../../../../../.././components/HoverableIcon/HoverableIcon';
 import dateService from '../../../../../../../../services/dates/dateService';
-import { Divider } from 'semantic-ui-react';
+import { Icon, Divider } from 'semantic-ui-react';
 
 import './WeekCardVersion.css';
 import DayHeader from './DayHeader/DayHeader';
