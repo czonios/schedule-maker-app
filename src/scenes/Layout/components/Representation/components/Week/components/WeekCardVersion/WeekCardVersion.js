@@ -29,15 +29,16 @@ const WeekCardVersion = ({ events, displayEventModal, deleteEvent, displayYear, 
               <DayHeader dayOfWeekVal={dayOfWeekVal} displayEventModal={displayEventModal}
                 displayYear={displayYear} displayMonth={displayMonth} displayDay={displayDay}
               />
+              <Divider />
             </div>
             <div className="add-event clickable">
               <Icon name="plus" size="tiny" onClick={displayEventModal} />
+              <Divider />
             </div>
             <div>
               <DayCardVersion events={dayEvents} condensed={true} displayEventModal={displayEventModal}
                 deleteEvent={deleteEvent} />
             </div>
-            <div className="vertical-div"><Divider vertical/></div>
           </div>
         )
       })}
@@ -52,9 +53,11 @@ const WeekCardVersion = ({ events, displayEventModal, deleteEvent, displayYear, 
               <DayHeader dayOfWeekVal={dayOfWeekVal} displayEventModal={displayEventModal}
                 displayYear={displayYear} displayMonth={displayMonth} displayDay={displayDay}
               />
+              <Divider />
             </div>
             <div className="add-event clickable">
               <Icon name="plus" size="tiny" onClick={displayEventModal} />
+              <Divider />
             </div>
             <div>
               <DayCardVersion events={dayEvents} condensed={true} displayEventModal={displayEventModal}

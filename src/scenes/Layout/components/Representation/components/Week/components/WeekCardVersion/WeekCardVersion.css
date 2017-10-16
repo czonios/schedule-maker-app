@@ -8,29 +8,19 @@
     display: none;
 }
 
-.vertical-div {
-    position:relative;
-    margin:0; 
-    padding:0;
-}
-
 .weekdayColumn {
     /* text-align: center; */
-    /* border-left: 1px solid grey;
-    border-right: 1px solid grey; */
+    border-right: 1px solid rgba(128, 128, 128, 0.5); 
     flex: 1;
 }
+
 
 .dayHeader {
     margin-top: 10px;
     text-align: center;
-    border-right: 1px solid teal;
-    border-bottom: 1px solid teal;
 }
 
-.dayHeader:last-child {
-    border-right: none;
-}
+
 
 .add-event {
     text-align: center;
@@ -71,5 +61,11 @@
 
     .ui.medium.header.day-name {
         font-size: 1em;
+    }
+
+    .weekdayColumn {
+        display: inline-block;
+        vertical-align: top;
+        max-width: 50%;
     }
 }
