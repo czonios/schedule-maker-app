@@ -61,8 +61,8 @@ class DayCardVersion extends Component {
     }
     return (
       <div className="day">
-        <div style={{ textAlign: 'center' }} >
-          <HoverableIcon name="add" onClickCb={displayEventModal} show={true}
+        <div className="add-event clickable" style={{ textAlign: 'center' }} >
+          <HoverableIcon className="add-event" name="add" onClickCb={displayEventModal} show={true}
             cbArgs={{ year: displayYear, month: displayMonth, day: displayDay }}
           />
         </div>
