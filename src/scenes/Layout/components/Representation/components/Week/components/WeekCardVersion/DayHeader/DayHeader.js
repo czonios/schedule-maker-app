@@ -4,10 +4,6 @@ import { Header } from 'semantic-ui-react';
 import dateService from '../../../../../../../../../services/dates/dateService';
 
 const propTypes = {
-  displayEventModal: PropTypes.func.isRequired,
-  displayYear: PropTypes.number.isRequired,
-  displayMonth: PropTypes.number.isRequired,
-  displayDay: PropTypes.number.isRequired,
   dayOfWeekVal: PropTypes.number.isRequired //from the parent's loop, not the event itself
 };
 
