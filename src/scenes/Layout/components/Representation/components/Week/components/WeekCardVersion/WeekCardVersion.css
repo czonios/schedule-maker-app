@@ -4,6 +4,16 @@
     /* flex-direction: column; */
 }
 
+.break {
+    display: none;
+}
+
+.vertical-div {
+    position:relative;
+    margin:0; 
+    padding:0;
+}
+
 .weekdayColumn {
     /* text-align: center; */
     /* border-left: 1px solid grey;
@@ -41,9 +51,19 @@
 
 @media (max-width: 768px) {
 
-    .weekdayColumn {
-        max-width: 15%;
+    .break {
+        display: block;
+    }
 
+    .weekViewWrapper {
+        display: block;
+        max-width: 100%;
+    }
+
+    .weekdayColumn {
+        display: inline-block;
+        vertical-align: top;
+        max-width: 25%;
     }
 } 
 

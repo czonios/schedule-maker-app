@@ -1,9 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import DayCardVersion from '../../.././DayCardVersion/DayCardVersion.js'
-import { Icon } from 'semantic-ui-react';
+import { Icon, Divider } from 'semantic-ui-react';
 
-import './WeekCardVersion.css'
+import './WeekCardVersion.css';
 import DayHeader from './DayHeader/DayHeader';
 
 const propTypes = {
@@ -21,7 +21,30 @@ const WeekCardVersion = ({ events, displayEventModal, deleteEvent, displayYear, 
   displayDay }) => {
   return (
     <div className="weekViewWrapper">
-      {[1, 2, 3, 4, 5, 6, 0].map(dayOfWeekVal => {
+      {[1, 2, 3, 4].map(dayOfWeekVal => {
+        const dayEvents = events.filter(event => event.date.dayOfWeek === dayOfWeekVal);
+        return (
+          <div key={dayOfWeekVal} className="weekdayColumn">
+            <div className="dayHeader" >
+              <DayHeader dayOfWeekVal={dayOfWeekVal} displayEventModal={displayEventModal}
+                displayYear={displayYear} displayMonth={displayMonth} displayDay={displayDay}
+              />
+            </div>
+            <div className="add-event clickable">
+              <Icon name="plus" size="tiny" onClick={displayEventModal} />
+            </div>
+            <div>
+              <DayCardVersion events={dayEvents} condensed={true} displayEventModal={displayEventModal}
+                deleteEvent={deleteEvent} />
+            </div>
+            <div className="vertical-div"><Divider vertical/></div>
+          </div>
+        )
+      })}
+      <div className="break">
+        <br />
+      </div>
+      {[5, 6, 0].map(dayOfWeekVal => {
         const dayEvents = events.filter(event => event.date.dayOfWeek === dayOfWeekVal);
         return (
           <div key={dayOfWeekVal} className="weekdayColumn">

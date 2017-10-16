@@ -4,7 +4,7 @@ import { Grid, Header } from 'semantic-ui-react';
 import dateService from '../../../../../../services/dates/dateService';
 import WeekdayColumns from '../WeekDayColumns/WeekdayColumns';
 import DayOfWeek from './components/DayOfWeek/DayOfWeek';
-import PropTypes from 'prop-types'
+import PropTypes from 'prop-types';
 
 const propTypes = {
   events: PropTypes.array.isRequired
