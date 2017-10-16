@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import DayCardVersion from '../../.././DayCardVersion/DayCardVersion.js'
 import HoverableIcon from '../../../../../../.././components/HoverableIcon/HoverableIcon';
 import dateService from '../../../../../../../../services/dates/dateService';
-import { Icon, Divider } from 'semantic-ui-react';
+import { Divider } from 'semantic-ui-react';
 
 import './WeekCardVersion.css';
 import DayHeader from './DayHeader/DayHeader';
@@ -29,13 +29,11 @@ const WeekCardVersion = ({ events, displayEventModal, deleteEvent, displayYear, 
         return (
           <div key={dayOfWeekVal} className="weekdayColumn">
             <div className="dayHeader" >
-              <DayHeader dayOfWeekVal={dayOfWeekVal} displayEventModal={displayEventModal}
-                displayYear={displayYear} displayMonth={displayMonth} displayDay={displayDay}
-              />
+              <DayHeader dayOfWeekVal={dayOfWeekVal} />
               <Divider />
             </div>
             <div className="add-event clickable">
-              <HoverableIcon name="add" onClickCb={displayEventModal} show={true}
+              <HoverableIcon className="add-event" name="add" onClickCb={displayEventModal} color='teal' show={true} inverted={false}
                 cbArgs={{
                   year: displayYear, month: displayMonth,
                   day: calculateDay(displayYear, displayMonth, displayDay, dayOfWeekVal)
@@ -63,7 +61,7 @@ const WeekCardVersion = ({ events, displayEventModal, deleteEvent, displayYear, 
               <Divider />
             </div>
             <div className="add-event clickable">
-              <HoverableIcon name="add" onClickCb={displayEventModal} show={true}
+              <HoverableIcon className="add-event" name="add" onClickCb={displayEventModal} color='teal' show={true} inverted={false}
                 cbArgs={{
                   year: displayYear, month: displayMonth,
                   day: calculateDay(displayYear, displayMonth, displayDay, dayOfWeekVal)

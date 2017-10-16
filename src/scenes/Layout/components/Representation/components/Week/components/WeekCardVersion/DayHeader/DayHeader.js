@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Header } from 'semantic-ui-react';
 import dateService from '../../../../../../../../../services/dates/dateService';
-import HoverableIcon from '../../../../../../../.././components/HoverableIcon/HoverableIcon';
 
 const propTypes = {
   displayEventModal: PropTypes.func.isRequired,
@@ -15,31 +14,17 @@ const propTypes = {
 const defaultProps = {};
 
 class DayHeader extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      isHoveredOver: false
-    };
-  }
 
   render() {
-    const { dayOfWeekVal, displayEventModal, displayYear, displayMonth, displayDay } = this.props;
-    const { isHoveredOver } = this.state;
+    const { dayOfWeekVal } = this.props;
     // The + and - of constants below is because dayOfWeekVal is a display number, thus with
     // monday indexed at 0 instead of sunday
 
     return (
-      <Header size="medium" className="day-name" onMouseEnter={this.handleHoverEnter} onMouseLeave={this.handleHoverExit}>
+      <Header size="medium" className="day-name">
         {dateService.dayStrRepArr[dateService.convertDay(dayOfWeekVal)]}
-
       </Header>
     );
-  }
-  handleHoverEnter = () => {
-    this.setState({ isHoveredOver: true });
-  }
-  handleHoverExit = () => {
-    this.setState({ isHoveredOver: false });
   }
 }
 
