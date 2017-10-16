@@ -17,9 +17,6 @@ class DayHeader extends Component {
 
   render() {
     const { dayOfWeekVal } = this.props;
-    // The + and - of constants below is because dayOfWeekVal is a display number, thus with
-    // monday indexed at 0 instead of sunday
-
     return (
       <Header size="medium" className="day-name">
         {dateService.dayStrRepArr[dateService.convertDay(dayOfWeekVal)]}
