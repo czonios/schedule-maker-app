@@ -32,3 +32,12 @@
     background-color: rgba(0, 128, 128, 0.2) !important;
 }
 
+@media (max-width: 768px) {
+
+    .ui.small.header.view-option {
+        display: block;
+        margin: 0;
+        padding: 0;
+    }
+}
+
