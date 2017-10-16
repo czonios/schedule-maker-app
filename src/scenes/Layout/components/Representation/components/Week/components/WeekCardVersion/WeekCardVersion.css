@@ -1,5 +1,6 @@
 .weekViewWrapper {
     display: flex;
+    max-width: 100%;
     /* flex-direction: column; */
 }
 
@@ -38,11 +39,16 @@
     user-select: none; 
 }
 
+@media (max-width: 768px) {
 
+    .weekdayColumn {
+        max-width: 15%;
+
+    }
+} 
 
 @media (max-width: 500px) {
-    
-    
+
     .ui.medium.header.day-name {
         font-size: 1em;
     }

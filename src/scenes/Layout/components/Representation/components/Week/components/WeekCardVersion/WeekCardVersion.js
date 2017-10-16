@@ -33,7 +33,7 @@ const WeekCardVersion = ({ events, displayEventModal, deleteEvent, displayYear, 
             <div className="add-event clickable">
               <Icon name="plus" size="tiny" onClick={displayEventModal} />
             </div>
-            <div >
+            <div>
               <DayCardVersion events={dayEvents} condensed={true} displayEventModal={displayEventModal}
                 deleteEvent={deleteEvent} />
             </div>
