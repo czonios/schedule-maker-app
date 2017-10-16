@@ -10,7 +10,10 @@ const propTypes = {
   events: PropTypes.array.isRequired,
   condensed: PropTypes.bool,
   displayEventModal: PropTypes.func.isRequired,
-  deleteEvent: PropTypes.func.isRequired
+  deleteEvent: PropTypes.func.isRequired,
+  displayYear: PropTypes.number,
+  displayMonth: PropTypes.number,
+  displayDay: PropTypes.number,
 };
 
 const defaultProps = {};
@@ -23,11 +26,13 @@ class DayCardVersion extends Component {
     }
   }
   render() {
-    const { events, condensed, displayEventModal, deleteEvent } = this.props;
+    const { events, condensed, displayEventModal, deleteEvent, displayYear,
+      displayMonth, displayDay } = this.props;
     const { isHoveredOver } = this.state;
     if (condensed) {
       return (
         <div className="day" >
+
           {timeService.sortEventsByTimeMutable(events).map((event, i) => {
             return (
               <Card key={i} fluid style={{ 'width': '100%', 'padding': '0px' }}
@@ -56,6 +61,11 @@ class DayCardVersion extends Component {
     }
     return (
       <div className="day">
+        <div style={{ textAlign: 'center' }} >
+          <HoverableIcon name="add" onClickCb={displayEventModal} show={true}
+            cbArgs={{ year: displayYear, month: displayMonth, day: displayDay }}
+          />
+        </div>
         {timeService.sortEventsByTimeMutable(events).map((event, i) => {
           return (
             <Card key={i} centered onMouseEnter={() => this.handleHoverEnter(event.id)}
@@ -102,3 +112,4 @@ DayCardVersion.propTypes = propTypes;
 DayCardVersion.defaultProps = defaultProps;
 
 export default DayCardVersion;
+

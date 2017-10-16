@@ -24,6 +24,7 @@ export default function data(state = defaultState, action) {
       // console.log(action.payload);
       const { id, title, description, date, time } = action.payload;
       if (state.events.allIds.indexOf(id) === -1) { //New event
+        // console.log('new event branch in reducer');
         return {
           events: {
             allIds: state.events.allIds.concat(id),
@@ -41,6 +42,7 @@ export default function data(state = defaultState, action) {
         }
 
       } else {                       // Existing event
+        // console.log('existing event branch in reducer');
         return {
           events: {
             ...state.events,

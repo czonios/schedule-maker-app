@@ -9,12 +9,10 @@ import EventForm from './EventForm';
 const propTypes = {
   eventModal: PropTypes.oneOfType([
     PropTypes.bool,
+    PropTypes.object,
     PropTypes.string
-  ]).isRequired,
-  eventModalData: PropTypes.oneOfType([
-    PropTypes.bool,
-    PropTypes.object
-  ]).isRequired,
+  ]),
+  eventModalData: PropTypes.object.isRequired,
   dismissEventModal: PropTypes.func.isRequired,
   submitEditedEvent: PropTypes.func.isRequired
 };
@@ -36,7 +34,7 @@ class EventModal extends Component {
         </Modal.Header>
         <Modal.Content>
           <EventForm eventModalData={eventModalData} submitEditedEvent={submitEditedEvent}
-            dismissEventModal={dismissEventModal} isNewEvent={eventModalData ? false : true} />
+            dismissEventModal={dismissEventModal} />
         </Modal.Content>
       </Modal>
     );
@@ -50,9 +48,19 @@ EventModal.defaultProps = defaultProps;
 const mapStateToProps = state => {
   const { UI } = state;
   const eventModal = UI.eventModal;
+  let eventModalData;
+  if (typeof eventModal === 'string') {
+    //existing event
+    eventModalData = state.layout.representation.data.events.byId[eventModal];
+  } else {
+    //new event, only have date data to inject into form
+    eventModalData = { date: eventModal };
+
+  }
   return {
+    // 'eventModal' can be and eventId or a date object
     eventModal,
-    eventModalData: state.layout.representation.data.events.byId[eventModal] || false
+    eventModalData
   }
 }
 const mapDispatchToProps = dispatch =>

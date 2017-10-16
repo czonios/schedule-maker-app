@@ -51,7 +51,7 @@ export class MonthDayCell extends Component {
           <div>{day}</div>
         </Link>
         {acceptedDays.includes(day) && <HoverableIcon name="add" show={isHoveredOver}
-          onClickCb={displayEventModal} cbArgs={'NEW_EVENT'} />}
+          onClickCb={displayEventModal} cbArgs={{ year: displayYear, month: displayMonth, day }} />}
         {/* Gross, break out a function for this */}
         {eventsPerDayArray[day] > 0
           ? `${eventsPerDayArray[day]} events`
