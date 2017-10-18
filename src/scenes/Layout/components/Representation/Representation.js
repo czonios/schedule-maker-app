@@ -5,9 +5,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { toggleGridOrCardDisplay, displayEventModal, deleteEvent } from '../../../.././data/actions';
 import Month from './components/Month/Month';
-import Week from './components/Week/Week';
 import WeekCardVersion from './components/Week/components/WeekCardVersion/WeekCardVersion';
-import Day from './components/Day/Day';
 import DayCardVersion from './components/DayCardVersion/DayCardVersion';
 
 import ViewMenu from './components/ViewMenu/ViewMenu';
@@ -20,7 +18,6 @@ const Representation = (props) => {
     const { view, year, month, day } = props.url.match.params;
     return (
         <div className="representation">
-            {/* Could/should be broken out into its own subcomponent */}
             <ViewMenu day={day} month={month} year={year} view={view}
                 gridOrCardDisplay={gridOrCardDisplay} toggleGridOrCardDisplay={toggleGridOrCardDisplay} />
             <ViewHeader displayMonth={displayMonth} displayYear={displayYear} displayDay={displayDay} dateService={dateService}
@@ -34,28 +31,17 @@ function chooseView({ displayMonth, displayYear, displayDay, url, displayDayEven
     deleteEvent }) {
     //Decide which view to render, based on the URL
     const view = url.match.params.view;
-    //don't need the null check for route '/' i think?
-    // if (!url.match) return null;
     if (view === 'month') {
         return <Month events={displayMonthEvents} displayMonth={displayMonth} displayYear={displayYear}
         />
     } else if (view === 'week') {
-        // console.log(toggleGridOrCardDisplay);
-        // return <Week events={displayWeekEvents} />
-        // return <WeekCardVersion events={displayWeekEvents} />
-        return gridOrCardDisplay === 'grid'
-            ? <Week events={displayWeekEvents} />
-            : <WeekCardVersion events={displayWeekEvents} displayEventModal={displayEventModal}
-                deleteEvent={deleteEvent} displayYear={displayYear} displayMonth={displayMonth}
-                displayDay={displayDay} />
+        return <WeekCardVersion events={displayWeekEvents} displayEventModal={displayEventModal}
+            deleteEvent={deleteEvent} displayYear={displayYear} displayMonth={displayMonth}
+            displayDay={displayDay} />
     } else if (view === 'day') {
-        // return <Day />
-        // return <DayCardVersion events={displayDayEvents} />
-        return gridOrCardDisplay === 'grid'
-            ? <Day />
-            : <DayCardVersion events={displayDayEvents} displayEventModal={displayEventModal}
-                deleteEvent={deleteEvent} displayYear={displayYear} displayMonth={displayMonth}
-                displayDay={displayDay} />
+        return <DayCardVersion events={displayDayEvents} displayEventModal={displayEventModal}
+            deleteEvent={deleteEvent} displayYear={displayYear} displayMonth={displayMonth}
+            displayDay={displayDay} />
     }
 }
 
