@@ -13,7 +13,7 @@ const defaultProps = {
 
 const HoverableIcon = ({ show, name, onClickCb, cbArgs }) => {
   if (show === false) return null;
-  return <Icon link name={name} onClick={handleClick(onClickCb, cbArgs)} />
+  return <Icon link name={name} onClick={handleClick(onClickCb, cbArgs)}  />
 };
 
 
