@@ -1,10 +1,10 @@
 import React from 'react';
 import { Menu } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
+import GridCardToggle from '.././GridCardToggle/GridCardToggle';
 
 
-
-export const ViewMenu = ({ day, month, year, view, gridOrCardDisplay }) => {
+export const ViewMenu = ({ day, month, year, view, gridOrCardDisplay, toggleGridOrCardDisplay }) => {
 
     return (
         <Menu tabular>
@@ -20,6 +20,9 @@ export const ViewMenu = ({ day, month, year, view, gridOrCardDisplay }) => {
                 Day
             </Menu.Item>
 
+            <Menu.Item position="right">
+                <GridCardToggle gridOrCardDisplay={gridOrCardDisplay} toggleGridOrCardDisplay={toggleGridOrCardDisplay} />
+            </Menu.Item>
         </Menu>
     );
 
