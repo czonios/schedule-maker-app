@@ -98,7 +98,7 @@ npm start
 
 ## Contributing
 
-This project is still in very early stages and we are not accepting contributions until we have a working base product.
+Contributions are welcome. You can tackle anything you see fit or an issue, and communicate with us so we can add you to the Trello team.
 
 ## Authors
 
